@@ -1,0 +1,129 @@
+/*
+
+rgb(30, 30, 30) # Darkest
+rgb(42, 42, 42)
+rgb(54, 54, 54)
+rgb(67, 67, 67)
+rgb(79, 79, 79)
+rgb(91, 91, 91)
+rgb(103, 103, 103)
+rgb(115, 115, 115) # Lightest
+
+*/
+
+/* Everything that makes up the content. */
+div.content {
+    
+    padding: 10px;
+    
+}
+
+/* Holds info. */
+div.content .sub-content {
+    
+    margin: 15px;
+    padding: 10px;
+    display: block;
+    background-color: rgb(42, 42, 42);
+    box-shadow: 0px 0px 10px;
+    
+}
+
+/* Holds info within info. */
+div.content .sub-sub-content {
+
+    flex: 0.33;
+    margin: 10px;
+    padding: 10px;
+    display: block;
+    background-color: rgb(42, 42, 42);
+    box-shadow: 0px 0px 10px;
+    
+}
+
+/* Holds objects; images, embeds, etc. */
+div.content .sub-space {
+
+    display: flex;
+    flex-wrap: wrap;
+    
+}
+
+
+/* Tag Changes */
+div.content hr {
+    
+    box-shadow: 0px 0px 10px;
+    
+}
+
+/* Special Classes */
+div.content .title {
+    
+    padding: 5px;
+    font-size: 50px;
+    color: white;
+    text-shadow: 0px 0px 10px;
+    
+}
+
+div.content .text {
+    
+    padding: 15px;
+    font-size: 30px;
+    color: white;
+    text-shadow: 0px 0px 10px;
+    
+}
+
+div.content .center {
+    
+    align-items: center;
+    justify-content: center;
+    
+}
+
+div.content .image {
+    
+    max-width: 100%;
+    display: inline;
+    box-shadow: 0px 0px 10px;
+    
+}
+
+/* Resizing Set-Up */
+@media only screen and (max-width: 800px) {
+
+    div.content .sub-space {
+
+        justify-content: center;
+
+    }
+    
+    div.content .sub-sub-content {
+
+        flex: 1;
+        flex-basis: 100%;
+
+    }
+
+    div.content .title {
+
+        font-size: 25px;
+
+    }
+
+    div.content .text {
+
+        font-size: 15px;
+
+    }
+    
+}
+
+/* Hover Effects */
+div.content .selectable:hover {
+    
+    background-color: rgb(30, 30, 30);
+    
+}

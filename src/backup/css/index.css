@@ -1,0 +1,142 @@
+/*
+
+rgb(30, 30, 30) # Darkest
+rgb(42, 42, 42)
+rgb(54, 54, 54)
+rgb(67, 67, 67)
+rgb(79, 79, 79)
+rgb(91, 91, 91)
+rgb(103, 103, 103)
+rgb(115, 115, 115) # Lightest
+
+*/
+
+/* Slideshow container */
+div.content .slides-container {
+    
+    
+    padding: 10px 0px;
+    position: relative;
+    margin: auto;
+    
+}
+
+/* Slides in slideshow container */
+div.content .slide {
+    
+    display: none;
+    box-shadow: 0px 0px 10px;
+    
+}
+
+/* Next and Previous Buttons */
+div.content .previousSlide, .nextSlide {
+    
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    margin-top: -22px;
+    padding: 16px;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    
+}
+
+/* Position The "next button" to the right */
+div.content .nextSlide {
+    
+    right: 0;
+    border-radius: 3px 0 0 3px;
+    
+}
+
+/* On hover, add a black background color with a little bit see-through */
+div.content .previousSlide:hover, .nextSlide:hover {
+    
+    background-color: rgba(0,0,0,0.8);
+    
+}
+
+/* Caption text */
+div.content .slideText {
+    
+    color: white;
+    font-size: 30px;
+    padding: 6px;
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+    text-align: center;
+    text-shadow: 0px 0px 3px;
+    
+}
+
+/* The dots/bullets/indicators */
+div.content .dot {
+    
+    cursor: pointer;
+    height: 13px;
+    width: 13px;
+    margin: 0 2px;
+    background-color: rgb(67, 67, 67);
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.6s ease;
+    
+}
+
+div.content .active, .dot:hover {
+    
+    background-color: rgb(103, 103, 103);
+    
+}
+
+/* Fading animation */
+div.content .fade {
+    
+    /* Support Most Browsers */
+    animation-name: fade;
+    animation-duration: 2s;
+    
+    /* Support Webkit */
+    -webkit-animation-name: fade;
+    -webkit-animation-duration: 2s;
+    
+}
+
+/* Effects Set-Up */
+/* Support Most Browsers */
+@keyframes fade {
+    
+    from {
+        
+        opacity: 0
+            
+    }
+    to {
+        
+        opacity: 1
+            
+    }
+    
+}
+
+/* Support Webkit */
+@-webkit-keyframes fade {
+    
+    from {
+        
+        opacity: 0;
+            
+    }
+    to {
+        
+        opacity: 1;
+            
+    }
+    
+}
