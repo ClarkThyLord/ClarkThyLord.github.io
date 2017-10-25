@@ -2,12 +2,12 @@ window.onload = function (){
 
     // Set-up page
     setupPage();
-    navActivate("nav-work");
+    navActivate("nav-projects");
 
     try{
 
 		var xmlHttp = new XMLHttpRequest();
-		xmlHttp.open("POST", "./php/art.php", false);
+		xmlHttp.open("POST", "./php/preview.php", false);
 
 		// When the state of the response changes do the following
 		xmlHttp.onreadystatechange = function () {

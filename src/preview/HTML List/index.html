@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Test-2</title>
+  <!-- Load CSS files -->
+  <link rel="stylesheet" type="text/css" href="./css/index.css">
+
+  <!-- Load JS files -->
+  <script src="./js/jquery-3.2.1.min.js"></script>
+  <script src="./js/index.js"></script>
+</head>
+
+<body>
+  <form id="object_manager">
+    <input type="text" placeholder="Search..." oninput="" name="obj_search">
+    <select name="obj_filter">
+      <option value="any">Any</option>
+      <option value="sprite">Sprite</option>
+      <option value="bone">Bone</option>
+      <option value="group">Group</option>
+    </select>
+
+    <hr>
+
+    <ul class="item-menu" name="obj_view">
+      <li class="item" draggable="true" ondragstart="objManagingDragStart(event);" ondragenter="objManagingDragEnter(event);" ondragover="objManagingDragOver(event);" ondragleave="objManagingDragLeave(event);" ondrop="objManagingDragDrop(event);">
+        <div class="top"></div>
+        <div class="content">sample 1</div>
+        <ul class="item-menu">
+
+        </ul>
+        <div class="bottom"></div>
+      </li>
+      <li class="item" draggable="true" ondragstart="objManagingDragStart(event);" ondragenter="objManagingDragEnter(event);" ondragover="objManagingDragOver(event);" ondragleave="objManagingDragLeave(event);" ondrop="objManagingDragDrop(event);">
+        <div class="top"></div>
+        <div class="content">sample 2</div>
+        <ul class="item-menu">
+
+        </ul>
+        <div class="bottom"></div>
+      </li>
+    </ul>
+  </form>
+
+  <hr>
+
+  <form>
+    <input type="text" placeholder="Name..." name="obj_name">
+    <select name="obj_type">
+      <option value="any">Any</option>
+      <option value="sprite">Sprite</option>
+      <option value="bone">Bone</option>
+      <option value="group">Group</option>
+    </select>
+    <input type="button" value="Create" onclick="">
+  </form>
+
+</body>
+
+</html>

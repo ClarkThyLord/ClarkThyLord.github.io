@@ -1,0 +1,88 @@
+[draggable] {
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+  /* Required to make elements draggable in old WebKit */
+  -khtml-user-drag: element;
+  -webkit-user-drag: element;
+}
+
+#object_manager {
+
+  padding: 5px;
+
+  background-color: rgba(60, 255, 0, 1);
+
+}
+
+/* Item Menu setup */
+ul.item-menu {
+  margin: 0px;
+  padding: 0px;
+  overflow: auto;
+
+  list-style-type: none;
+}
+
+ul.item-menu li.item {
+  /* Makes things look pretty?
+  padding-top: 2.5px;
+  padding-bottom: 2.5px;
+  */
+  padding-left: 5px;
+  min-width: 150px;
+
+  cursor: move;
+
+  background-color: rgba(0, 0, 0, 1);
+}
+
+/* Item for Item Menu setup */
+ul.item-menu li.item .top {
+  padding-top: 6px;
+
+  background-color: rgba(255, 0, 200, 1);
+}
+
+ul.item-menu li.item .content {
+  padding-left: 2px;
+
+  cursor: default;
+
+  color: rgba(255, 255, 255, 1);
+  background-color: rgba(255, 175, 0, 1);
+}
+
+ul.item-menu li.item .bottom {
+  padding-bottom: 6px;
+
+  background-color: rgba(0, 155, 255, 1);
+}
+
+ul.item-menu li.hover-top {
+    border-width: 3px;
+    border-top-style: solid;
+    border-color: rgba(255, 255, 255, 1);
+}
+
+ul.item-menu li.hover-content {
+    border-width: 3px;
+    border-style: dashed;
+    border-color: rgba(255, 255, 255, 1);
+}
+
+ul.item-menu li.hover-bottom {
+  border-width: 3px;
+  border-bottom-style: solid;
+  border-color: rgba(255, 255, 255, 1);
+}
+
+.column.dragElem {
+  opacity: 0.4;
+}
+
+.column.over {
+  //border: 2px dashed #000;
+  border-top: 2px solid blue;
+}
