@@ -1,4 +1,4 @@
 WWW-potential
 =============
 
-	Source and resources which make up my website potential. Made with HTML, CSS, JS, and PHP!
+	Source code and resources that make up my website potential, made with HTML, CSS, JS, and PHP!

@@ -1,1 +1,0 @@
-Manage a list by dragging and dropping it's elements around!

@@ -2,44 +2,40 @@
 <html>
 
 <head>
-  <title>Test-2</title>
+  <title>Interactive List</title>
   <!-- Load CSS files -->
   <link rel="stylesheet" type="text/css" href="./css/index.css">
 
   <!-- Load JS files -->
   <script src="./js/jquery-3.2.1.min.js"></script>
+  <script src="./js/DragDropTouch.js"></script>
   <script src="./js/index.js"></script>
 </head>
 
 <body>
   <form id="object_manager">
-    <input type="text" placeholder="Search..." oninput="" name="obj_search">
-    <select name="obj_filter">
+    <input type="text" placeholder="Search..." oninput="updateObjectManagers();" name="obj_search">
+    <select name="obj_filter" onchange="updateObjectManagers();">
       <option value="any">Any</option>
       <option value="sprite">Sprite</option>
       <option value="bone">Bone</option>
       <option value="group">Group</option>
+      <option value="folder">Folder</option>
     </select>
 
     <hr>
 
     <ul class="item-menu" name="obj_view">
-      <li class="item" draggable="true" ondragstart="objManagingDragStart(event);" ondragenter="objManagingDragEnter(event);" ondragover="objManagingDragOver(event);" ondragleave="objManagingDragLeave(event);" ondrop="objManagingDragDrop(event);">
-        <div class="top"></div>
+      <!--
+      <li class="item" draggable="true" ondragstart="objManagingDragStart(event);" ondragenter="objManagingDragEnter(event);" ondragover="objManagingDragOver(event);" ondragleave="objManagingDragLeave(event);" ondrop="objManagingDragDrop(event);" data-path="">
+        <div class="above"></div>
         <div class="content">sample 1</div>
         <ul class="item-menu">
 
         </ul>
         <div class="bottom"></div>
       </li>
-      <li class="item" draggable="true" ondragstart="objManagingDragStart(event);" ondragenter="objManagingDragEnter(event);" ondragover="objManagingDragOver(event);" ondragleave="objManagingDragLeave(event);" ondrop="objManagingDragDrop(event);">
-        <div class="top"></div>
-        <div class="content">sample 2</div>
-        <ul class="item-menu">
-
-        </ul>
-        <div class="bottom"></div>
-      </li>
+      -->
     </ul>
   </form>
 
@@ -48,12 +44,13 @@
   <form>
     <input type="text" placeholder="Name..." name="obj_name">
     <select name="obj_type">
-      <option value="any">Any</option>
       <option value="sprite">Sprite</option>
       <option value="bone">Bone</option>
       <option value="group">Group</option>
+      <option value="folder">Folder</option>
     </select>
-    <input type="button" value="Create" onclick="">
+    <input type="button" value="Create" onclick="objCreate(obj_name.value, obj_type.value, 0); obj_name.value = '';"> |
+    <input type="button" value="Style" onclick="updateStyle();">
   </form>
 
 </body>
