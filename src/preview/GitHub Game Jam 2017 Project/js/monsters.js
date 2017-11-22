@@ -1,0 +1,222 @@
+var MONSTERS = {
+  "cacus": {
+    "name": "cacus",
+    "type": "earth",
+    "level": 0,
+    "xp": 0,
+    "ult": 0,
+    "life": 100,
+    "attack": 12,
+    "defence": 25,
+    "drops": [
+      "potion",
+      "potion",
+      22,
+      42,
+      5,
+      null,
+      null,
+      "capture",
+      "capture",
+      "capture"
+    ]
+  },
+  "bree": {
+    "name": "bree",
+    "type": "water",
+    "level": 0,
+    "xp": 0,
+    "ult": 0,
+    "life": 145,
+    "attack": 17,
+    "defence": 15,
+    "drops": [
+      "potion",
+      "potion",
+      22,
+      12,
+      31,
+      null,
+      null,
+      "capture",
+      "capture",
+      "capture"
+    ]
+  },
+  "bun": {
+    "name": "bun",
+    "type": "wind",
+    "level": 0,
+    "xp": 0,
+    "ult": 0,
+    "life": 86,
+    "attack": 17,
+    "defence": 13,
+    "drops": [
+      "potion",
+      "potion",
+      12,
+      3,
+      4,
+      null,
+      null,
+      "capture",
+      "capture",
+      "capture"
+    ]
+  },
+  "bunnu": {
+    "name": "bunnu",
+    "type": "light",
+    "level": 0,
+    "xp": 0,
+    "ult": 0,
+    "life": 175,
+    "attack": 9,
+    "defence": 11,
+    "drops": [
+      "potion",
+      "potion",
+      2,
+      71,
+      null,
+      null,
+      null,
+      null,
+      "capture",
+      "capture"
+    ]
+  },
+  "frea": {
+    "name": "frea",
+    "type": "dark",
+    "level": 0,
+    "xp": 0,
+    "ult": 0,
+    "life": 79,
+    "attack": 20,
+    "defence": 23,
+    "drops": [
+      "potion",
+      "potion",
+      "potion",
+      "potion",
+      5,
+      12,
+      null,
+      null,
+      "capture",
+      "capture"
+    ]
+  },
+  "lolo": {
+    "name": "lolo",
+    "type": "meme",
+    "level": 0,
+    "xp": 0,
+    "ult": 0,
+    "life": 76,
+    "attack": 25,
+    "defence": 85,
+    "drops": [
+      "potion",
+      "potion",
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      "capture"
+    ]
+  },
+  "pase": {
+    "name": "pase",
+    "type": "meme",
+    "level": 0,
+    "xp": 0,
+    "ult": 0,
+    "life": 310,
+    "attack": 5,
+    "defence": 31,
+    "drops": [
+      "potion",
+      "potion",
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      "capture"
+    ]
+  },
+  "seriosity": {
+    "name": "seriosity",
+    "type": "meme",
+    "level": 0,
+    "xp": 0,
+    "ult": 0,
+    "life": 120,
+    "attack": 42,
+    "defence": 67,
+    "drops": [
+      "potion",
+      "potion",
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      "capture"
+    ]
+  },
+  "so": {
+    "name": "so",
+    "type": "meme",
+    "level": 0,
+    "xp": 0,
+    "ult": 0,
+    "life": 122,
+    "attack": 13,
+    "defence": 44,
+    "drops": [
+      "potion",
+      "potion",
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      "capture"
+    ]
+  },
+  "ugo": {
+    "name": "ugo",
+    "type": "fire",
+    "level": 0,
+    "xp": 0,
+    "ult": 0,
+    "life": 84,
+    "attack": 22,
+    "defence": 22,
+    "drops": [
+      "potion",
+      "potion",
+      17,
+      13,
+      22,
+      null,
+      null,
+      "capture",
+      "capture",
+      "capture"
+    ]
+  }
+};

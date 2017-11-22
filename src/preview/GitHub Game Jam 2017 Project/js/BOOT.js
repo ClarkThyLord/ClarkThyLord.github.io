@@ -1,10 +1,20 @@
+// Object containing game's configuration
+var CONFIGURATION = {};
+// Object containing save state
+var SAVE = {};
+// Object containing font properties
+var FONT = {
+  font: "25px Karmatic_Arcade",
+  fill: "rgb(0, 0, 255)",
+  align: "center",
+  boundsAlignH: "center",
+  boundsAlignV: "middle"
+};
+
 // Object containing all the scenes
 var GAME = {};
 
-GAME.BOOT = function(game) {
-  // Setup variables
-  // NOTHING
-};
+GAME.BOOT = function(game) {};
 
 GAME.BOOT.prototype = {
   init: function() {
@@ -24,13 +34,11 @@ GAME.BOOT.prototype = {
     }
   },
   preload: function() {
+    // Load preload things
     this.load.image("mm_icon", "./res/main menu/icon.png");
     this.load.image("mm_load", "./res/main menu/load.jpg");
   },
   create: function() {
     this.state.start("PRELOAD");
-  },
-  render: function() {
-    // NOTHING
   }
 };
