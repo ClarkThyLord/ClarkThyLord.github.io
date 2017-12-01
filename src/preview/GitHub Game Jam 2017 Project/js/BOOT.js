@@ -1,11 +1,10 @@
-// Object containing game's configuration
-var CONFIGURATION = {};
 // Object containing save state
 var SAVE = {};
+
 // Object containing font properties
 var FONT = {
   font: "25px Karmatic_Arcade",
-  fill: "rgb(0, 0, 255)",
+  fill: "rgb(226, 226, 226)",
   align: "center",
   boundsAlignH: "center",
   boundsAlignV: "middle"
@@ -27,6 +26,7 @@ GAME.BOOT.prototype = {
     if (this.game.device.desktop) { // DESKTOP SETTINGS
       this.scale.pageAlignHorizontally = true;
     } else { // MOBILE SETTINGS
+      this.scale.forceOrientation(true, false);
       this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
       this.scale.setMinMax(480, 260, 1024, 768);
       this.scale.forceLandscape = true;
@@ -34,9 +34,9 @@ GAME.BOOT.prototype = {
     }
   },
   preload: function() {
-    // Load preload things
-    this.load.image("mm_icon", "./res/main menu/icon.png");
-    this.load.image("mm_load", "./res/main menu/load.jpg");
+    // Preload things for the following scene
+    this.load.image("G_background", "./res/global/background.jpg");
+    this.load.image("G_logo", "./res/global/logo.png");
   },
   create: function() {
     this.state.start("PRELOAD");
