@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+  <link rel="icon" href="./assets/potential.png">
+
+  <title>WS - Potential</title>
+
+  <!-- Meta -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Load CSS Files -->
+  <!-- Libraries -->
+  <!-- Global -->
+  <link rel="stylesheet" type="text/css" href="../css/spectrum.css">
+
+  <!-- Core CSS -->
+  <!-- Global -->
+  <link rel="stylesheet" type="text/css" href="../css/core/gui.css">
+
+  <!-- Load JS Files -->
+  <!-- Libraries -->
+  <!-- Global -->
+  <script src="../js/DragDropTouch.js"></script>
+  <script src="../js/jquery-3.2.1.min.js"></script>
+  <script src="../js/spectrum.js"></script>
+
+  <!-- Skeleton Animation -->
+  <script src="../js/preloadjs.min.js"></script>
+  <script src="../js/easeljs.min.js"></script>
+  <script src="../js/tweenjs.min.js"></script>
+  <script src="../js/soundjs.min.js"></script>
+  <script src="../js/matter.min.js"></script>
+
+  <!-- Core JS -->
+  <!-- Global -->
+  <script src="../js/core/config.js"></script>
+  <script src="../js/core/gui.js"></script>
+
+  <!-- Skeleton Animation -->
+  <script src="../js/core/SkeletonAnimation/panels.js"></script>
+
+</head>
+
+<body>
+
+  <!-- Settings popup -->
+  <div class="popup settings">
+
+    <div class="content">
+
+      <!-- Settings popup - toolbar -->
+      <div class="center options toolbar">
+        <div class="item selectable" onclick="$('.settings .menus .item').hide(); $('.settings .menus .settings').toggle();">
+          Settings
+        </div>
+        <div class="item selectable" onclick="$('.settings .menus .item').hide(); $('.settings .menus .appearance').toggle();">
+          Appearance
+        </div>
+        <div class="item selectable" onclick="$('.settings .menus .item').hide(); $('.settings .menus .about').toggle();">
+          About
+        </div>
+      </div>
+
+      <!-- Settings popup - appearance menu -->
+      <div class="menus">
+        <form class="item appearance">
+          <!-- Font appearance -->
+          <fieldset>
+            <legend>
+              Font Appearance
+            </legend>
+
+            <label>
+              Text Size:
+              <input type="number" min=8 max=100 onchange="themePropertyUpdate(this.name, this.value + 'px');" name="--text-size"/>
+            </label>
+
+            <label>
+              Text Color:
+              <input type="color" class="spectrum-widget" data-type="theme" name="--text-color" />
+            </label>
+          </fieldset>
+
+          <!-- Foreground appearance -->
+          <fieldset>
+            <legend>
+              Foreground appearance
+            </legend>
+            <label>
+              Background colors:
+              Primery:
+              <input type="color" class="spectrum-widget" data-type="theme" name="--primary-background-color">
+              Seconday:
+              <input type="color" class="spectrum-widget" data-type="theme" name="--secondary-background-color">
+            </label>
+            <label>
+              Decoration colors:
+              Border color:
+              <input type="color" class="spectrum-widget" data-type="theme" name="--border-color">
+              Cover color:
+              <input type="color" class="spectrum-widget" data-type="theme" name="--cover-color">
+            </label>
+          </fieldset>
+
+          <!-- Interactives appearance -->
+          <fieldset>
+            <legend>
+              <span class="tooltip">
+                Interactives Appearance
+                <span class="tip">
+                  The appearance of GUI you iteract with!
+                </span>
+              </span>
+            </legend>
+
+            <label>
+            </label>
+          </fieldset>
+
+          <!-- Theme options -->
+          <select onchange="themeUse(THEMES[this.value]);" name="theme_list">
+
+          </select>
+          <input type="button" value="Delete" onclick="themeDelete(theme_list.value);" name="theme_delete" /> |
+          <input type="text" placeholder="New theme..." name="theme_name" />
+          <input type="button" value="Save" onclick="themeSave(themeCurrent, theme_name.value);" name="theme_save" /> |
+          <input type="file" accept=".json" multiple style="display: none;" onchange="var files = Object.keys(this.files); for (var file in files) { themeLoad(this.files[file]); } this.value = '';" name="theme_file" />
+          <input type="button" value="Import" onclick="theme_file.click();" name="theme_import" />
+          <input type="button" value="Export" onclick="themeExport(themeCurrent);" name="theme_export" />
+        </form>
+
+        <!-- Settings popup - settings menu -->
+        <form class="item settings">
+
+        </form>
+
+        <!-- Settings popup - about menu -->
+        <form class="item about">
+
+          <h1>
+            <a href="https://github.com/ClarkThyLord/WS-potential">
+              WS Potential
+            </a>
+          </h1>
+
+          <span>
+            WS Potential is for the newbies, hobbyist, and the professionals. Removing all the complicated and ridiculous stuff from them, and implementing all of their shining features while improving upon them. Most image manipulation softwares don’t have game developers in mind, I don’t blame that for that; but, unlike them I do which is why this software will be suitable for any game developer having support for scripts, particles, physics, and more. Their is no fee for using WS Potential, and all it’s code is open source so if you’re looking to fix or improve something you can do so!
+          </span>
+
+        </form>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Top Toolbar -->
+  <div class="top options toolbar">
+
+    <!-- Left of Toolbar -->
+    <div style="flex: 0.34;">
+
+      <!-- File -->
+      <div class="item selectable dropmenu left">
+        File
+        <div class="menu">
+          <div class="item selectable">
+            New...
+          </div>
+          <div class="item selectable">
+            Open...
+          </div>
+          <hr>
+          <div class="item selectable">
+            Save
+          </div>
+          <div class="item selectable">
+            Save as...
+          </div>
+          <hr>
+          <div class="item selectable">
+            Export...
+          </div>
+        </div>
+      </div>
+
+      <!-- View -->
+      <div class="item selectable dropmenu left">
+        View
+        <div class="menu">
+          <div class="item selectable">
+            Object Manager
+          </div>
+          <div class="item selectable">
+            Object Properties
+          </div>
+          <div class="item selectable">
+            Asset Manager
+          </div>
+          <div class="item selectable">
+            Asset Properties
+          </div>
+          <hr>
+          <div class="item selectable" onclick="settings('appearance');">
+            Appearance...
+          </div>
+        </div>
+      </div>
+
+      <!-- About -->
+      <div class="item selectable dropmenu left">
+        About
+        <div class="menu">
+          <div class="item selectable">
+            WS Potential
+          </div>
+          <hr>
+          <div class="item selectable" onclick="settings('about');">
+            About...
+          </div>
+          <div class="item selectable" onclick="settings('settings');">
+            Settings...
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Middle of Toolbar -->
+    <div style="display: flex; flex: 0.33;" class="center">
+
+      <!-- PAGE -->
+      <div class="item selectable dropmenu left">
+        Skeleton Animation
+        <div class="menu">
+          <div onclick="location.href = '../index.html';" class="item selectable">
+            Main Menu
+          </div>
+          <div class="item selectable">
+            Image Manipulation
+          </div>
+          <div class="item selectable">
+            Vector Manipulation
+          </div>
+          <div class="item selectable">
+            Frame by Frame Animation
+          </div>
+          <div class="item selectable">
+            Video Manipulation
+          </div>
+          <div class="item selectable">
+            Sound Manipulation
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Right of Toolbar -->
+    <div style="flex: 0.33;">
+
+    </div>
+
+  </div>
+
+  <!-- Middle container -->
+  <div class="middle container">
+
+    <!-- Panel left -->
+    <div class="panel left">
+
+      <div class="section" data-type="Object Manager" id="sectionA">
+
+        <div class="title">
+
+        </div>
+
+        <form class="content">
+
+        </form>
+
+      </div>
+
+      <div class="section" data-type="Object View" id="sectionB">
+
+        <div class="title">
+
+        </div>
+
+        <form class="content">
+
+        </form>
+
+      </div>
+
+    </div>
+
+    <!-- Canvas container -->
+    <div class="canvas_container" id="canvas_container">
+
+      <canvas style="background-color: black;" id="canvasDOM"></canvas>
+      <script src="../js/core/SkeletonAnimation/canvas.js"></script>
+
+    </div>
+
+    <!-- Panel right -->
+    <div class="panel right">
+
+      <div class="section" data-type="Asset Manager" id="sectionC">
+
+        <div class="title">
+
+        </div>
+
+        <form class="content">
+
+        </form>
+
+      </div>
+
+      <div class="section" data-type="Asset View" id="sectionD">
+
+        <div class="title">
+
+        </div>
+
+        <form class="content">
+
+        </form>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Bottom -->
+  <div class="bottom">
+
+  </div>
+
+</body>
+
+</html>

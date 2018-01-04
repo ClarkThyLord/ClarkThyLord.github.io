@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+  <link rel="icon" href="./assets/potential.png">
+
+  <title>WS - Potential</title>
+
+  <!-- Meta -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Load CSS Files -->
+  <!-- Libraries -->
+  <!-- Global -->
+  <link rel="stylesheet" type="text/css" href="./css/spectrum.css">
+
+  <!-- Core JS -->
+  <!-- Global -->
+  <link rel="stylesheet" type="text/css" href="./css/core/gui.css">
+  <link rel="stylesheet" type="text/css" href="./css/core/index.css">
+
+  <!-- Load JS Files -->
+  <!-- Libraries -->
+  <!-- Global -->
+  <script src="./js/DragDropTouch.js"></script>
+  <script src="./js/jquery-3.2.1.min.js"></script>
+  <script src="./js/spectrum.js"></script>
+
+  <!-- Core JS -->
+  <!-- Global -->
+  <script src="./js/core/config.js"></script>
+  <script src="./js/core/gui.js"></script>
+
+</head>
+
+<body>
+
+  <!-- Settings popup -->
+  <div class="popup settings">
+
+    <div class="content">
+
+      <!-- Settings popup - toolbar -->
+      <div class="center options toolbar">
+        <div class="item selectable" onclick="$('.settings .menus .item').hide(); $('.settings .menus .settings').toggle();">
+          Settings
+        </div>
+        <div class="item selectable" onclick="$('.settings .menus .item').hide(); $('.settings .menus .appearance').toggle();">
+          Appearance
+        </div>
+        <div class="item selectable" onclick="$('.settings .menus .item').hide(); $('.settings .menus .about').toggle();">
+          About
+        </div>
+      </div>
+
+      <!-- Settings popup - appearance menu -->
+      <div class="menus">
+        <form class="item appearance">
+          <!-- Font appearance -->
+          <fieldset>
+            <legend>
+              Font Appearance
+            </legend>
+
+            <label>
+              Text Size:
+              <input type="number" min=8 max=100 onchange="themePropertyUpdate(this.name, this.value + 'px');" name="--text-size"/>
+            </label>
+
+            <label>
+              Text Color:
+              <input type="color" class="spectrum-widget" data-type="theme" name="--text-color" />
+            </label>
+          </fieldset>
+
+          <!-- Foreground appearance -->
+          <fieldset>
+            <legend>
+              Foreground appearance
+            </legend>
+            <label>
+              Background colors:
+              Primery:
+              <input type="color" class="spectrum-widget" data-type="theme" name="--primary-background-color">
+              Seconday:
+              <input type="color" class="spectrum-widget" data-type="theme" name="--secondary-background-color">
+            </label>
+            <label>
+              Decoration colors:
+              Border color:
+              <input type="color" class="spectrum-widget" data-type="theme" name="--border-color">
+              Cover color:
+              <input type="color" class="spectrum-widget" data-type="theme" name="--cover-color">
+            </label>
+          </fieldset>
+
+          <!-- Interactives appearance -->
+          <fieldset>
+            <legend>
+              <span class="tooltip">
+                Interactives Appearance
+                <span class="tip">
+                  The appearance of GUI you iteract with!
+                </span>
+              </span>
+            </legend>
+
+            <label>
+            </label>
+          </fieldset>
+
+          <!-- Theme options -->
+          <select onchange="themeUse(THEMES[this.value]);" name="theme_list">
+
+          </select>
+          <input type="button" value="Delete" onclick="themeDelete(theme_list.value);" name="theme_delete" /> |
+          <input type="file" accept=".json" multiple style="display: none;" onchange="var files = Object.keys(this.files); for (var file in files) { themeLoad(this.files[file]); } this.value = '';" name="theme_file" />
+          <input type="text" placeholder="New theme..." name="theme_name" />
+          <input type="button" value="Save" onclick="themeSave(themeCurrent, theme_name.value);" name="theme_save" /> |
+          <input type="button" value="Import" onclick="theme_file.click();" name="theme_import" />
+          <input type="button" value="Export" onclick="themeExport(themeCurrent);" name="theme_export" />
+        </form>
+
+        <!-- Settings popup - settings menu -->
+        <form class="item settings">
+
+        </form>
+
+        <!-- Settings popup - about menu -->
+        <form class="item about">
+
+          <h1>
+            <a href="https://github.com/ClarkThyLord/WS-potential">
+              WS Potential
+            </a>
+          </h1>
+
+          <span>
+            WS Potential is for the newbies, hobbyist, and the professionals. Removing all the complicated and ridiculous stuff from them, and implementing all of their shining features while improving upon them. Most image manipulation softwares don’t have game developers in mind, I don’t blame that for that; but, unlike them I do which is why this software will be suitable for any game developer having support for scripts, particles, physics, and more. Their is no fee for using WS Potential, and all it’s code is open source so if you’re looking to fix or improve something you can do so!
+          </span>
+
+        </form>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="title center">
+    <img src="./assets/potential.png" class="icon" />
+  </div>
+
+  <div class="options toolbar">
+    <!-- left of toolbar -->
+    <div style="flex: 0.33;" class="left">
+
+    </div>
+
+    <!-- middle of toolbar -->
+    <div style="display: flex; flex: 0.34;" class="center">
+      <div onclick="location.href = './index.html';" class="item selectable center">
+        Image Manipulation
+      </div>
+      <div onclick="location.href = './index.html';" class="item selectable center">
+        Vector Manipulation
+      </div>
+      <div onclick="location.href = './index.html';" class="item selectable center">
+        Frame by Frame Animation
+      </div>
+      <div onclick="location.href = './pages/SkeletonAnimation.html';" class="item selectable center">
+        Skeleton Animation
+      </div>
+      <div onclick="location.href = './index.html';" class="item selectable center">
+        Video Manipulation
+      </div>
+      <div onclick="location.href = './index.html';" class="item selectable center">
+        Sound Manipulation
+      </div>
+    </div>
+
+    <!-- right of toolbar -->
+    <div style="flex: 0.33;" class="right">
+
+    </div>
+  </div>
+
+  <div class="center">
+    <form>
+      <input type="file" multiple style="display: none;" onchange="" name="projects" />
+      <input type="button" value="Open A Project" onclick="projects.click()" style="cursor: pointer; margin: 10px;" />
+    </form>
+  </div>
+
+  <div class="projects center">
+    <div onclick="" class="project selectable center">
+      <div class="title">
+        New Project...
+      </div>
+      <div class="properties">
+        Create a new ___ project!
+      </div>
+    </div>
+    <div onclick="" class="project selectable center">
+      <div class="title">
+        First Project
+      </div>
+      <div class="properties">
+        Date Modified: xx-xx-xxxx
+      </div>
+    </div>
+    <div onclick="" class="project selectable center">
+      <div class="title">
+        Second Project
+      </div>
+      <div class="properties">
+        Date Modified: xx-xx-xxxx
+      </div>
+    </div>
+  </div>
+
+  <div class="options toolbar">
+
+    <!-- toolbar's left -->
+    <div style="flex=33;">
+
+    </div>
+
+    <!-- toolbar's middle -->
+    <div style="display: flex; flex: 34;" class="center">
+
+      <div onclick="settings();" class="item selectable center border">
+        Settings
+      </div>
+
+    </div>
+
+    <!-- toolbar's right -->
+    <div style="flex: 0.33;">
+
+    </div>
+
+  </div>
+
+</body>
+
+</html>

@@ -1,0 +1,285 @@
+:root {
+  /* Text */
+  --text-size: 18px;
+  --text-color: rgba(255, 255, 255, 1);
+
+  /* Interactive */
+  --above-color: rgba(54, 54, 54, 1);
+  --over-color: rgba(54, 54, 54, 1);
+  --under-color: rgba(54, 54, 54, 1);
+
+  /* Foreground */
+  --cover-color: rgba(0, 0, 0, 0.6);
+  --border-color: rgba(17, 17, 17, 0.3);
+  --primary-background-color: rgba(30, 30, 30, 1);
+  --secondary-background-color: rgba(42, 42, 42, 1);
+
+  background-color: var(--primary-background-color);
+}
+
+body {
+  /* Bounds */
+  margin: 0px;
+  padding: 0px;
+
+  /* Visuals */
+  font-size: var(--text-size);
+
+  /* Colors */
+  color: var(--text-color);
+  background-color: var(--primary-background-color);
+}
+
+input, select {
+  /* Visuals */
+  font-size: inherit;
+  font-family: inherit;
+  border: 2px solid;
+
+  /* Colors */
+  color: inherit;
+  border-color: var(--border-color);
+  background-color: var(--primary-background-color);
+}
+
+input:focus, select:focus {
+  /* Colors */
+  background-color: var(--secondary-background-color);
+}
+
+.tip {
+  /* Position */
+  position: relative;
+  left: -50%;
+  top: 0px;
+  z-index: 100;
+
+  /* Bounds */
+  width: 120px;
+  display: none;
+  overflow: auto;
+  padding: 5px 0;
+  border-radius: 6px;
+
+  /* Visuals */
+  text-align: center;
+
+  /* Colors */
+  box-shadow: 0px 0px 2px;
+  background-color: var(--secondary-background-color);
+}
+
+.popup {
+  /* Position */
+  position: fixed;
+  z-index: 100;
+  left: 0;
+  top: 0;
+
+  /* Size */
+  width: 100%;
+  height: 100%;
+
+  /* Bounds */
+  display: none;
+  overflow: auto;
+
+  /* Colors */
+  background-color: var(--cover-color);
+}
+
+.popup .content {
+  /* Position */
+  position: fixed;
+  left: 10%;
+  top: 20%;
+
+  /* Size */
+  width: 80%;
+  height: 60%;
+
+  /* Bounds */
+  padding: 20px;
+  margin: auto;
+
+  /* Colors */
+  border: 1px solid var(--border-color);
+  background-color: var(--primary-background-color);
+}
+
+.popup .content .menus {
+  /* Size */
+  width: 100%;
+  height: 100%;
+}
+
+.popup .content .menus .item {
+  /* Bounds */
+  display: none;
+  overflow: auto;
+}
+
+.toolbar {
+  /* Size */
+  width: 100%;
+
+  /* Bounds */
+  display: flex;
+}
+
+.container {
+  /* Side */
+  max-height: 60%;
+
+  /* Bounds */
+  display: flex;
+  overflow: auto;
+}
+
+.container .panel {
+  /* Size */
+  min-width: 20%;
+
+  /* Bounds */
+  overflow: auto;
+
+  /* Colors */
+  background-color:  var(--primary-background-color);
+}
+
+.container .section {
+  /* Size */
+  min-height: 25%;
+
+  /* Bounds */
+  overflow: auto;
+
+  /* Colors */
+  background-color: var(--secondary-background-color);
+}
+
+.container .section .title {
+  overflow: auto;
+  max-height: 10%;
+}
+
+.container .section .content {
+  overflow: auto;
+  max-height: 40%;
+}
+
+.container .section .title {
+  /* Bounds */
+  padding: 5px;
+
+  /* Colors */
+  border-color: 1px solid var(--border-color);
+  background-color: var(--primary-background-color);
+}
+
+.container .section .content {
+  /* Bounds */
+  padding: 5px;
+}
+
+.container .canvas_container {
+  /* Size */
+  flex: 1;
+  min-width: 60%;
+  min-height: 600px;
+
+  /* Bounds */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* Color */
+  background-color: var(--primary-background-color);
+}
+
+.options {
+  /* Color */
+  background-color: var(--primary-background-color);
+}
+
+.options .item {
+  /* Pointer */
+  cursor: pointer;
+
+  /* Position */
+  z-index: 2;
+
+  /* Bounds */
+  padding: 3px;
+}
+
+.selectable:hover {
+  /* Color */
+  background-color: var(--secondary-background-color);
+}
+
+.dropmenu {
+  /* Pointer */
+  cursor: pointer;
+
+  /* Position */
+  position: relative;
+}
+
+.dropmenu .item {
+  /* Pointer */
+  cursor: pointer;
+
+  /* Position */
+  position: relative;
+}
+
+.dropmenu .menu {
+  /* Pointer */
+  cursor: pointer;
+
+  /* Position */
+  position: absolute;
+  left: 0px;
+
+  /* Bounds */
+  display: none;
+  min-width: 160px;
+
+  /* Color */
+  background-color: var(--primary-background-color);
+}
+
+/* Global classes */
+.selected {
+  /* Color */
+  background-color: var(--secondary-background-color);
+}
+
+.hidden {
+  /* Bounds */
+  display: none;
+}
+
+.left {
+  /* Position */
+  float: left;
+}
+
+.right {
+  /* Position */
+  float: right;
+}
+
+.center {
+  /* Position */
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.border {
+  border-size: 10px;
+  border-style: solid;
+  border-color: var(--border-color);
+}
