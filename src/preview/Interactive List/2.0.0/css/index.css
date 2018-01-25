@@ -46,7 +46,7 @@ ul.item-menu li.item {
   min-width: 150px;
 
   cursor: move;
-  
+
   background-color: var(--secondary-background-color);
 }
 
@@ -60,7 +60,7 @@ ul.item-menu li.item .above {
 ul.item-menu li.item .content {
   padding-left: 2px;
 
-  cursor: default;
+  cursor: pointer;
 
   color: var(--text-color);
   background-color: var(--content-color);

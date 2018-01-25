@@ -1,6 +1,8 @@
-var style = 0, objects = [], selectedObjects = [];
+var style = 0,
+  objects = [],
+  selectedObjects = [];
 
-window.onload = function (){
+window.onload = function() {
   // Create root object
   objCreate("Project Objects", "folder");
 
@@ -14,20 +16,13 @@ window.onload = function (){
 
 
 /**
- * Function to handle dragging start of an object within object managing.
+ * Function to handle the start of a object's dragging.
  * @param {Event} [e] Event to be handled.
  * @return {undefined} Returns nothing.
  */
 function objManagingDragStart(e) {
-  // FOR DEBUGGING
-  console.log("Event: ---");
-  console.log(e);
-
   // Check if it's invalid
   if (e.target.dataset.id == 0 || e.target.dataset.id == "error") {
-    // FOR DEBUGGING
-    console.log("PREVENTED DRAG - " + e.target.dataset.id);
-
     e.preventDefault();
     return;
   }
@@ -43,18 +38,8 @@ function objManagingDragStart(e) {
  * @return {undefined} Returns nothing.
  */
 function objManagingDragEnter(e) {
-  // FOR DEBUGGING
-  // console.log("Event: ---");
-  // console.log(e);
-
-  // Make sure it's not the same object and/or the root object
-
-
   // Check if it's invalid
   if ((e.target.dataset.id || e.target.parentNode.dataset.id) === e.dataTransfer.getData("obj") || (e.target.dataset.id || e.target.parentNode.dataset.id) == 0 || (e.target.dataset.id || e.target.parentNode.dataset.id) == "error") {
-    // FOR DEBUGGING
-    console.log("PREVENTED ENTER");
-
     e.preventDefault();
     return;
   }
@@ -69,10 +54,6 @@ function objManagingDragEnter(e) {
  * @return {undefined} Returns nothing.
  */
 function objManagingDragOver(e) {
-  // FOR DEBUGGING
-  // console.log("Event: ---");
-  // console.log(e);
-
   e.preventDefault();
 }
 
@@ -83,16 +64,7 @@ function objManagingDragOver(e) {
  * @return {undefined} Returns nothing.
  */
 function objManagingDragLeave(e) {
-  // FOR DEBUGGING
-  // console.log("Event: ---");
-  // console.log(e);
-
-  try {
-    e.target.parentNode.classList.remove("hover-" + e.target.classList[0]);
-  }
-  catch(err) {
-    return;
-  }
+  e.target.parentNode.classList.remove("hover-" + e.target.classList[0]);
 }
 
 
@@ -102,49 +74,28 @@ function objManagingDragLeave(e) {
  * @return {undefined} Returns nothing.
  */
 function objManagingDragDrop(e) {
-  // FOR DEBUGGING
-  console.log("Event: ---");
-  console.log(e);
-
   e.target.parentNode.classList.remove("hover-" + e.target.classList[0]);
 
   // Check if it's invalid
   if ((e.target.dataset.id || e.target.parentNode.dataset.id) == 0 || (e.target.dataset.id || e.target.parentNode.dataset.id) == "error") {
-    // FOR DEBUGGING
-    console.log("PREVENTED DROP");
-
     e.preventDefault();
     return;
   }
 
   // Setup variables
   var obj = e.dataTransfer.getData("obj"),
-  target = e.target.dataset.id || e.target.parentNode.dataset.id;
+    target = e.target.dataset.id || e.target.parentNode.dataset.id;
 
   // Check if the target is the object being dropped
   if (obj == target[0]) {
-    // FOR DEBUGGING
-    // console.log("SAME OBJECT!");
-
     return;
   }
 
   if (e.target.classList.contains("above")) {
-    // FOR DEBUGGING
-    console.log("On: above");
-
     objMove(obj, target, "above");
-  }
-  else if (e.target.classList.contains("content")) {
-    // FOR DEBUGGING
-    console.log("On: content");
-
+  } else if (e.target.classList.contains("content")) {
     objMove(obj, target, "into");
-  }
-  else if (e.target.classList.contains("bottom")) {
-    // FOR DEBUGGING
-    console.log("On: bottom");
-
+  } else if (e.target.classList.contains("bottom")) {
     objMove(obj, target, "below");
   }
 }
@@ -163,9 +114,6 @@ function objMove(obj, target, operation) {
   obj = objects[obj];
   target = objects[target];
 
-  // FOR DEBUGGING
-  console.log("Moving Objects: ---\nOperation: " + operation + "\nOriginal:\nObj: " + JSON.stringify(obj) + "\nObj Parent: " + JSON.stringify(objects[obj.parent]) + "\nTarget: " + JSON.stringify(target) + "\nTarger Parent: " + JSON.stringify(objects[target.parent]));
-
   // Remove links between object and parent
   objects[obj.parent].sub.splice(objects[obj.parent].sub.indexOf(obj.id), 1);
 
@@ -183,23 +131,18 @@ function objMove(obj, target, operation) {
 
     // Setup parent for obj
     objects[obj.id].parent = target.parent;
-  }
-  else if (operation == "into") {
+  } else if (operation == "into") {
     objects[target.id].sub.push(obj.id);
 
     // Setup parent for obj
     objects[obj.id].parent = target.id;
-  }
-  else if (operation == "below") {
+  } else if (operation == "below") {
     // Move obj below the target in parent
     objects[target.parent].sub.splice(objects[target.parent].sub.indexOf(target.id) + 1, 0, obj.id);
 
     // Setup parent for obj
     objects[obj.id].parent = target.parent;
   }
-
-  // FOR DEBUGGING
-  console.log("Result:\nObj: " + JSON.stringify(obj) + "\nObj Parent: " + JSON.stringify(objects[obj.parent]) + "\nTarget: " + JSON.stringify(target) + "\nTarger Parent: " + JSON.stringify(objects[target.parent]));
 
   updateObjectManagers();
 }
@@ -223,9 +166,11 @@ function objSearch(name, type, obj) {
   if ((name === "<any>" || (obj.name).toLowerCase().indexOf(name.toLowerCase()) !== -1) && obj.name !== objects[0].name) {
     if (type === "any" || type === obj.type) {
       result = obj;
-    }
-    else {
-        result = {"id": "error", "name": "Not Found"};
+    } else {
+      result = {
+        "id": "error",
+        "name": "Not Found"
+      };
     }
   }
   // Check if this object has valid sub objects
@@ -244,15 +189,14 @@ function objSearch(name, type, obj) {
     }
 
     if (result.sub.length === 0) {
-      result = {"id": "error", "name": "Not Found"};
-    }
-    else {
+      result = {
+        "id": "error",
+        "name": "Not Found"
+      };
+    } else {
       result.realRefrences = true;
     }
   }
-
-  // FOR DEBUGGING
-  console.log("Object Search: --- Name: " + name + " - " + obj.name + " |Type: " + type + " - " + obj.type + " --- Object: " + JSON.stringify(obj) + " -" + (result.id !== "error" ? " FOUND" : ""));
 
   return result;
 }
@@ -263,20 +207,19 @@ function objSearch(name, type, obj) {
  * @param {Object} [obj] Name of the file.
  * @return {String} String representing object's data in HTML.
  */
-function objToHTML(obj){
+function objToHTML(obj) {
   // Setup variables
   var inner = "";
 
   for (var sub in obj.sub) {
     if (obj.realRefrences) {
       inner += objToHTML(obj.sub[sub]);
-    }
-    else {
+    } else {
       inner += objToHTML(objects[obj.sub[sub]]);
     }
   }
 
-  return '<li class="item" draggable="true" ondragstart="objManagingDragStart(event);" ondragenter="objManagingDragEnter(event);" ondragover="objManagingDragOver(event);" ondragleave="objManagingDragLeave(event);" ondrop="objManagingDragDrop(event);" data-id="' + obj.id + '"> <div class="above"></div> <div class="content">' + obj.name + '</div> <ul class="item-menu">' + inner + '</ul> <div class="bottom"></div> </li>';
+  return '<li class="item" draggable="true" ondragstart="objManagingDragStart(event);" ondragenter="objManagingDragEnter(event);" ondragover="objManagingDragOver(event);" ondragleave="objManagingDragLeave(event);" ondrop="objManagingDragDrop(event);" data-id="' + obj.id + '"> <div class="above"></div> <div class="content"> <span class="toggle">-</span>' + obj.name + '<span class="remove">x</span></div> <ul class="item-menu">' + inner + '</ul> <div class="bottom"></div> </li>';
 }
 
 
@@ -311,16 +254,9 @@ function objCreate(name, type, parent) {
     "realRefrences": false
   }) - 1;
 
-  // FOR DEBUGGING
-  console.log("New Object: ---");
-  console.log(objects[key]);
-
   // Add as sub to parent
   if (parent !== undefined) {
     objects[parent].sub.push(key);
-
-    // FOR DEBUGGING
-    // console.log("Parent: " + JSON.stringify(objects[parent]));
   }
 
   updateObjectManagers();
@@ -334,16 +270,11 @@ function objCreate(name, type, parent) {
  * @return {undefined} Returns nothing.
  */
 function updateObjectManagers() {
-  $("#object_manager").each(function() {
-    // FOR DEBUGGING
-    console.log("Searching in:");
-    console.log(this);
-
-    var objs = objSearch(this.obj_search.value, this.obj_filter.value, objects[0]);
-    $(this).find("[name=obj_view]").each(function() {
-      this.innerHTML = objToHTML(objs);
-    });
-  });
+  let object_managers = document.querySelectorAll("#object_manager");
+  for (let object_manager of object_managers) {
+    let objs = objSearch(object_manager.obj_search.value, object_manager.obj_filter.value, objects[0]);
+    object_manager.querySelector("[name=obj_view]").innerHTML = objToHTML(objs);
+  }
 }
 
 
@@ -352,7 +283,7 @@ function updateObjectManagers() {
  * @return {undefined} Returns nothing.
  */
 function updateStyle() {
-  if (style == 0){
+  if (style == 0) {
     document.documentElement.style.setProperty("--text-color", "rgba(255, 255, 255, 1)");
     document.documentElement.style.setProperty("--above-color", "rgba(255, 0, 200, 1)");
     document.documentElement.style.setProperty("--content-color", "rgba(255, 175, 0, 1)");
@@ -362,8 +293,7 @@ function updateStyle() {
     document.documentElement.style.setProperty("--secondary-background-color", "rgba(0, 0, 0, 1)");
 
     style = 1;
-  }
-  else {
+  } else {
     document.documentElement.style.setProperty("--text-color", "rgba(255, 255, 255, 1)");
     document.documentElement.style.setProperty("--above-color", "rgb(54, 54, 54)");
     document.documentElement.style.setProperty("--content-color", "rgb(54, 54, 54)");
