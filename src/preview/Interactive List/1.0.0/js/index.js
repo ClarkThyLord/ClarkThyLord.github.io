@@ -136,26 +136,40 @@ function branchMove(branch = undefined, target_branch = undefined, operation = "
 
       index = tree.branches[target_branch.root].branches.indexOf(branch.id);
     }
+  } else {
+    let index = tree.root.indexOf(branch.id);
+    while (index !== -1) {
+      index = tree.root.splice(index, 1);
+
+      index = tree.root.indexOf(branch.id);
+    }
   }
 
   if (operation == "above") {
-    // Move branch below the targeted branch in root
-    tree.branches[target_branch.root].branches.splice(tree.branches[target_branch.root].branches.indexOf(target_branch.id), 0, branch.id);
+    if (target_branch.root === undefined) {
+      tree.root.splice(tree.root.indexOf(target_branch.id), 0, branch.id);
+    } else {
+      // Move branch below the targeted branch in root
+      tree.branches[target_branch.root].branches.splice(tree.branches[target_branch.root].branches.indexOf(target_branch.id), 0, branch.id);
 
-    // Setup root for branch
-    tree.branches[branch.id].root = target_branch.root;
+      // Setup root for branch
+      tree.branches[branch.id].root = target_branch.root;
+    }
   } else if (operation == "into") {
     // Move branch into the targeted branch
     tree.branches[target_branch.id].branches.push(branch.id);
-
     // Setup root for branch
     tree.branches[branch.id].root = target_branch.id;
   } else if (operation == "below") {
-    // Move branch below the targeted branch in root
-    tree.branches[target_branch.root].branches.splice(tree.branches[target_branch.root].branches.indexOf(target_branch.id) + 1, 0, branch.id);
+    if (target_branch.root === undefined) {
+      tree.root.splice(tree.root.indexOf(target_branch.id) + 1, 0, branch.id);
+    } else {
+      // Move branch below the targeted branch in root
+      tree.branches[target_branch.root].branches.splice(tree.branches[target_branch.root].branches.indexOf(target_branch.id) + 1, 0, branch.id);
 
-    // Setup root for branch
-    tree.branches[branch.id].root = target_branch.root;
+      // Setup root for branch
+      tree.branches[branch.id].root = target_branch.root;
+    }
   }
 
   updateObjectManagers();
