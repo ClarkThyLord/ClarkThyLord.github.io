@@ -114,34 +114,34 @@ function objMove(obj, target, operation) {
   obj = objects[obj];
   target = objects[target];
 
-  // Remove links between object and parent
-  objects[obj.parent].sub.splice(objects[obj.parent].sub.indexOf(obj.id), 1);
+  // Remove links between object and root
+  objects[obj.root].branches.splice(objects[obj.root].branches.indexOf(obj.id), 1);
 
-  // If object is already in target's parent then remove it
-  index = objects[target.parent].sub.indexOf(obj.id);
+  // If object is already in target's root then remove it
+  index = objects[target.root].branches.indexOf(obj.id);
   while (index !== -1) {
-    objects[target.parent].sub.splice(index, 1);
+    objects[target.root].branches.splice(index, 1);
 
-    index = objects[target.parent].sub.indexOf(obj.id);
+    index = objects[target.root].branches.indexOf(obj.id);
   }
 
   if (operation == "above") {
-    // Move obj below the target in parent
-    objects[target.parent].sub.splice(objects[target.parent].sub.indexOf(target.id), 0, obj.id);
+    // Move obj below the target in root
+    objects[target.root].branches.splice(objects[target.root].branches.indexOf(target.id), 0, obj.id);
 
-    // Setup parent for obj
-    objects[obj.id].parent = target.parent;
+    // Setup root for obj
+    objects[obj.id].root = target.root;
   } else if (operation == "into") {
-    objects[target.id].sub.push(obj.id);
+    objects[target.id].branches.push(obj.id);
 
-    // Setup parent for obj
-    objects[obj.id].parent = target.id;
+    // Setup root for obj
+    objects[obj.id].root = target.id;
   } else if (operation == "below") {
-    // Move obj below the target in parent
-    objects[target.parent].sub.splice(objects[target.parent].sub.indexOf(target.id) + 1, 0, obj.id);
+    // Move obj below the target in root
+    objects[target.root].branches.splice(objects[target.root].branches.indexOf(target.id) + 1, 0, obj.id);
 
-    // Setup parent for obj
-    objects[obj.id].parent = target.parent;
+    // Setup root for obj
+    objects[obj.id].root = target.root;
   }
 
   updateObjectManagers();
@@ -153,7 +153,7 @@ function objMove(obj, target, operation) {
  * @param {String} [name] Name of object searching for.
  * @param {String} [type] Type of object to search for.
  * @param {Object} [obj] Object to search through.
- * @return {Object} Returns a object filled with valid objects; empty object, neither this object or it's sub-objects are valid.
+ * @return {Object} Returns a object filled with valid objects; empty object, neither this object or it's branches-objects are valid.
  */
 function objSearch(name, type, obj) {
   // Setup variables
@@ -173,27 +173,28 @@ function objSearch(name, type, obj) {
       };
     }
   }
-  // Check if this object has valid sub objects
+  // Check if this object has valid branches objects
   else {
     result = Object.assign({}, obj);
-    result.sub = [];
+    result.branches = [];
 
-    var sub, subResult;
-    for (sub in obj.sub) {
-      subResult = objSearch(name, type, objects[obj.sub[sub]]);
+    var branches, subResult;
+    for (branches in obj.branches) {
+      subResult = objSearch(name, type, objects[obj.branches[branches]]);
 
       // If a valid object is found push it to result
       if (subResult.id !== "error") {
-        result.sub.push(subResult);
+        result.branches.push(subResult);
       }
     }
 
-    if (result.sub.length === 0) {
+    if (result.branches.length === 0) {
       result = {
         "id": "error",
         "name": "Not Found"
       };
     } else {
+      // result.open = true;
       result.realRefrences = true;
     }
   }
@@ -211,15 +212,19 @@ function objToHTML(obj) {
   // Setup variables
   var inner = "";
 
-  for (var sub in obj.sub) {
-    if (obj.realRefrences) {
-      inner += objToHTML(obj.sub[sub]);
-    } else {
-      inner += objToHTML(objects[obj.sub[sub]]);
+  if (obj.open == true) {
+    for (var branches in obj.branches) {
+      if (obj.realRefrences) {
+        inner += objToHTML(obj.branches[branches]);
+      } else {
+        inner += objToHTML(objects[obj.branches[branches]]);
+      }
     }
+  } else {
+    inner = null;
   }
 
-  return '<li class="item" draggable="true" ondragstart="objManagingDragStart(event);" ondragenter="objManagingDragEnter(event);" ondragover="objManagingDragOver(event);" ondragleave="objManagingDragLeave(event);" ondrop="objManagingDragDrop(event);" data-id="' + obj.id + '"> <div class="above"></div> <div class="content"> <span class="toggle">-</span>' + obj.name + '<span class="remove">x</span></div> <ul class="item-menu">' + inner + '</ul> <div class="bottom"></div> </li>';
+  return '<li class="item" draggable="true" ondragstart="objManagingDragStart(event);" ondragenter="objManagingDragEnter(event);" ondragover="objManagingDragOver(event);" ondragleave="objManagingDragLeave(event);" ondrop="objManagingDragDrop(event);" data-id="' + obj.id + '"> <div class="above"></div> <div class="content"> <span onclick="objToggle(this.parentNode.parentNode.dataset.id)" class="toggle">' + (inner == "" ? "&#9900" : "+" /** (objects[obj.id].open ? "-" : "+") **/ ) + '</span>' + obj.name + '<span onclick="objDelete(this.parentNode.parentNode.dataset.id);" class="remove">x</span></div> <ul class="item-menu">' + (inner == null ? "" : inner) + '</ul> <div class="bottom"></div> </li>';
 }
 
 
@@ -229,7 +234,7 @@ function objToHTML(obj) {
  * @param {String} [type] Type of object to be created.
  * @return {Integer} Returns the objects index in "objects array".
  */
-function objCreate(name, type, parent) {
+function objCreate(name, type, root) {
   // Setup variables
   type = type || "sprite";
   name = name || type + " " + objects.length;
@@ -240,28 +245,50 @@ function objCreate(name, type, parent) {
   //  "id": {Integer} [object's unique ID/index in objects],
   //  "name": {String} [object's name],
   //  "type": {String} [object's type],
-  //  "parent": {Integer} [object's parent ID],
-  //  "sub": {Array of Objects} [objects under this object],
-  //  "realRefrences": {Boolean} [wether refrences, sub, to objects are objects themselves or ids]
+  //  "root": {Integer} [object's root ID],
+  //  "branches": {Array of Objects} [objects under this object],
+  //  "realRefrences": {Boolean} [wether refrences to objects are objects themselves or ids]
   //
   //  }
   var key = objects.push({
-    "id": objects.length,
-    "name": name,
-    "type": type,
-    "parent": parent,
-    "sub": [],
-    "realRefrences": false
+    id: objects.length,
+    name: name,
+    type: type,
+    root: root,
+    branches: [],
+    realRefrences: false,
+    open: true
   }) - 1;
 
-  // Add as sub to parent
-  if (parent !== undefined) {
-    objects[parent].sub.push(key);
+  // Add as branches to root
+  if (root !== undefined) {
+    objects[root].branches.push(key);
   }
 
   updateObjectManagers();
 
   return key;
+}
+
+
+/**
+ * Delete a object.
+ * @param {Integer} [obj_id] ID of object to delete.
+ * @return {undefined} Returns nothing.
+ */
+function objDelete(obj_id) {
+  delete objects[obj_id];
+  updateObjectManagers();
+}
+
+/**
+ * Toggle a object.
+ * @param {Integer} [obj_id] ID of object to toggle.
+ * @return {undefined} Returns nothing.
+ */
+function objToggle(obj_id) {
+  objects[obj_id].open = !objects[obj_id].open;
+  updateObjectManagers();
 }
 
 
