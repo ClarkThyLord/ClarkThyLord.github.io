@@ -22,15 +22,14 @@ window.onload = function() {
  * @return {undefined} Returns nothing.
  */
 function branchDragStart(e) {
-  // Check if it's a invalid target; meaning target isn't a disabled branch
-  if (e.target.dataset.id == 0 || e.target.dataset.id == "error") {
+  // Make sure it's a valid target; meaning target isn't a disabled branch
+  if (e.target.classList.contains("disabled")) {
     e.preventDefault();
     return;
   }
 
   // Setup data for data transfer
-  e.dataTransfer.setData("obj", e.target.dataset.id);
-  e.dataTransfer.setData("type", "object");
+  e.dataTransfer.setData("branch_id", e.target.dataset.id);
 }
 
 
@@ -40,14 +39,33 @@ function branchDragStart(e) {
  * @return {undefined} Returns nothing.
  */
 function branchDragEnter(e) {
-  // Check if it's not a invalid target; meaning target isn't itself or a disabled branch
-  if ((e.target.dataset.id || e.target.parentNode.dataset.id) === e.dataTransfer.getData("obj") || (e.target.dataset.id || e.target.parentNode.dataset.id) == 0 || (e.target.dataset.id || e.target.parentNode.dataset.id) == "error") {
+  // Refrence to branch DOM
+  var branch, relative;
+  switch (e.target.nodeName === "#text" ? e.target.parentNode.dataset.path : e.target.dataset.path) {
+    case "0":
+      branch = e.target;
+      relative = "content";
+      break;
+    case "1":
+      branch = e.target.parentNode;
+      relative = e.target.classList[0];
+      break;
+    case "2":
+      branch = e.target.parentNode.parentNode.parentNode;
+      relative = "content";
+      break;
+    default:
+      return;
+  }
+
+  // Maker sure it's a valid target; target isn't itself or a disabled branch
+  if (branch.dataset.id === e.dataTransfer.getData("branch_id") || branch.classList.contains("disabled")) {
     e.preventDefault();
     return;
   }
 
   // Add CSS "hover" class to target's parent DOM
-  e.target.parentNode.classList.add("hover-" + e.target.classList[0]);
+  branch.classList.add("hover-" + relative);
 }
 
 
@@ -67,8 +85,33 @@ function branchDragOver(e) {
  * @return {undefined} Returns nothing.
  */
 function branchDragExit(e) {
+  // Refrence to branch DOM
+  var branch, relative;
+  switch (e.target.nodeName === "#text" ? e.target.parentNode.dataset.path : e.target.dataset.path) {
+    case "0":
+      branch = e.target;
+      relative = "content";
+      break;
+    case "1":
+      branch = e.target.parentNode;
+      relative = e.target.classList[0];
+      break;
+    case "2":
+      branch = e.target.parentNode.parentNode.parentNode;
+      relative = "content";
+      break;
+    default:
+      return;
+  }
+
+  // Maker sure it's a valid target; target isn't itself or a disabled branch
+  if (branch.dataset.id === e.dataTransfer.getData("branch_id") || branch.classList.contains("disabled")) {
+    e.preventDefault();
+    return;
+  }
+
   // Remove CSS "hover" class to target's parent DOM
-  e.target.parentNode.classList.remove("hover-" + e.target.classList[0]);
+  branch.classList.remove("hover-" + relative);
 }
 
 
@@ -78,30 +121,49 @@ function branchDragExit(e) {
  * @return {undefined} Returns nothing.
  */
 function branchDragDrop(e) {
-  // Remove CSS "hover" class to target's parent DOM
-  e.target.parentNode.classList.remove("hover-" + e.target.classList[0]);
+  // Refrence to branch DOM
+  var branch, relative;
+  switch (e.target.nodeName === "#text" ? e.target.parentNode.dataset.path : e.target.dataset.path) {
+    case "0":
+      branch = e.target;
+      relative = "content";
+      break;
+    case "1":
+      branch = e.target.parentNode;
+      relative = e.target.classList[0];
+      break;
+    case "2":
+      branch = e.target.nodeName === "#text" ? e.target.parentNode.parentNode.parentNode : e.target.parentNode.parentNode;
+      relative = "content";
+      break;
+    default:
+      return;
+  }
 
-  // Check if it's invalid target; meaning target isn't itself or a disabled branch
-  if ((e.target.dataset.id || e.target.parentNode.dataset.id) == 0 || (e.target.dataset.id || e.target.parentNode.dataset.id) == "error") {
+  // Remove CSS "hover" class to target's parent DOM
+  branch.classList.remove("hover-" + relative);
+
+  // Maker sure it's a valid target; target isn't itself or a disabled branch
+  if (branch.dataset.id === e.dataTransfer.getData("branch_id") || branch.classList.contains("disabled")) {
     e.preventDefault();
     return;
   }
 
   // Setup variables
-  var obj = e.dataTransfer.getData("obj"),
-    target = e.target.dataset.id || e.target.parentNode.dataset.id;
+  var branch = e.dataTransfer.getData("branch_id"),
+    target = e.target.dataset.id || e.target.parentNode.dataset.id || e.target.parentNode.parentNode.dataset.id;
 
   // Check if the target is the object being dropped
-  if (obj == target[0]) {
+  if (branch == target[0]) {
     return;
   }
 
-  if (e.target.classList.contains("above")) {
-    branchMove(tree.branches[obj], tree.branches[target], "above");
-  } else if (e.target.classList.contains("content")) {
-    branchMove(tree.branches[obj], tree.branches[target], "into");
-  } else if (e.target.classList.contains("bottom")) {
-    branchMove(tree.branches[obj], tree.branches[target], "below");
+  if (relative === "above") {
+    branchMove(tree.branches[branch], tree.branches[target], "above");
+  } else if (relative === "content") {
+    branchMove(tree.branches[branch], tree.branches[target], "into");
+  } else if (relative === "bottom") {
+    branchMove(tree.branches[branch], tree.branches[target], "below");
   }
 }
 
@@ -343,7 +405,7 @@ function branchToHTML(branch) {
     inner = null;
   }
 
-  return '<li class="item" draggable="true" ondragstart="branchDragStart(event);" ondragenter="branchDragEnter(event);" ondragover="branchDragOver(event);" ondragleave="branchDragExit(event);" ondrop="branchDragDrop(event);" data-id="' + branch.id + '"> <div class="above"></div> <div class="content"> <span onclick="branchToggle(this.parentNode.parentNode.dataset.id)" class="toggle">' + (inner == "" ? "&#9900" : "+" /** (tree.branches[branch.id].open ? "-" : "+") **/ ) + '</span>' + branch.name + '<span onclick="branchDelete(this.parentNode.parentNode.dataset.id);" class="remove">x</span></div> <ul class="item-menu">' + (inner == null ? "" : inner) + '</ul> <div class="bottom"></div> </li>';
+  return '<li class="item" draggable="true" ondragstart="branchDragStart(event);" ondragenter="branchDragEnter(event);" ondragover="branchDragOver(event);" ondragleave="branchDragExit(event);" ondrop="branchDragDrop(event);" data-id="' + branch.id + '" data-path=0> <div class="above" data-path=1></div> <div class="content" data-path=1> <span onclick="branchToggle(this.parentNode.parentNode.dataset.id)" class="toggle" data-path=2>' + (inner == "" ? "&#9900" : "+" /** (tree.branches[branch.id].open ? "-" : "+") **/ ) + '</span><span ondblclick="this.contentEditable = !(this.contentEditable == `true`);" class="name" data-path=2>' + branch.name + '</span><span onclick="branchDelete(this.parentNode.parentNode.dataset.id);" class="remove"  data-path=2>x</span></div> <ul class="item-menu" data-path=1>' + (inner == null ? "" : inner) + '</ul> <div class="bottom" data-path=1></div> </li>';
 }
 
 
