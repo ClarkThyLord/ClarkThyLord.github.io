@@ -8,11 +8,11 @@ var tree = {
 
 window.onload = function() {
   // Testing branches
-  objCreate("Head", "sprite");
-  objCreate("Body", "sprite");
-  objCreate("Hands", "sprite");
-  objCreate("Legs", "sprite");
-  objCreate("Feet", "sprite");
+  branchCreate("Head", "sprite");
+  branchCreate("Body", "sprite");
+  branchCreate("Hands", "sprite");
+  branchCreate("Legs", "sprite");
+  branchCreate("Feet", "sprite");
 };
 
 
@@ -272,7 +272,7 @@ function branchSearch(search_term = "<any>", search_type = "any", branch) {
     }, branch);
     // For branch within this branch do a search
     for (let branches of branch.branches) {
-      let subResult = branchSearch(search_term, search_type, objects[branches]);
+      var subResult = branchSearch(search_term, search_type, tree.branches[branches]);
 
       // If a valid branch is returned append to branches
       if (subResult.id !== "error") {
@@ -303,7 +303,7 @@ function branchSearch(search_term = "<any>", search_type = "any", branch) {
  * @param {String} [type] Type of object to be created.
  * @return {Integer} Returns the objects index in "objects array".
  */
-function objCreate(name, type, root) {
+function branchCreate(name, type, root) {
   // Setup variables
   type = type || "sprite";
   name = name || type + " " + tree.branches.length;
@@ -350,10 +350,26 @@ function objCreate(name, type, root) {
  * @return {undefined} Returns nothing.
  */
 function branchDelete(branch_id) {
-  for (let branch of tree.branches[obj_id].branches) {
+  // Refrence to branch object
+  var main_branch = tree.branches[branch_id];
+
+  // Remove all sub branches
+  for (let branch of main_branch.branches) {
     delete tree.branches[branch.id];
   }
+
+  // Remove itself from parent branches
+  if (main_branch.parent !== undefined) {
+    var result = tree.branches[main_branch.root].branches.indexOf(branch_id);
+    if (result !== -1) {
+      delete tree.branches[main_branch.root].branches[result];
+    }
+  }
+
+  // Finally delete itself
   delete tree.branches[branch_id];
+
+  // Update object managers
   updateObjectManagers();
 }
 
@@ -402,10 +418,10 @@ function branchToHTML(branch) {
       }
     }
   } else {
-    inner = null;
+    inner = "";
   }
 
-  return '<li class="item" draggable="true" ondragstart="branchDragStart(event);" ondragenter="branchDragEnter(event);" ondragover="branchDragOver(event);" ondragleave="branchDragExit(event);" ondrop="branchDragDrop(event);" data-id="' + branch.id + '" data-path=0> <div class="above" data-path=1></div> <div class="content" data-path=1> <span onclick="branchToggle(this.parentNode.parentNode.dataset.id)" class="toggle" data-path=2>' + (inner == "" ? "&#9900" : "+" /** (tree.branches[branch.id].open ? "-" : "+") **/ ) + '</span><span ondblclick="this.contentEditable = !(this.contentEditable == `true`);" class="name" data-path=2>' + branch.name + '</span><span onclick="branchDelete(this.parentNode.parentNode.dataset.id);" class="remove"  data-path=2>x</span></div> <ul class="item-menu" data-path=1>' + (inner == null ? "" : inner) + '</ul> <div class="bottom" data-path=1></div> </li>';
+  return '<li class="item" draggable="true" ondragstart="branchDragStart(event);" ondragenter="branchDragEnter(event);" ondragover="branchDragOver(event);" ondragleave="branchDragExit(event);" ondrop="branchDragDrop(event);" data-id="' + branch.id + '" data-path=0> <div class="above" data-path=1></div> <div class="content" data-path=1> <span onclick="branchToggle(this.parentNode.parentNode.dataset.id)" class="toggle" data-path=2>' + (inner === "" ? "&#9900" : (tree.branches[branch.id].open ? "-" : "+")) + '</span><span ondblclick="this.contentEditable = !(this.contentEditable == `true`);" class="name" data-path=2>' + branch.name + '</span><span onclick="branchDelete(this.parentNode.parentNode.dataset.id);" class="remove"  data-path=2>x</span></div> ' + (inner === "" ? "" : '<ul class="item-menu" data-path=1>' + inner + '</ul>') + ' <div class="bottom" data-path=1></div> </li>';
 }
 
 

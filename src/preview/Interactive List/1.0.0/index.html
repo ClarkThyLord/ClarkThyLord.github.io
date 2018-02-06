@@ -29,16 +29,6 @@
     <hr>
 
     <ul class="item-menu" name="obj_view">
-      <!--
-      <li class="item" draggable="true" ondragstart="objManagingDragStart(event);" ondragenter="objManagingDragEnter(event);" ondragover="objManagingDragOver(event);" ondragleave="objManagingDragLeave(event);" ondrop="objManagingDragDrop(event);" data-path="">
-        <div class="above"></div>
-        <div class="content">sample 1</div>
-        <ul class="item-menu">
-
-        </ul>
-        <div class="bottom"></div>
-      </li>
-      -->
     </ul>
   </form>
 
@@ -52,7 +42,7 @@
       <option value="group">Group</option>
       <option value="folder">Folder</option>
     </select>
-    <input type="button" value="Create" onclick="objCreate(obj_name.value, obj_type.value, 0); obj_name.value = '';"> |
+    <input type="button" value="Create" onclick="branchCreate(obj_name.value, obj_type.value, 0); obj_name.value = '';"> |
     <input type="button" value="Style" onclick="updateStyle();">
   </form>
 
