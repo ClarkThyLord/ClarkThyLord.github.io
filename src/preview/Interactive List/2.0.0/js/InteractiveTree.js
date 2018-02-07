@@ -3,12 +3,14 @@ var InteractiveTrees = [];
 
 // Interactive Tree object
 function InteractiveTree(parameters) {
-  this.configuration = Object.assign({
+  this.config = Object.assign({
+    dom: null,
     enabled: true,
     search: true,
     search_enabled: true,
     filter: true,
     filter_enabled: true,
+    key_support: true,
     use_classes: true,
     classes: {
       foreground: "",
@@ -18,8 +20,33 @@ function InteractiveTree(parameters) {
     variables: {
       ForegroundColor: "",
       BackgroundColor: ""
+    },
+    branches: {
+      movable: true,
+      renamable: true,
+      deletable: true
     }
   }, parameters);
+
+  // The root branches of tree
+  this.tree = [];
+  // All the branches of the tree
+  this.branches = {};
+  // Number of branches in tree's life span
+  this.branch_count = 0;
+  // Branch currently in use
+  this.current = null;
+
+  if (this.config.dom === null) {
+    this.config.dom = document.currentScript.parentNode;
+  } else {
+    var dom = document.querySelector(this.config.dom);
+    if (dom_targets.length === null) {
+      console.log("ERROR:\nInteractive Tree found no DOMs matching the following selector `" + this.config.dom + "`");
+    } else {
+      this.config.dom = dom;
+    }
+  }
 }
 
 // Interactive Tree prototype
