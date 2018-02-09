@@ -1,10 +1,29 @@
 // Interactive Trees list
 var InteractiveTrees = [];
 
+// Interactive Tree DOM
+function InteractiveTreeDOM(parameters, interactive_tree) {
+  config = Object.assign({
+    dom: null
+  }, parameters);
+
+  if (this.config.dom === null) {
+    var dom = document.currentScript.parentNode;
+  } else {
+    var doms = document.querySelectorAll(this.config.dom);
+    if (dom_targets.length === []) {
+      console.log("ERROR:\nInteractive Tree found no DOMs matching the following selector `" + this.config.dom + "`");
+    } else {
+      for (let dom of doms) {
+
+      }
+    }
+  }
+}
+
 // Interactive Tree object
 function InteractiveTree(parameters) {
   this.config = Object.assign({
-    dom: null,
     enabled: true,
     search: true,
     search_enabled: true,
@@ -36,21 +55,10 @@ function InteractiveTree(parameters) {
   this.branch_count = 0;
   // Branch currently in use
   this.current = null;
-
-  if (this.config.dom === null) {
-    this.config.dom = document.currentScript.parentNode;
-  } else {
-    var dom = document.querySelector(this.config.dom);
-    if (dom_targets.length === null) {
-      console.log("ERROR:\nInteractive Tree found no DOMs matching the following selector `" + this.config.dom + "`");
-    } else {
-      this.config.dom = dom;
-    }
-  }
 }
 
-// Interactive Tree prototype
-InteractiveTree.prototype = {
+// Interactive Tree DOM prototype
+InteractiveTreeDOM.prototype = {
   /**
    * Function to handle the action "drag start" on a branch.
    * @param {Event} [e] Event to be handled.
@@ -201,4 +209,9 @@ InteractiveTree.prototype = {
       branchMove(tree.branches[branch], tree.branches[target], "below");
     }
   }
+};
+
+// Interactive Tree object prototype
+InteractiveTree.prototype = {
+
 };
