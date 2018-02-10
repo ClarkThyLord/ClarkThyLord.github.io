@@ -4,26 +4,7 @@ var InteractiveTrees = [];
 // Interactive Tree DOM
 function InteractiveTreeDOM(parameters, interactive_tree) {
   config = Object.assign({
-    dom: null
-  }, parameters);
-
-  if (this.config.dom === null) {
-    var dom = document.currentScript.parentNode;
-  } else {
-    var doms = document.querySelectorAll(this.config.dom);
-    if (dom_targets.length === []) {
-      console.log("ERROR:\nInteractive Tree found no DOMs matching the following selector `" + this.config.dom + "`");
-    } else {
-      for (let dom of doms) {
-
-      }
-    }
-  }
-}
-
-// Interactive Tree object
-function InteractiveTree(parameters) {
-  this.config = Object.assign({
+    dom: null,
     enabled: true,
     search: true,
     search_enabled: true,
@@ -46,6 +27,24 @@ function InteractiveTree(parameters) {
       deletable: true
     }
   }, parameters);
+
+  if (this.config.dom === null) {
+    var dom = document.currentScript.parentNode;
+  } else {
+    var doms = document.querySelectorAll(this.config.dom);
+    if (dom_targets.length === []) {
+      console.log("ERROR:\nInteractive Tree found no DOMs matching the following selector `" + this.config.dom + "`");
+    } else {
+      for (let dom of doms) {
+
+      }
+    }
+  }
+}
+
+// Interactive Tree object
+function InteractiveTree(parameters) {
+  this.config = Object.assign({}, parameters);
 
   // The root branches of tree
   this.tree = [];
