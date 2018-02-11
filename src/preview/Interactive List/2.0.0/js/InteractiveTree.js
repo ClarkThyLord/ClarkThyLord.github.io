@@ -1,5 +1,5 @@
 // Interactive Trees list
-var InteractiveTrees = [];
+var InteractiveTrees = {};
 
 // Interactive Tree DOM
 function InteractiveTreeDOM(parameters, interactive_tree) {
@@ -38,8 +38,9 @@ function InteractiveTreeDOM(parameters, interactive_tree) {
   }
 
   if (config.dom === null) {
-    var dom = document.currentScript.parentNode;
-  } else {
+    config.dom = document.currentScript.parentNode;
+    InteractiveTreeDOM(config, interactive_tree);
+  } else if (typeof config.dom === "string") {
     var doms = document.querySelectorAll(config.dom);
     if (doms.length === []) {
       console.log("ERROR:\nInteractive Tree found no DOMs matching the following selector `" + config.dom + "`");
@@ -49,12 +50,15 @@ function InteractiveTreeDOM(parameters, interactive_tree) {
         InteractiveTreeDOM(config, interactive_tree);
       }
     }
+  } else {
+
   }
 }
 
 // Interactive Tree object
 function InteractiveTree(parameters) {
   this.config = Object.assign({
+    id: Object.keys(InteractiveTrees).length,
     maximum_branches: null
   }, parameters);
 
@@ -66,16 +70,18 @@ function InteractiveTree(parameters) {
   this.branch_count = 0;
   // Branch currently in use
   this.current = null;
+
+  // Add self the list of existing trees
+  InteractiveTrees[this.config.id] = this;
 }
 
-// Interactive Tree DOM prototype
-InteractiveTreeDOM.prototype = {
-  /**
-   * Function to handle the action "drag start" on a branch.
-   * @param {Event} [e] Event to be handled.
-   * @return {undefined} Returns nothing.
-   */
-  branchDragStart: function(e) {
+
+/**
+ * Function to handle the action "drag start" on a branch.
+ * @param {Event} [e] Event to be handled.
+ * @return {undefined} Returns nothing.
+ */
+branchDragStart: function(e) {
     // Make sure it's a valid target; meaning target isn't a disabled branch
     if (e.target.classList.contains("disabled")) {
       e.preventDefault();
@@ -220,9 +226,24 @@ InteractiveTreeDOM.prototype = {
       branchMove(tree.branches[branch], tree.branches[target], "below");
     }
   }
-};
 
 // Interactive Tree object prototype
 InteractiveTree.prototype = {
+  /**
+   * Export Interactive Tree object as JSON.
+   * @return {String} Returns string representing JSON.
+   */
+  export: function() {
 
+  },
+
+
+  /**
+   * Import Interactive Tree object from a JSON.
+   * @param {String} json String representing JSON.
+   * @return {undefined} Returns nothing.
+   */
+  import: function(json) {
+
+  }
 };
