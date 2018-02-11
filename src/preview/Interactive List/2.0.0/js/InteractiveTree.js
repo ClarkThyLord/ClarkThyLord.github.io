@@ -13,6 +13,9 @@ function InteractiveTreeDOM(parameters, interactive_tree) {
     key_support: true,
     use_classes: true,
     classes: {
+      icons: "",
+      input: "",
+      branches: "",
       foreground: "",
       background: ""
     },
@@ -28,15 +31,22 @@ function InteractiveTreeDOM(parameters, interactive_tree) {
     }
   }, parameters);
 
-  if (this.config.dom === null) {
+  if (interactive_tree === undefined) {
+    interactive_tree = new InteractiveTree();
+  } else {
+    interactive_tree = InteractiveTrees[interactive_tree];
+  }
+
+  if (config.dom === null) {
     var dom = document.currentScript.parentNode;
   } else {
-    var doms = document.querySelectorAll(this.config.dom);
-    if (dom_targets.length === []) {
-      console.log("ERROR:\nInteractive Tree found no DOMs matching the following selector `" + this.config.dom + "`");
+    var doms = document.querySelectorAll(config.dom);
+    if (doms.length === []) {
+      console.log("ERROR:\nInteractive Tree found no DOMs matching the following selector `" + config.dom + "`");
     } else {
       for (let dom of doms) {
-
+        config.dom = dom;
+        InteractiveTreeDOM(config, interactive_tree);
       }
     }
   }
@@ -44,7 +54,9 @@ function InteractiveTreeDOM(parameters, interactive_tree) {
 
 // Interactive Tree object
 function InteractiveTree(parameters) {
-  this.config = Object.assign({}, parameters);
+  this.config = Object.assign({
+    maximum_branches: null
+  }, parameters);
 
   // The root branches of tree
   this.tree = [];
