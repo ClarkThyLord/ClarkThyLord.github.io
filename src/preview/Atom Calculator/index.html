@@ -10,7 +10,11 @@
   <!-- Meta -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
+  <!-- Load CSS files -->
+  <link rel="stylesheet" type="text/css" href="./css/index.css">
+
   <!-- Load JS Files -->
+  <script src="./js/index.js"></script>
   <script src="./js/lib/DragDropTouch.js"></script>
   <script src="./js/lib/jquery-3.2.1.min.js"></script>
   <script src="./js/lib/preloadjs.min.js"></script>
@@ -20,8 +24,9 @@
 
 </head>
 
-<body>
-
+<body onload="init();">
+  <!-- Canvas -->
+  <canvas id="main_canvas" width="800" height="600" style="background-color: var(--canvas-color);"></canvas>
 </body>
 
 </html>

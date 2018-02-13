@@ -1,0 +1,18 @@
+:root {
+  --text-color: rgba(255, 255, 255, 1);
+  --canvas-color: rgba(0, 0, 0, 1);
+  --primary-background-color: rgb(30, 30, 30);
+  --secondary-background-color: rgb(42, 42, 42);
+
+  background-color: var(--primary-background-color);
+}
+
+body {
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+}
+
+canvas {
+}
