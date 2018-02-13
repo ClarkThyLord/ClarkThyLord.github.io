@@ -7,12 +7,44 @@
   background-color: var(--primary-background-color);
 }
 
-body {
+/* DOM classes */
+label {
+  margin: 10px;
+}
+
+canvas {
+  background-color: var(--canvas-color);
+  box-shadow: 0px 0px 10px;
+}
+
+/* Custom classes */
+.title_space {
+  font-size: 125px;
+
   display: flex;
   align-items: center;
   align-content: center;
   justify-content: center;
+
+  margin: 5px;
 }
 
-canvas {
+.canvas_space {
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+
+  margin: 5px;
+}
+
+.controls_space {
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+
+  margin: 5px;
+
+  color: var(--text-color);
 }

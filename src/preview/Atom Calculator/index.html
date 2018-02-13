@@ -25,8 +25,38 @@
 </head>
 
 <body onload="init();">
+
+  <div class="title_space">
+    Atom Calculator
+  </div>
+
   <!-- Canvas -->
-  <canvas id="main_canvas" width="800" height="600" style="background-color: var(--canvas-color);"></canvas>
+  <div class="canvas_space">
+    <canvas id="main_canvas" width="800" height="600"></canvas>
+  </div>
+
+  <!-- Control panel -->
+  <form class="controls_space">
+    <label> Charge:
+      <select name="atom_charge" />
+        <option>
+          =
+        </option>
+        <option>
+          +
+        </option>
+        <option>
+          -
+        </option>
+      </select>
+    </label>
+    <label> Magnitude:
+      <input type="number" step="1" min="0" max="99999" placeholder="0" name="atom_magnitude" />
+    </label>
+    <label> Color:
+      <input type="color" name="color" name="atom_color" />
+    </label>
+  </form>
 </body>
 
 </html>
