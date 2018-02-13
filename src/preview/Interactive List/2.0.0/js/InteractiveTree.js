@@ -33,8 +33,12 @@ function InteractiveTreeDOM(parameters, interactive_tree) {
 
   if (interactive_tree === undefined) {
     interactive_tree = new InteractiveTree();
-  } else {
+  } else if (typeof interactive_tree === "object") {
+
+  } else if (typeof interactive_tree === "string") {
     interactive_tree = InteractiveTrees[interactive_tree];
+  } else {
+    console.log("ERROR:\nInteractive Tree was given to valid Interactive Tree");
   }
 
   if (config.dom === null) {
@@ -54,18 +58,40 @@ function InteractiveTreeDOM(parameters, interactive_tree) {
     var dom_one, dom_two;
     if (config.search) {
       dom_one = document.createElement("input");
+      dom_one.type = "text";
+      dom_one.placeholder = "Search term...";
+      config.dom.append(dom_one);
     }
     if (config.filter) {
       dom_one = document.createElement("select");
+
+      // Create default types
+      dom_two = document.createElement("option");
+      dom_two.value = "Any";
+      dom_two.innerHTML = "Any";
+      dom_one.append(dom_two);
+
+      for (let type of interactive_tree.config.types) {
+        dom_two = document.createElement("option");
+        dom_two.value = "" + type;
+        dom_two.innerHTML = "" + type;
+        dom_one.append(dom_two);
+      }
+      config.dom.append(dom_one);
     }
 
     dom_one = document.createElement("div");
     config.dom.append(dom_one);
-
-    dom_two = document.createElement("ul");
-
-    dom_two.append(interactive_tree.toHTML());
-    dom_one.append(dom_two);
+    if (Object.keys(interactive_tree.branches).lenght === 0) {
+      let list = document.createElement("ul");
+      let msg = document.createElement("li");
+      msg.innerHTML = "Nothing To Show";
+      list.append(msg);
+      dom_one.append(list);
+    } else {
+      dom_one.append(interactive_tree.toHTML());
+    }
+    config.dom.append(dom_one);
   }
 }
 
@@ -73,7 +99,8 @@ function InteractiveTreeDOM(parameters, interactive_tree) {
 function InteractiveTree(parameters) {
   this.config = Object.assign({
     id: Object.keys(InteractiveTrees).length,
-    maximum_branches: null
+    maximum_branches: null,
+    types: []
   }, parameters);
 
   // The root branches of tree
@@ -95,7 +122,7 @@ function InteractiveTree(parameters) {
  * @param {Event} [e] Event to be handled.
  * @return {undefined} Returns nothing.
  */
-branchDragStart: function(e) {
+function branchDragStart(e) {
   // Make sure it's a valid target; meaning target isn't a disabled branch
   if (e.target.classList.contains("disabled")) {
     e.preventDefault();
@@ -112,7 +139,7 @@ branchDragStart: function(e) {
  * @param {Event} [e] Event to be handled.
  * @return {undefined} Returns nothing.
  */
-branchDragEnter: function(e) {
+function branchDragEnter(e) {
   // Refrence to branch DOM
   var branch, relative;
   switch (e.target.nodeName === "#text" ? e.target.parentNode.dataset.path : e.target.dataset.path) {
@@ -148,7 +175,7 @@ branchDragEnter: function(e) {
  * @param {Event} [e] Event to be handled.
  * @return {undefined} Returns nothing.
  */
-branchDragOver: function(e) {
+function branchDragOver(e) {
   e.preventDefault();
 }
 
@@ -158,7 +185,7 @@ branchDragOver: function(e) {
  * @param {Event} [e] Event to be handled.
  * @return {undefined} Returns nothing.
  */
-branchDragExit: function(e) {
+function branchDragExit(e) {
   // Refrence to branch DOM
   var branch, relative;
   switch (e.target.nodeName === "#text" ? e.target.parentNode.dataset.path : e.target.dataset.path) {
@@ -194,7 +221,7 @@ branchDragExit: function(e) {
  * @param {Event} [e] Event to be handled.
  * @return {undefined} Returns nothing.
  */
-branchDragDrop: function(e) {
+function branchDragDrop(e) {
   // Refrence to branch DOM
   var branch, relative;
   switch (e.target.nodeName === "#text" ? e.target.parentNode.dataset.path : e.target.dataset.path) {
@@ -263,10 +290,18 @@ InteractiveTree.prototype = {
 
 
   /**
-   * Interactive Tree to HTML.
-   * @return {String} Returns string representing HTML Interactive Tree.
+   * Interactive Tree to HTML list.
+   * @return {String} Returns string representing HTML Interactive Tree as a list.
    */
   toHTML: function(json) {
+    var result = document.createElement("ul");
+    for (let branch of Object.keys(this.branches)) {
+      branch = this.branches[branch];
+      let branch_dom = document.createElement("li");
+      branch_dom.innerHTML = branch.name;
+      result.append(branch_dom);
+    }
 
+    return result;
   }
 };
