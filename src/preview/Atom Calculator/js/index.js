@@ -8,7 +8,11 @@ var stage, update = true,
     "-": "rgb(0, 0, 255)"
   },
   config = {
-    "custom_colors": true
+    "custom_colors": true,
+    "show_text": true,
+    "text_color": "rgb(0, 0, 0)",
+    "show_magnitudes": true,
+    "magnitude_intensity": 0.25
   },
   active_session = "temporary",
   sessions = {};
@@ -20,6 +24,15 @@ var stage, update = true,
  */
 function save() {
   localStorage.setItem("config", JSON.stringify(config));
+
+  sessions[active_session] = [];
+  for (let atom of atoms) {
+    sessions[active_session].push(atom.toDictionary());
+  }
+  localStorage.setItem("sessions", JSON.stringify({
+    "active_session": active_session,
+    "sessions": sessions
+  }));
 }
 
 
@@ -28,12 +41,16 @@ function save() {
  * @return {undefined} Returns nothing.
  */
 function load() {
-  if (localStorage.getItem("config") !== null) {
-    config = Object.assign(config, JSON.parse(localStorage.getItem("config")));
+  var data = localStorage.getItem("config");
+  if (data !== null) {
+    data = JSON.parse(data);
+    config = Object.assign(config, data);
   }
-
-  for (let atom of atoms) {
-
+  data = localStorage.getItem("sessions");
+  if (data !== null) {
+    data = JSON.parse(data);
+    active_session = data.active_session;
+    sessions = data.sessions;
   }
 }
 
@@ -53,7 +70,7 @@ function init() {
   stage.mouseMoveOutside = true;
 
   // Create the first atom
-  atom("=", 12.2, (config.custom_colors ? randomRGB() : colors["="]));
+  newAtom();
 
   // Setup tick
   createjs.Ticker.addEventListener("tick", tick);
@@ -118,33 +135,32 @@ function stringRGBA(rgb, alpha) {
  * @param {string} [color] Atom's color.
  * @return {Object} Returns refrence to atom.
  */
-function atom(charge, magnitude, color) {
+function newAtom(charge = "=", magnitude = 1, color = randomRGB()) {
   // Setup properties for self
   this.charge = charge;
   this.magnitude = Math.abs(magnitude);
   this.color = color;
 
   // Create canvas object
-  this.atom = new createjs.Shape();
-  this.atom.graphics.beginFill(stringRGB(this.color)).drawCircle(0, 0, 25);
-  this.atom.x = 400;
-  this.atom.y = 300;
-  stage.addChild(this.atom);
+  // Setup group
+  this.obj = new createjs.Container();
+  this.obj.x = 400;
+  this.obj.y = 300;
 
   // Mouse enter event handler
-  this.atom.on("rollover", function(evt) {
+  this.obj.on("rollover", function(evt) {
     this.scale = 1.25;
     update = true;
   });
 
   // Mouse exit event handler
-  this.atom.on("rollout", function(evt) {
+  this.obj.on("rollout", function(evt) {
     this.scale = 1;
     update = true;
   });
 
   // Mouse down events handler
-  this.atom.on("mousedown", function(evt) {
+  this.obj.on("mousedown", function(evt) {
     this.parent.addChild(this);
     this.offset = {
       x: this.x - evt.stageX,
@@ -153,14 +169,27 @@ function atom(charge, magnitude, color) {
   });
 
   // Mouse drag events handler
-  this.atom.on("pressmove", function(evt) {
+  this.obj.on("pressmove", function(evt) {
     this.x = evt.stageX + this.offset.x;
     this.y = evt.stageY + this.offset.y;
     update = true;
   });
 
+  // Setup atom
+  this.atom = new createjs.Shape();
+  this.atom.graphics.beginFill(stringRGB(this.color)).drawCircle(0, 0, 25);
+
+  // Setup text
+  this.text = new createjs.Text(this.charge + "\n" + this.magnitude, "12px Arial", config.text_color);
+  this.text.textAlign = "center";
+
+  this.obj.addChild(this.atom, this.text);
+  stage.addChild(this.obj);
+
   // Add self to atoms
   atoms.push(this);
+
+  update = true;
 
   // Return self
   return this;
@@ -168,7 +197,7 @@ function atom(charge, magnitude, color) {
 
 
 // Atom's prototype
-atom.prototype = {
+newAtom.prototype = {
   /**
    * Atom to a dictionary object.
    * @return {Object} Returns a dictionary object.
