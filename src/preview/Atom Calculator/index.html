@@ -36,25 +36,75 @@
   </div>
 
   <!-- Control panel -->
-  <form class="controls_space">
+  <form class="control_panel" id="control_panel">
+    <label>
+      All Atoms:
+      <select name="atoms_all">
+        <option value="1">
+          Atom 1
+        </option>
+      </select>
+    </label>
+    <label>
+      Selected Atoms:
+      <select name="atoms_selected">
+        <option>
+          None
+        </option>
+      </select>
+    </label>
+
+    <br />
+
+    <div style="font-size: 24px;" name="atom_title">
+      Atom 1
+    </div>
+
     <label> Charge:
       <select name="atom_charge" />
-        <option>
-          =
+        <option value="=">
+          neutral (=)
         </option>
-        <option>
-          +
+        <option value="+">
+          positive (+)
         </option>
-        <option>
-          -
+        <option value="-">
+          negative (-)
         </option>
       </select>
     </label>
     <label> Magnitude:
-      <input type="number" step="1" min="0" max="99999" placeholder="0" name="atom_magnitude" />
+      <input type="number" step="1" min="0" placeholder="0" value="0" name="atom_magnitude" />
     </label>
     <label> Color:
       <input type="color" name="color" name="atom_color" />
+    </label> |
+    <input type="button" value="Duplicate" name="atom_duplicate" />
+    <input type="button" value="Delete" name="atom_delete" />
+  </form>
+
+  <hr />
+
+  <!-- Config panel -->
+  <form class="config_panel" id="config_panel">
+    <label name="session_current">
+      Session:
+      <select>
+        <option value="temporary">
+          temporary
+        </option>
+      </select>
+    </label> |
+    <input type="text" placeholder="session name..." value="temporary" onchange="session_rename.value = this.value;" name="session_name" />
+    <input type="button" value="Rename" name="session_rename" />
+    <input type="button" value="Duplicate" name="session_duplicate" />
+    <input type="button" value="Delete" name="session_delete" />
+
+    <br />
+
+    <label>
+      Custom Colors:
+      <input type="checkbox" onchange="config.custom_colors = !config.custom_colors;" />
     </label>
   </form>
 </body>

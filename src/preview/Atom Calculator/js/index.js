@@ -1,5 +1,6 @@
 // Global variables
 var stage, update = true,
+  active_atoms = [],
   atoms = [],
   colors = {
     "=": "rgb(100, 100, 100)",
@@ -8,7 +9,33 @@ var stage, update = true,
   },
   config = {
     "custom_colors": true
-  };
+  },
+  active_session = "temporary",
+  sessions = {};
+
+
+/**
+ * Save session to local storage.
+ * @return {undefined} Returns nothing.
+ */
+function save() {
+  localStorage.setItem("config", JSON.stringify(config));
+}
+
+
+/**
+ * Load and setup session from local storage.
+ * @return {undefined} Returns nothing.
+ */
+function load() {
+  if (localStorage.getItem("config") !== null) {
+    config = Object.assign(config, JSON.parse(localStorage.getItem("config")));
+  }
+
+  for (let atom of atoms) {
+
+  }
+}
 
 
 /**
@@ -100,8 +127,37 @@ function atom(charge, magnitude, color) {
   // Create canvas object
   this.atom = new createjs.Shape();
   this.atom.graphics.beginFill(stringRGB(this.color)).drawCircle(0, 0, 25);
-  this.atom.x = this.atom.y = 100;
+  this.atom.x = 400;
+  this.atom.y = 300;
   stage.addChild(this.atom);
+
+  // Mouse enter event handler
+  this.atom.on("rollover", function(evt) {
+    this.scale = 1.25;
+    update = true;
+  });
+
+  // Mouse exit event handler
+  this.atom.on("rollout", function(evt) {
+    this.scale = 1;
+    update = true;
+  });
+
+  // Mouse down events handler
+  this.atom.on("mousedown", function(evt) {
+    this.parent.addChild(this);
+    this.offset = {
+      x: this.x - evt.stageX,
+      y: this.y - evt.stageY
+    };
+  });
+
+  // Mouse drag events handler
+  this.atom.on("pressmove", function(evt) {
+    this.x = evt.stageX + this.offset.x;
+    this.y = evt.stageY + this.offset.y;
+    update = true;
+  });
 
   // Add self to atoms
   atoms.push(this);
@@ -109,3 +165,33 @@ function atom(charge, magnitude, color) {
   // Return self
   return this;
 }
+
+
+// Atom's prototype
+atom.prototype = {
+  /**
+   * Atom to a dictionary object.
+   * @return {Object} Returns a dictionary object.
+   */
+  toDictionary: function() {
+    return {
+      "charge": this.charge,
+      "magnitude": this.magnitude,
+      "color": this.color
+    };
+  },
+
+
+
+  /**
+   * Atom to a string representing a JSON.
+   * @return {Object} Returns a string representing a JSON.
+   */
+  toJSON: function() {
+    return JSON.stringify({
+      "charge": this.charge,
+      "magnitude": this.magnitude,
+      "color": this.color
+    });
+  }
+};

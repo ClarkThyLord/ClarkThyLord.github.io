@@ -21,7 +21,7 @@ canvas {
 .title_space {
   font-size: 125px;
 
-  display: flex;
+  text-align: center;
   align-items: center;
   align-content: center;
   justify-content: center;
@@ -30,7 +30,7 @@ canvas {
 }
 
 .canvas_space {
-  display: flex;
+  text-align: center;
   align-items: center;
   align-content: center;
   justify-content: center;
@@ -38,8 +38,19 @@ canvas {
   margin: 5px;
 }
 
-.controls_space {
-  display: flex;
+.control_panel {
+  text-align: center;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+
+  margin: 5px;
+
+  color: var(--text-color);
+}
+
+.config_panel {
+  text-align: center;
   align-items: center;
   align-content: center;
   justify-content: center;
