@@ -79,10 +79,10 @@
       </select>
     </label>
     <label> Magnitude:
-      <input type="number" step="1" min="0" placeholder="0" value="0" name="atom_magnitude" />
+      <input type="number" step="1" min="0" placeholder="0" name="atom_magnitude" />
     </label>
     <label> Color:
-      <input type="color" name="color" name="atom_color" />
+      <input type="color" onchange="var value = this.value.match(/[A-Za-z0-9]{2}/g); value = value.map(function(v) { return parseInt(v, 16) });" name="atom_color" />
     </label> |
     <input type="button" value="Duplicate" name="atom_duplicate" />
     <input type="button" value="Delete" name="atom_delete" />
@@ -109,7 +109,23 @@
 
     <label>
       Custom Colors:
-      <input type="checkbox" onchange="config.custom_colors = !config.custom_colors;" />
+      <input type="checkbox" onchange="config.custom_colors = !config.custom_colors;" name="custom_colors" />
+    </label>
+    <label>
+      Show Text:
+      <input type="checkbox" placeholder="" onchange="config.show_text = !config.show_text;" name="show_text" />
+    </label>
+    <label>
+      Text Color:
+      <input type="color" onchange="var value = this.value.match(/[A-Za-z0-9]{2}/g); value = value.map(function(v) { return parseInt(v, 16) }); config.text_color = stringRGB(value);" name="text_color" />
+    </label>
+    <label>
+      Show Magnitudes:
+      <input type="checkbox" onchange="config.show_magnitudes = !config.show_magnitudes;" name="show_magnitudes" />
+    </label>
+    <label>
+      Show Alpha:
+      <input type="number" placeholder="0.25" step="0.01" min="0" max="1" onchange="config.magnitude_alpha = this.value;" name="magnitude_alpha" />
     </label>
   </form>
 </body>

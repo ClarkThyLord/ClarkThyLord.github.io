@@ -12,7 +12,7 @@ var stage, update = true,
     "show_text": true,
     "text_color": "rgb(0, 0, 0)",
     "show_magnitudes": true,
-    "magnitude_intensity": 0.25
+    "magnitude_alpha": 0.25
   },
   active_session = "temporary",
   sessions = {};
@@ -56,10 +56,53 @@ function load() {
 
 
 /**
- * Function to setup canvas.
+ * Updates control panel's DOMs.
+ * @return {undefined} Returns nothing.
+ */
+function updateAllAtomList() {}
+
+
+/**
+ * Updates control panel's DOMs.
+ * @return {undefined} Returns nothing.
+ */
+function updateCurrentAtomList() {}
+
+
+/**
+ * Updates control panel's DOMs.
+ * @return {undefined} Returns nothing.
+ */
+function updateControlPanel() {
+  var panel = document.querySelector("#control_panel");
+}
+
+
+/**
+ * Updates config panel's DOMs.
+ * @return {undefined} Returns nothing.
+ */
+function updateConfigPanel() {
+  var panel = document.querySelector("#config_panel");
+
+  // Update DOMs
+  panel.elements.custom_colors.checked = config.custom_colors;
+  panel.elements.show_text.checked = config.custom_colors;
+  panel.elements.show_magnitudes.checked = config.show_magnitudes;
+  // TODO update text color
+  panel.elements.magnitude_alpha.value = config.magnitude_alpha;
+}
+
+
+/**
+ * Function to setup everything.
  * @return {undefined} Returns nothing.
  */
 function init() {
+  load();
+  updateConfigPanel();
+
+  // Setup EaselJS
   stage = new createjs.Stage("main_canvas");
 
   // Enable touch interactions
@@ -137,6 +180,7 @@ function stringRGBA(rgb, alpha) {
  */
 function newAtom(charge = "=", magnitude = 1, color = randomRGB()) {
   // Setup properties for self
+  this.id = atoms.length;
   this.charge = charge;
   this.magnitude = Math.abs(magnitude);
   this.color = color;
@@ -166,6 +210,7 @@ function newAtom(charge = "=", magnitude = 1, color = randomRGB()) {
       x: this.x - evt.stageX,
       y: this.y - evt.stageY
     };
+    active_atoms.push(this.id);
   });
 
   // Mouse drag events handler
@@ -173,6 +218,11 @@ function newAtom(charge = "=", magnitude = 1, color = randomRGB()) {
     this.x = evt.stageX + this.offset.x;
     this.y = evt.stageY + this.offset.y;
     update = true;
+  });
+
+  // Mouse drag events handler
+  this.obj.on("pressup", function(evt) {
+    active_atoms.splice(active_atoms.indexOf(this.id), 1);
   });
 
   // Setup atom
