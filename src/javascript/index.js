@@ -1,15 +1,15 @@
-window.onload = function (){
-    
-    // Star-up slides with cycle
-    showSlides(slidesIndex);
-    setTimeout(autoSlides, 3500);
-    
+window.onload = function() {
+
+  // Star-up slides with cycle
+  showSlides(slidesIndex);
+  setTimeout(autoSlides, 3500);
+
 };
 
 
 // Local Variables
 var slidesIndex = 0,
-    slidesAuto = true;
+  slidesAuto = true;
 
 function setSlide(slideNumber) {
 
@@ -18,82 +18,82 @@ function setSlide(slideNumber) {
 }
 
 function showSlides(slideNumber) {
-    // Make refrences to DOM objects
-    var slides = document.getElementsByClassName("slide");
-    var dots = document.getElementsByClassName("dot");
+  // Make refrences to DOM objects
+  var slides = document.getElementsByClassName("slide");
+  var dots = document.getElementsByClassName("dot");
 
-    if (slideNumber >= slides.length){
+  if (slideNumber >= slides.length) {
 
-        slidesIndex = 0;
+    slidesIndex = 0;
 
-    }
-    else if (slideNumber < 0){
+  } else if (slideNumber < 0) {
 
-        slidesIndex = slides.length - 1;
+    slidesIndex = slides.length - 1;
 
-    }
-    else{
-        
-        slidesIndex = slideNumber;
-        
-    }
-    
-    // Cycle through and set-up DOM objects
-    for (var num = 0; num < slides.length; num++) {
+  } else {
 
-        slides[num].style.display = "none";
+    slidesIndex = slideNumber;
 
-    }
-    for (var num = 0; num < dots.length; num++) {
+  }
 
-        dots[num].classList.remove("active");
+  // Cycle through and set-up DOM objects
+  for (var num = 0; num < slides.length; num++) {
 
-    }
-    
-    // Set-up classes to DOM objects
-    slides[slidesIndex].style.display = "inline";
-    dots[slidesIndex].classList.add("active");
+    slides[num].style.display = "none";
+
+  }
+  for (var num = 0; num < dots.length; num++) {
+
+    dots[num].classList.remove("active");
+
+  }
+
+  // Set-up classes to DOM objects
+  slides[slidesIndex].style.display = "inline";
+  dots[slidesIndex].classList.add("active");
 
 }
 
 function autoSlides() {
+  if (slidesAuto === true) {
     // Make refrences to DOM objects
     var slides = document.getElementsByClassName("slide");
     var dots = document.getElementsByClassName("dot");
-    
+
     // Cycle through and set-up DOM objects
     for (var num = 0; num < slides.length; num++) {
-        
-        slides[num].style.display = "none";
-        
+
+      slides[num].style.display = "none";
+
     }
     for (var num = 0; num < dots.length; num++) {
 
-        dots[num].classList.remove("active");
+      dots[num].classList.remove("active");
 
     }
-    
+
     // Move to the next slide
     slidesIndex++;
-    
+
     if (slidesIndex >= slides.length) {
-        
-        slidesIndex = 0;
-        
+
+      slidesIndex = 0;
+
     }
-    
+
     // Set-up classes to DOM objects
     slides[slidesIndex].style.display = "inline";
     dots[slidesIndex].classList.add("active");
-    
-    // Cycle again if all is true
-    if (slidesAuto == true){
-        setTimeout(function (){
-        if (slidesAuto == true){
-            autoSlides();
+
+    // Cycle again if auto sliding is still true
+    if (slidesAuto === true) {
+      setTimeout(function() {
+        if (slidesAuto === true) {
+          autoSlides();
         }
-        }, 3500);
-        
+      }, 3500);
+
     }
-    
+  }
+
 }

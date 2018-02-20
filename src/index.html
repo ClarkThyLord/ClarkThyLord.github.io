@@ -51,8 +51,8 @@
         </div>
 
         <div class="slide fade">
-          <img src="./assets/design/Pierce%20The%20Veil.jpg" style="width:100%">
-          <div class="slideText">Pierce The Veil</div>
+          <img src="./assets/temporary/thinking machines - banner.jpg" onclick="location.href = './assets/literature/Thinking Machines.pdf'" style="width:100%">
+          <div class="slideText">Thinking Machines</div>
         </div>
 
         <div class="slide fade">
@@ -65,17 +65,17 @@
           <div class="slideText">Kingdom Hearts Moon</div>
         </div>
 
-        <a class="previousSlide" onclick="showSlides(slidesIndex - 1);  slidesAuto = false;">&#10094;</a>
-        <a class="nextSlide" onclick="showSlides(slidesIndex + 1);  slidesAuto = false;">&#10095;</a>
+        <a class="previousSlide" onclick="slidesAuto = false; showSlides(slidesIndex - 1);">&#10094;</a>
+        <a class="nextSlide" onclick="slidesAuto = false; showSlides(slidesIndex + 1);">&#10095;</a>
 
       </div>
 
       <div style="text-align:center; margin: 10px;">
 
-        <span class="dot" onclick="setSlide(0); slidesAuto = false;"></span>
-        <span class="dot" onclick="setSlide(1); slidesAuto = false;"></span>
-        <span class="dot" onclick="setSlide(2); slidesAuto = false;"></span>
-        <span class="dot" onclick="setSlide(3); slidesAuto = false;"></span>
+        <span class="dot" onclick="slidesAuto = false; setSlide(0);"></span>
+        <span class="dot" onclick="slidesAuto = false; setSlide(1);"></span>
+        <span class="dot" onclick="slidesAuto = false; setSlide(2);"></span>
+        <span class="dot" onclick="slidesAuto = false; setSlide(3);"></span>
 
       </div>
 
