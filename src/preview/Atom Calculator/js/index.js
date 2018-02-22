@@ -59,14 +59,22 @@ function load() {
  * Updates control panel's DOMs.
  * @return {undefined} Returns nothing.
  */
-function updateAllAtomList() {}
+function updateAllAtomsList() {
+  var panel = document.querySelector("#control_panel");
+  panel.elements.atoms_all.innerHTML = "";
+  for (let atom of atoms) {
+    panel.elements.atoms_all.innerHTML += "<option value=" + atom.id + ">Atom " + atom.id + "</option>";
+  }
+}
 
 
 /**
  * Updates control panel's DOMs.
  * @return {undefined} Returns nothing.
  */
-function updateCurrentAtomList() {}
+function updateCurrentAtomsList() {
+  var panel = document.querySelector("#control_panel");
+}
 
 
 /**
@@ -113,7 +121,7 @@ function init() {
   stage.mouseMoveOutside = true;
 
   // Create the first atom
-  newAtom();
+  new newAtom();
 
   // Setup tick
   createjs.Ticker.addEventListener("tick", tick);
@@ -238,6 +246,7 @@ function newAtom(charge = "=", magnitude = 1, color = randomRGB()) {
 
   // Add self to atoms
   atoms.push(this);
+  updateAllAtomsList();
 
   update = true;
 
