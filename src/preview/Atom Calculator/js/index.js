@@ -1,5 +1,10 @@
 // Global variables
-var stage, update = true,
+var stage,
+  update = true,
+  selection = {
+    "obj": null,
+    "origin": []
+  },
   active_atoms = [],
   atoms = [],
   colors = {
@@ -8,6 +13,7 @@ var stage, update = true,
     "-": "rgb(0, 0, 255)"
   },
   config = {
+    "selection_box_color": [0, 0, 255],
     "custom_colors": true,
     "show_text": true,
     "text_color": "rgb(0, 0, 0)",
@@ -72,8 +78,12 @@ function updateAllAtomsList() {
  * Updates control panel's DOMs.
  * @return {undefined} Returns nothing.
  */
-function updateCurrentAtomsList() {
+function updateActiveAtomsList() {
   var panel = document.querySelector("#control_panel");
+  panel.elements.atoms_selected.innerHTML = "";
+  for (let atom of atoms) {
+    panel.elements.atoms_selected.innerHTML += "<option value=" + atom.id + ">Atom " + atom.id + "</option>";
+  }
 }
 
 
@@ -112,6 +122,34 @@ function init() {
 
   // Setup EaselJS
   stage = new createjs.Stage("main_canvas");
+
+  // Setup handlers
+  stage.on("stagemousedown", function(evt) {
+    if (evt.relatedTarget == null) {
+      selection.origin[0] = evt.stageX;
+      selection.origin[1] = evt.stageY;
+    }
+  });
+
+  // Mouse drag events handler
+  stage.on("pressmove", function(evt) {
+    selection.x = evt.stageX - selection.origin[0];
+    selection.y = evt.stageY - selection.origin[1];
+    update = true;
+  });
+
+  // Mouse drag events handler
+  stage.on("pressup", function(evt) {
+    selection.obj.graphics.drawRect(0, 0, 0, 0);
+    updateActiveAtomsList();
+    update = true;
+  });
+
+  selection.obj = new createjs.Shape();
+  selection.obj.graphics.beginFill(stringRGBA(config.selection_box_color, 0.6));
+  selection.obj.graphics.drawRect(0, 0, 0, 0);
+  selection.obj.graphics.endFill();
+  stage.addChild(selection.obj);
 
   // Enable touch interactions
   createjs.Touch.enable(stage);
@@ -219,6 +257,7 @@ function newAtom(charge = "=", magnitude = 1, color = randomRGB()) {
       y: this.y - evt.stageY
     };
     active_atoms.push(this.id);
+    updateActiveAtomsList();
   });
 
   // Mouse drag events handler
@@ -231,6 +270,7 @@ function newAtom(charge = "=", magnitude = 1, color = randomRGB()) {
   // Mouse drag events handler
   this.obj.on("pressup", function(evt) {
     active_atoms.splice(active_atoms.indexOf(this.id), 1);
+    updateActiveAtomsList();
   });
 
   // Setup atom
