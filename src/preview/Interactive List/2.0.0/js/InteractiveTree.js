@@ -1,28 +1,29 @@
-// Interactive Trees list
+// Object containing all Interactive Tree instances.
 var InteractiveTrees = {};
 
-// Interactive Tree DOM
-function InteractiveTreeDOM(parameters, interactive_tree) {
-  config = Object.assign({
-    dom: null,
+
+/**
+ * Creat a Interactive Tree.
+ * @param {String/DOM} [dom] Selector or DOM in which Interactive Tree is setup.
+ * @param {Object} [parameters] Configuration for Interactive Tree.
+ * @return {InteractiveTree} Returns a Interactive Tree.
+ */
+function InteractiveTree(dom, parameters) {
+  this.config = Object.assign({
     enabled: true,
     search: true,
+    search_dom: null,
     search_enabled: true,
     filter: true,
+    filter_dom: null,
     filter_enabled: true,
     key_support: true,
-    use_classes: true,
     classes: {
       icons: "",
       input: "",
       branches: "",
       foreground: "",
       background: ""
-    },
-    use_variables: false,
-    variables: {
-      ForegroundColor: "",
-      BackgroundColor: ""
     },
     branches: {
       movable: true,
@@ -31,245 +32,229 @@ function InteractiveTreeDOM(parameters, interactive_tree) {
     }
   }, parameters);
 
-  if (interactive_tree === undefined) {
-    interactive_tree = new InteractiveTree();
-  } else if (typeof interactive_tree === "object") {
-
-  } else if (typeof interactive_tree === "string") {
-    interactive_tree = InteractiveTrees[interactive_tree];
-  } else {
-    console.log("ERROR:\nInteractive Tree was given to valid Interactive Tree");
-  }
-
-  if (config.dom === null) {
-    config.dom = document.currentScript.parentNode;
-    InteractiveTreeDOM(config, interactive_tree);
-  } else if (typeof config.dom === "string") {
-    var doms = document.querySelectorAll(config.dom);
-    if (doms.length === []) {
-      console.log("ERROR:\nInteractive Tree found no DOMs matching the following selector `" + config.dom + "`");
-    } else {
-      for (let dom of doms) {
-        config.dom = dom;
-        InteractiveTreeDOM(config, interactive_tree);
-      }
-    }
-  } else {
-    var dom_one, dom_two;
-    if (config.search) {
-      dom_one = document.createElement("input");
-      dom_one.type = "text";
-      dom_one.placeholder = "Search term...";
-      config.dom.append(dom_one);
-    }
-    if (config.filter) {
-      dom_one = document.createElement("select");
-
-      // Create default types
-      dom_two = document.createElement("option");
-      dom_two.value = "Any";
-      dom_two.innerHTML = "Any";
-      dom_one.append(dom_two);
-
-      for (let type of interactive_tree.config.types) {
-        dom_two = document.createElement("option");
-        dom_two.value = "" + type;
-        dom_two.innerHTML = "" + type;
-        dom_one.append(dom_two);
-      }
-      config.dom.append(dom_one);
-    }
-
-    dom_one = document.createElement("div");
-    config.dom.append(dom_one);
-    if (Object.keys(interactive_tree.branches).lenght === 0) {
-      let list = document.createElement("ul");
-      let msg = document.createElement("li");
-      msg.innerHTML = "Nothing To Show";
-      list.append(msg);
-      dom_one.append(list);
-    } else {
-      dom_one.append(interactive_tree.toHTML());
-    }
-    config.dom.append(dom_one);
-  }
-}
-
-// Interactive Tree object
-function InteractiveTree(parameters) {
-  this.config = Object.assign({
-    id: Object.keys(InteractiveTrees).length,
-    maximum_branches: null,
-    types: []
-  }, parameters);
-
-  // The root branches of tree
-  this.tree = [];
-  // All the branches of the tree
-  this.branches = {};
-  // Number of branches in tree's life span
-  this.branch_count = 0;
-  // Branch currently in use
-  this.current = null;
-
-  // Add self the list of existing trees
-  InteractiveTrees[this.config.id] = this;
+  this.setupDOM(dom);
 }
 
 
 /**
- * Function to handle the action "drag start" on a branch.
- * @param {Event} [e] Event to be handled.
- * @return {undefined} Returns nothing.
+ * Interactive Tree prototype.
  */
-function branchDragStart(e) {
-  // Make sure it's a valid target; meaning target isn't a disabled branch
-  if (e.target.classList.contains("disabled")) {
-    e.preventDefault();
-    return;
-  }
-
-  // Setup data for data transfer
-  e.dataTransfer.setData("branch_id", e.target.dataset.id);
-}
-
-
-/**
- * Function to handle the action "drag enter" on a branch.
- * @param {Event} [e] Event to be handled.
- * @return {undefined} Returns nothing.
- */
-function branchDragEnter(e) {
-  // Refrence to branch DOM
-  var branch, relative;
-  switch (e.target.nodeName === "#text" ? e.target.parentNode.dataset.path : e.target.dataset.path) {
-    case "0":
-      branch = e.target;
-      relative = "content";
-      break;
-    case "1":
-      branch = e.target.parentNode;
-      relative = e.target.classList[0];
-      break;
-    case "2":
-      branch = e.target.parentNode.parentNode.parentNode;
-      relative = "content";
-      break;
-    default:
-      return;
-  }
-
-  // Maker sure it's a valid target; target isn't itself or a disabled branch
-  if (branch.dataset.id === e.dataTransfer.getData("branch_id") || branch.classList.contains("disabled")) {
-    e.preventDefault();
-    return;
-  }
-
-  // Add CSS "hover" class to target's parent DOM
-  branch.classList.add("hover-" + relative);
-}
-
-
-/**
- * Function to handle the action "drag over" on a branch.
- * @param {Event} [e] Event to be handled.
- * @return {undefined} Returns nothing.
- */
-function branchDragOver(e) {
-  e.preventDefault();
-}
-
-
-/**
- * Function to handle the action "drag exit" on a branch.
- * @param {Event} [e] Event to be handled.
- * @return {undefined} Returns nothing.
- */
-function branchDragExit(e) {
-  // Refrence to branch DOM
-  var branch, relative;
-  switch (e.target.nodeName === "#text" ? e.target.parentNode.dataset.path : e.target.dataset.path) {
-    case "0":
-      branch = e.target;
-      relative = "content";
-      break;
-    case "1":
-      branch = e.target.parentNode;
-      relative = e.target.classList[0];
-      break;
-    case "2":
-      branch = e.target.parentNode.parentNode.parentNode;
-      relative = "content";
-      break;
-    default:
-      return;
-  }
-
-  // Maker sure it's a valid target; target isn't itself or a disabled branch
-  if (branch.dataset.id === e.dataTransfer.getData("branch_id") || branch.classList.contains("disabled")) {
-    e.preventDefault();
-    return;
-  }
-
-  // Remove CSS "hover" class to target's parent DOM
-  branch.classList.remove("hover-" + relative);
-}
-
-
-/**
- * Function to handle the action "drag drop" on a branch.
- * @param {Event} [e] Event to be handled.
- * @return {undefined} Returns nothing.
- */
-function branchDragDrop(e) {
-  // Refrence to branch DOM
-  var branch, relative;
-  switch (e.target.nodeName === "#text" ? e.target.parentNode.dataset.path : e.target.dataset.path) {
-    case "0":
-      branch = e.target;
-      relative = "content";
-      break;
-    case "1":
-      branch = e.target.parentNode;
-      relative = e.target.classList[0];
-      break;
-    case "2":
-      branch = e.target.nodeName === "#text" ? e.target.parentNode.parentNode.parentNode : e.target.parentNode.parentNode;
-      relative = "content";
-      break;
-    default:
-      return;
-  }
-
-  // Remove CSS "hover" class to target's parent DOM
-  branch.classList.remove("hover-" + relative);
-
-  // Maker sure it's a valid target; target isn't itself or a disabled branch
-  if (branch.dataset.id === e.dataTransfer.getData("branch_id") || branch.classList.contains("disabled")) {
-    e.preventDefault();
-    return;
-  }
-
-  // Setup variables
-  var branch = e.dataTransfer.getData("branch_id"),
-    target = e.target.dataset.id || e.target.parentNode.dataset.id || e.target.parentNode.parentNode.dataset.id;
-
-  // Check if the target is the object being dropped
-  if (branch == target[0]) {
-    return;
-  }
-
-  if (relative === "above") {
-    branchMove(tree.branches[branch], tree.branches[target], "above");
-  } else if (relative === "content") {
-    branchMove(tree.branches[branch], tree.branches[target], "into");
-  } else if (relative === "bottom") {
-    branchMove(tree.branches[branch], tree.branches[target], "below");
-  }
-}
-
-// Interactive Tree object prototype
 InteractiveTree.prototype = {
+  /**
+   * Function to handle the action "drag start" on a branch.
+   * @param {Event} [e] Selector string representing DOM or the DOM itself to setup InteractiveTree in.
+   * @return {Array} Returns a Array of DOMs in which Interactive Tree is setup.
+   */
+  setupDOM: function(dom) {
+    if (dom === undefined) {
+      dom = document.currentScript.parentNode;
+    } else if (typeof dom === "string") {
+      var doms = document.querySelectorAll(dom);
+      if (doms.length === 0) {
+        console.log("ERROR:\nInteractive Tree found no DOMs matching the following selector `" + dom + "`");
+      } else {
+        for (let dom of doms) {
+          setupDOM(dom);
+        }
+      }
+
+      return doms;
+    } else if (typeof dom == "object") {
+      var dom_one, dom_two;
+      if (config.search) {
+        dom_one = document.createElement("input");
+        dom_one.type = "text";
+        dom_one.placeholder = "Search term...";
+        dom.append(dom_one);
+      }
+      if (config.filter) {
+        dom_one = document.createElement("select");
+
+        // Create default types
+        dom_two = document.createElement("option");
+        dom_two.value = "Any";
+        dom_two.innerHTML = "Any";
+        dom_one.append(dom_two);
+
+        for (let type of interactive_tree.config.types) {
+          dom_two = document.createElement("option");
+          dom_two.value = "" + type;
+          dom_two.innerHTML = "" + type;
+          dom_one.append(dom_two);
+        }
+        dom.append(dom_one);
+      }
+
+      dom_one = document.createElement("div");
+      dom.append(dom_one);
+      if (Object.keys(interactive_tree.branches).lenght === 0) {
+        let list = document.createElement("ul");
+        let msg = document.createElement("li");
+        msg.innerHTML = "Nothing To Show";
+        list.append(msg);
+        dom_one.append(list);
+      } else {
+        dom_one.append(interactive_tree.toHTML());
+      }
+      dom.append(dom_one);
+
+      return [dom];
+    }
+  },
+
+
+  /**
+   * Function to handle the action "drag start" on a branch.
+   * @param {Event} [e] Event to be handled.
+   * @return {undefined} Returns nothing.
+   */
+  branchDragStart: function(e) {
+    // Make sure it's a valid target; meaning target isn't a disabled branch
+    if (e.target.classList.contains("disabled")) {
+      e.preventDefault();
+      return;
+    }
+
+    // Setup data for data transfer
+    e.dataTransfer.setData("branch_id", e.target.dataset.id);
+  },
+
+
+  /**
+   * Function to handle the action "drag enter" on a branch.
+   * @param {Event} [e] Event to be handled.
+   * @return {undefined} Returns nothing.
+   */
+  branchDragEnter: function(e) {
+    // Refrence to branch DOM
+    var branch, relative;
+    switch (e.target.nodeName === "#text" ? e.target.parentNode.dataset.path : e.target.dataset.path) {
+      case "0":
+        branch = e.target;
+        relative = "content";
+        break;
+      case "1":
+        branch = e.target.parentNode;
+        relative = e.target.classList[0];
+        break;
+      case "2":
+        branch = e.target.parentNode.parentNode.parentNode;
+        relative = "content";
+        break;
+      default:
+        return;
+    }
+
+    // Maker sure it's a valid target; target isn't itself or a disabled branch
+    if (branch.dataset.id === e.dataTransfer.getData("branch_id") || branch.classList.contains("disabled")) {
+      e.preventDefault();
+      return;
+    }
+
+    // Add CSS "hover" class to target's parent DOM
+    branch.classList.add("hover-" + relative);
+  },
+
+
+  /**
+   * Function to handle the action "drag over" on a branch.
+   * @param {Event} [e] Event to be handled.
+   * @return {undefined} Returns nothing.
+   */
+  branchDragOver: function(e) {
+    e.preventDefault();
+  },
+
+
+  /**
+   * Function to handle the action "drag exit" on a branch.
+   * @param {Event} [e] Event to be handled.
+   * @return {undefined} Returns nothing.
+   */
+  branchDragExit: function(e) {
+    // Refrence to branch DOM
+    var branch, relative;
+    switch (e.target.nodeName === "#text" ? e.target.parentNode.dataset.path : e.target.dataset.path) {
+      case "0":
+        branch = e.target;
+        relative = "content";
+        break;
+      case "1":
+        branch = e.target.parentNode;
+        relative = e.target.classList[0];
+        break;
+      case "2":
+        branch = e.target.parentNode.parentNode.parentNode;
+        relative = "content";
+        break;
+      default:
+        return;
+    }
+
+    // Maker sure it's a valid target; target isn't itself or a disabled branch
+    if (branch.dataset.id === e.dataTransfer.getData("branch_id") || branch.classList.contains("disabled")) {
+      e.preventDefault();
+      return;
+    }
+
+    // Remove CSS "hover" class to target's parent DOM
+    branch.classList.remove("hover-" + relative);
+  },
+
+
+  /**
+   * Function to handle the action "drag drop" on a branch.
+   * @param {Event} [e] Event to be handled.
+   * @return {undefined} Returns nothing.
+   */
+  branchDragDrop: function(e) {
+    // Refrence to branch DOM
+    var branch, relative;
+    switch (e.target.nodeName === "#text" ? e.target.parentNode.dataset.path : e.target.dataset.path) {
+      case "0":
+        branch = e.target;
+        relative = "content";
+        break;
+      case "1":
+        branch = e.target.parentNode;
+        relative = e.target.classList[0];
+        break;
+      case "2":
+        branch = e.target.nodeName === "#text" ? e.target.parentNode.parentNode.parentNode : e.target.parentNode.parentNode;
+        relative = "content";
+        break;
+      default:
+        return;
+    }
+
+    // Remove CSS "hover" class to target's parent DOM
+    branch.classList.remove("hover-" + relative);
+
+    // Maker sure it's a valid target; target isn't itself or a disabled branch
+    if (branch.dataset.id === e.dataTransfer.getData("branch_id") || branch.classList.contains("disabled")) {
+      e.preventDefault();
+      return;
+    }
+
+    // Setup variables
+    var branch = e.dataTransfer.getData("branch_id"),
+      target = e.target.dataset.id || e.target.parentNode.dataset.id || e.target.parentNode.parentNode.dataset.id;
+
+    // Check if the target is the object being dropped
+    if (branch == target[0]) {
+      return;
+    }
+
+    if (relative === "above") {
+      branchMove(tree.branches[branch], tree.branches[target], "above");
+    } else if (relative === "content") {
+      branchMove(tree.branches[branch], tree.branches[target], "into");
+    } else if (relative === "bottom") {
+      branchMove(tree.branches[branch], tree.branches[target], "below");
+    }
+  },
+
+
   /**
    * Export Interactive Tree object as JSON.
    * @return {String} Returns string representing JSON.
