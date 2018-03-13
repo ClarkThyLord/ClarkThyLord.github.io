@@ -1,15 +1,22 @@
 :root {
+  /* Prevent Select of Unintended Select */
+  user-select: none;
+  -ms-user-select: none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+
   /* Text */
   --text-size: 18px;
   --text-color: rgba(255, 255, 255, 1);
+  --shadow-effect: rgba(30, 30, 30, 0.25);
 
   /* Interactive */
-  --above-color: rgba(54, 54, 54, 1);
-  --over-color: rgba(54, 54, 54, 1);
-  --under-color: rgba(54, 54, 54, 1);
+  --choosen-color: rgba(60, 60, 60, 1);
+  --selected-color: rgba(50, 50, 50, 1);
 
   /* Foreground */
-  --cover-color: rgba(0, 0, 0, 0.6);
   --border-color: rgba(17, 17, 17, 0.3);
   --primary-background-color: rgba(30, 30, 30, 1);
   --secondary-background-color: rgba(42, 42, 42, 1);
@@ -47,28 +54,14 @@ input:focus, select:focus {
   background-color: var(--secondary-background-color);
 }
 
-.tip {
-  /* Position */
-  position: relative;
-  left: -50%;
-  top: 0px;
-  z-index: 100;
-
-  /* Bounds */
-  width: 120px;
-  display: none;
-  overflow: auto;
-  padding: 5px 0;
-  border-radius: 6px;
-
-  /* Visuals */
-  text-align: center;
-
-  /* Colors */
-  box-shadow: 0px 0px 2px;
-  background-color: var(--secondary-background-color);
+/* Custom Icons */
+.ui-icon-potential {
+  width: 32px;
+  height: 32px;
+  background-image: url(../../assets/common/icons/potential.png);
 }
 
+/* Custom Classes */
 .popup {
   /* Position */
   position: fixed;
@@ -101,6 +94,7 @@ input:focus, select:focus {
   /* Bounds */
   padding: 20px;
   margin: auto;
+  overflow-y: auto;
 
   /* Colors */
   border: 1px solid var(--border-color);
@@ -158,11 +152,6 @@ input:focus, select:focus {
   background-color: var(--secondary-background-color);
 }
 
-.container .section .title {
-  overflow: auto;
-  max-height: 10%;
-}
-
 .container .section .content {
   overflow: auto;
   max-height: 40%;
@@ -203,19 +192,11 @@ input:focus, select:focus {
 }
 
 .options .item {
-  /* Pointer */
-  cursor: pointer;
-
   /* Position */
   z-index: 2;
 
   /* Bounds */
   padding: 3px;
-}
-
-.selectable:hover {
-  /* Color */
-  background-color: var(--secondary-background-color);
 }
 
 .dropmenu {
@@ -251,9 +232,34 @@ input:focus, select:focus {
 }
 
 /* Global classes */
+.choosen {
+  /* Color */
+  background-color: var(--choosen-color);
+}
+
 .selected {
   /* Color */
-  background-color: var(--secondary-background-color);
+  background-color: var(--selected-color);
+}
+
+.selectable {
+  /* Pointer */
+  cursor: pointer;
+}
+
+.selectable:hover {
+  /* Color */
+  background-color: var(--selected-color);
+}
+
+.selectable:active {
+  /* Color */
+  background-color: var(--choosen-color);
+}
+
+.disabled {
+  /* Cursor */
+  cursor: not-allowed;
 }
 
 .hidden {
@@ -264,18 +270,22 @@ input:focus, select:focus {
 .left {
   /* Position */
   float: left;
+  text-align: left;
+}
+
+.center {
+  /* Position */
+  text-align: center;
+  align-items: center;
+  vertical-align: middle;
+  justify-content: center;
 }
 
 .right {
   /* Position */
   float: right;
-}
-
-.center {
-  /* Position */
-  align-items: center;
-  justify-content: center;
-  text-align: center;
+  text-align: right;
+  justify-content: flex-end;
 }
 
 .border {

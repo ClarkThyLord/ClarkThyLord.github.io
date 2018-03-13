@@ -3,151 +3,53 @@
 
 <head>
 
-  <link rel="icon" href="./assets/potential.png">
+  <link rel="icon" href="./assets/potential.png" />
 
   <title>WS - Potential</title>
 
   <!-- Meta -->
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <!-- Load CSS Files -->
+  <!-- Load CSS -->
+  <style rel="stylesheet" type="text/css">
+
+
+  </style>
   <!-- Libraries -->
-  <!-- Global -->
-  <link rel="stylesheet" type="text/css" href="./css/spectrum.css">
+  <link rel="stylesheet" type="text/css" href="./css/libraries/jquery-ui.min.css">
+  <link rel="stylesheet" type="text/css" href="./css/libraries/jquery-ui-theme.css">
+  <link rel="stylesheet" type="text/css" href="./css/libraries/jquery-sm-core.css">
+  <link rel="stylesheet" type="text/css" href="./css/libraries/jquery-sm-theme.css">
+  <link rel="stylesheet" type="text/css" href="./css/libraries/jquery-spectrum.css">
 
-  <!-- Core JS -->
-  <!-- Global -->
-  <link rel="stylesheet" type="text/css" href="./css/core/gui.css">
-  <link rel="stylesheet" type="text/css" href="./css/core/index.css">
+  <!-- Common -->
+  <link rel="stylesheet" type="text/css" href="./css/common/gui.css">
 
-  <!-- Load JS Files -->
+  <!-- Custom -->
+  <link rel="stylesheet" type="text/css" href="./css/index.css">
+
+  <!-- Load JS -->
+  <script>
+    var PREFIX = ".";
+
+  </script>
   <!-- Libraries -->
-  <!-- Global -->
-  <script src="./js/DragDropTouch.js"></script>
-  <script src="./js/jquery-3.2.1.min.js"></script>
-  <script src="./js/spectrum.js"></script>
+  <script src="./js/libraries/DragDropTouch.js"></script>
+  <script src="./js/libraries/jquery.min.js"></script>
+  <script src="./js/libraries/jquery-ui.min.js"></script>
+  <script src="./js/libraries/jquery-ui-touch-punch.min.js"></script>
+  <script src="./js/libraries/jquery-smartmenus.min.js"></script>
+  <script src="./js/libraries/jquery-spectrum.js"></script>
+  <script src="./js/libraries/dropzone.min.js"></script>
 
-  <!-- Core JS -->
-  <!-- Global -->
-  <script src="./js/core/config.js"></script>
-  <script src="./js/core/gui.js"></script>
+  <!-- Common -->
+  <script src="./js/common/config.js"></script>
+  <script src="./js/common/gui.js"></script>
 
 </head>
 
 <body>
-
-  <!-- Settings popup -->
-  <div class="popup settings">
-
-    <div class="content">
-
-      <!-- Settings popup - toolbar -->
-      <div class="center options toolbar">
-        <div class="item selectable" onclick="$('.settings .menus .item').hide(); $('.settings .menus .settings').toggle();">
-          Settings
-        </div>
-        <div class="item selectable" onclick="$('.settings .menus .item').hide(); $('.settings .menus .appearance').toggle();">
-          Appearance
-        </div>
-        <div class="item selectable" onclick="$('.settings .menus .item').hide(); $('.settings .menus .about').toggle();">
-          About
-        </div>
-      </div>
-
-      <!-- Settings popup - appearance menu -->
-      <div class="menus">
-        <form class="item appearance">
-          <!-- Font appearance -->
-          <fieldset>
-            <legend>
-              Font Appearance
-            </legend>
-
-            <label>
-              Text Size:
-              <input type="number" min=8 max=100 onchange="themePropertyUpdate(this.name, this.value + 'px');" name="--text-size"/>
-            </label>
-
-            <label>
-              Text Color:
-              <input type="color" class="spectrum-widget" data-type="theme" name="--text-color" />
-            </label>
-          </fieldset>
-
-          <!-- Foreground appearance -->
-          <fieldset>
-            <legend>
-              Foreground appearance
-            </legend>
-            <label>
-              Background colors:
-              Primery:
-              <input type="color" class="spectrum-widget" data-type="theme" name="--primary-background-color">
-              Seconday:
-              <input type="color" class="spectrum-widget" data-type="theme" name="--secondary-background-color">
-            </label>
-            <label>
-              Decoration colors:
-              Border color:
-              <input type="color" class="spectrum-widget" data-type="theme" name="--border-color">
-              Cover color:
-              <input type="color" class="spectrum-widget" data-type="theme" name="--cover-color">
-            </label>
-          </fieldset>
-
-          <!-- Interactives appearance -->
-          <fieldset>
-            <legend>
-              <span class="tooltip">
-                Interactives Appearance
-                <span class="tip">
-                  The appearance of GUI you iteract with!
-                </span>
-              </span>
-            </legend>
-
-            <label>
-            </label>
-          </fieldset>
-
-          <!-- Theme options -->
-          <select onchange="themeUse(THEMES[this.value]);" name="theme_list">
-
-          </select>
-          <input type="button" value="Delete" onclick="themeDelete(theme_list.value);" name="theme_delete" /> |
-          <input type="file" accept=".json" multiple style="display: none;" onchange="var files = Object.keys(this.files); for (var file in files) { themeLoad(this.files[file]); } this.value = '';" name="theme_file" />
-          <input type="text" placeholder="New theme..." name="theme_name" />
-          <input type="button" value="Save" onclick="themeSave(themeCurrent, theme_name.value);" name="theme_save" /> |
-          <input type="button" value="Import" onclick="theme_file.click();" name="theme_import" />
-          <input type="button" value="Export" onclick="themeExport(themeCurrent);" name="theme_export" />
-        </form>
-
-        <!-- Settings popup - settings menu -->
-        <form class="item settings">
-
-        </form>
-
-        <!-- Settings popup - about menu -->
-        <form class="item about">
-
-          <h1>
-            <a href="https://github.com/ClarkThyLord/WS-potential">
-              WS Potential
-            </a>
-          </h1>
-
-          <span>
-            WS Potential is for the newbies, hobbyist, and the professionals. Removing all the complicated and ridiculous stuff from them, and implementing all of their shining features while improving upon them. Most image manipulation softwares don’t have game developers in mind, I don’t blame that for that; but, unlike them I do which is why this software will be suitable for any game developer having support for scripts, particles, physics, and more. Their is no fee for using WS Potential, and all it’s code is open source so if you’re looking to fix or improve something you can do so!
-          </span>
-
-        </form>
-
-      </div>
-
-    </div>
-
-  </div>
-
   <div class="title center">
     <img src="./assets/potential.png" class="icon" />
   </div>
@@ -159,24 +61,45 @@
     </div>
 
     <!-- middle of toolbar -->
-    <div style="display: flex; flex: 0.34;" class="center">
-      <div onclick="location.href = './index.html';" class="item selectable center">
+    <div style="flex: 0.34;" class="center">
+      2D
+      <br />
+      <div onclick="location.href = './html/2D.html#ImageManipulation';" style="display: inline-block;" class="item  selectable center">
         Image Manipulation
       </div>
-      <div onclick="location.href = './index.html';" class="item selectable center">
+      <div onclick="location.href = './html/2D.html#VectorManipulation';" style="display: inline-block;" class="item  selectable center">
         Vector Manipulation
       </div>
-      <div onclick="location.href = './index.html';" class="item selectable center">
+      <div onclick="location.href = './html/2D.html#FrameByFrameAnimation';" style="display: inline-block;" class="item  selectable center">
         Frame by Frame Animation
       </div>
-      <div onclick="location.href = './pages/SkeletonAnimation.html';" class="item selectable center">
+      <div onclick="location.href = './html/2D.html#SkeletonAnimation';" style="display: inline-block;" class="item selectable center">
         Skeleton Animation
       </div>
-      <div onclick="location.href = './index.html';" class="item selectable center">
-        Video Manipulation
+      <hr /> 3D
+      <br />
+      <div onclick="location.href = './html/3D.html#Modeling';" style="display: inline-block;" class="item selectable  center">
+        Modeling
       </div>
-      <div onclick="location.href = './index.html';" class="item selectable center">
-        Sound Manipulation
+      <div onclick="location.href = './html/3D.html#Sculpting';" style="display: inline-block;" class="item selectable  center">
+        Sculpting
+      </div>
+      <div onclick="location.href = './html/3D.html#VoxelEditor';" style="display: inline-block;" class="item selectable center">
+        Voxel Editor
+      </div>
+      <div onclick="location.href = './html/3D.html#Animating';" style="display: inline-block;" class="item selectable  center">
+        Animating
+      </div>
+      <div onclick="location.href = './html/3D.html#Rendering';" style="display: inline-block;" class="item selectable  center">
+        Rendering
+      </div>
+      <hr /> Other
+      <br />
+      <div onclick="location.href = './html/Audio.html';" style="display: inline-block;" class="item selectable  center">
+        Audio Manipulation
+      </div>
+      <div onclick="location.href = './html/Video.html';" style="display: inline-block;" class="item  selectable center">
+        Video Manipulation
       </div>
     </div>
 
@@ -230,8 +153,14 @@
     <!-- toolbar's middle -->
     <div style="display: flex; flex: 34;" class="center">
 
-      <div onclick="settings();" class="item selectable center border">
+      <div onclick='$("#ConfigurationMenu").dialog("open"); $("#ConfigTabs").tabs({active: 0});' class="item selectable center">
         Settings
+      </div>
+      <div onclick='$("#ConfigurationMenu").dialog("open"); $("#ConfigTabs").tabs({active: 1});' class="item selectable center ">
+        Appearance
+      </div>
+      <div onclick='$("#ConfigurationMenu").dialog("open"); $("#ConfigTabs").tabs({active: 2});' class="item selectable center">
+        About
       </div>
 
     </div>

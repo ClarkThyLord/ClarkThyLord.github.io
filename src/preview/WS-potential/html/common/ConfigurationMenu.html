@@ -1,0 +1,88 @@
+<div id="ConfigurationMenu" title="Configuration Menu">
+  <div id="ConfigTabs">
+    <ul>
+      <li><a href="#config_T_1">Settings</a></li>
+      <li><a href="#config_T_2">Appearance</a></li>
+      <li><a href="#config_T_3">About</a></li>
+    </ul>
+    <div id="config_T_1">
+    </div>
+    <div id="config_T_2">
+      <form class="item appearance">
+        <!-- Font appearance -->
+        <fieldset>
+          <legend>
+            Font Appearance:
+          </legend>
+
+          <label>
+            Text Size:
+            <input type="number" min="8" max="100" onchange="themeUpdate(this.name, this.value + 'px');" data-type="theme" data-unit="px" name="--text-size" />
+          </label>
+          <label>
+            Text Color:
+            <input type="color" class="spectrum-widget" data-type="theme" name="--text-color" />
+          </label>
+        </fieldset>
+
+        <!-- Interactive appearance -->
+        <fieldset>
+          <legend>
+            Interactives Appearance
+          </legend>
+
+          <label>
+            Choosen Color:
+            <input type="color" class="spectrum-widget" data-type="theme" name="--choosen-color" />
+          </label>
+          <label>
+            Selected Color:
+            <input type="color" class="spectrum-widget" data-type="theme" name="--selected-color" />
+          </label>
+        </fieldset>
+
+        <!-- Foreground appearance -->
+        <fieldset>
+          <legend>
+            Foreground Appearance:
+          </legend>
+
+          <label>
+            Primary Color:
+            <input type="color" class="spectrum-widget" data-type="theme" name="--primary-background-color" />
+          </label>
+          <label>
+            Secondary Color:
+            <input type="color" class="spectrum-widget" data-type="theme" name="--secondary-background-color" />
+          </label>
+          <label>
+            Border Color:
+            <input type="color" class="spectrum-widget" data-type="theme" name="--border-color" />
+          </label>
+        </fieldset>
+
+        <!-- Theme options -->
+        <div style="margin: 5px;">
+          <select onchange="themesSet(this.value); themesSave();" name="theme_list"></select>
+          <input type="text" placeholder="Custom theme..." name="theme_name" />
+          <input type="button" value="Save" onclick="themesAdd(theme_name.value);" name="theme_save" />
+          <input type="button" value="Delete" onclick="themesRemove(theme_list.value);" name="theme_delete" /> |
+          <input type="file" accept=".json" multiple="multiple" style="display: none;" onchange="var files = Object.keys(this.files); for (var file in files) { themesImport(this.files[file]); } this.value = '';" name="theme_file" />
+          <input type="button" value="Import" onclick="theme_file.click();" name="theme_import" />
+          <input type="button" value="Export" onclick="themesExport(theme_name.value, THEMES[THEMES['<current>']]);" name="theme_export" />
+        </div>
+      </form>
+    </div>
+    <div id="config_T_3">
+      <h1>
+        <a href="https://github.com/ClarkThyLord/WS-potential">
+          WS Potential
+        </a>
+      </h1>
+
+      <span>
+        WS Potential is for the newbies, hobbyist, and the professionals. Removing all the complicated and ridiculous stuff from them, and implementing all of their shining features while improving upon them. Most image manipulation softwares don’t have game developers in mind, I don’t blame that for that; but, unlike them I do which is why this software will be suitable for any game developer having support for scripts, particles, physics, and more. Their is no fee for using WS Potential, and all it’s code is open source so if you’re looking to fix or improve something you can do so!
+      </span>
+    </div>
+  </div>
+</div>

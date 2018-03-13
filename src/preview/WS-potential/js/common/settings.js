@@ -1,26 +1,20 @@
-var WORKSPACE = {
+var SETTINGS = {
   "version": "0.0.0",
   "type": "work space",
-  "themes": {
-
+  "settings": {
+    "DEBUGGING": true
   },
   "projects": {
-    "image": { // Image manipulation
+    "2d": { // 2D projects
 
     },
-    "vector": { // Vector manipulation
+    "3d": { // 3D projects
 
     },
-    "frame": { // Frame by frame animation
+    "audio": { // Audio projects
 
     },
-    "skeleton": { // Skeleton animation
-
-    },
-    "video": { // Video manipulation
-
-    },
-    "audio": { // Audio manipulation
+    "video": { // Video projects
 
     }
   }
