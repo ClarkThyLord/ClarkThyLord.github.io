@@ -61,9 +61,6 @@ $(document).ready(function() {
       });
     }
   });
-
-  // Smart menu setup
-  $(".sm").smartmenus();
 });
 
 
@@ -92,14 +89,21 @@ function master_resize() {
  * @return {DOM} Returns DOM representing panel.
  */
 function setupPanel(type, name) {
-  $.get(PREFIX + "/html/panels/" + type + "/" + name + ".html", function(html) {
-    var dom = $.parseHTML(html);
-    $("body").append(dom);
-    $(dom).dialog({
-      width: window.innerWidth / 1.5,
-      height: window.innerHeight / 1.5
-    });
-  }, 'html');
+  if ($("#" + name + "_Panel").length >= 1) {
+    $("#" + name + "_Panel").first().focus();
+  } else {
+    $.get(PREFIX + "/html/panels/" + type + "/" + name + ".html", function(html) {
+      var dom = $.parseHTML(html);
+      $("body").append(dom);
+      $(dom).dialog({
+        width: window.innerWidth / 1.5,
+        height: window.innerHeight / 1.5,
+        close: function(eve, ui) {
+          $(this).remove();
+        }
+      });
+    }, 'html');
+  }
 }
 
 

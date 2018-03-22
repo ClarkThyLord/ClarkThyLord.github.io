@@ -1,7 +1,7 @@
 var stage, content, update = false;
 
 // Setup everything
-function init() {
+$(document).ready(function() {
   // Setup panels list
   var panels = [
     "Object Manager"
@@ -14,6 +14,9 @@ function init() {
     html += "</ul>";
     $("#panels").append(html);
   }
+
+  // Smart menu setup
+  $(".sm").smartmenus();
 
   // Setup master canvas
   stage = new createjs.Stage("master_canvas");
@@ -40,7 +43,7 @@ function init() {
 
   // Setup ticker
   createjs.Ticker.addEventListener("tick", tick);
-}
+});
 
 
 // Ticker: used to update

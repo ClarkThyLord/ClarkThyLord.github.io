@@ -12,80 +12,62 @@ rgb(115, 115, 115) # Lightest
 */
 
 /* Everything that makes up the navigation. */
+
 nav {
-    
-    position: fixed;
-    top: 0px;
-    width: 99.3%;
-    z-index: 100;
-    
+  position: fixed;
+  top: 0px;
+  width: 99.3%;
+  z-index: 100;
 }
 
 /* Navigation elements */
+
 nav ul {
-    
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: rgb(54, 54, 54);
-    
-    box-shadow: 0px 0px 10px;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: rgb(54, 54, 54);
+  box-shadow: 0px 0px 10px;
 }
 
 /* Navigation elements positioning */
+
 nav ul li.left {
-    
-    float: left;
-    
+  float: left;
 }
 
 /* Navigation elements positioning */
+
 nav ul li.right {
-    
-    float: right;
-    
+  float: right;
 }
 
 /* Navigation element's info */
+
 nav ul li a {
-    
-    display: block;
-    color: white;
-    text-shadow: 0px 0px 3px;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    
+  display: block;
+  color: white;
+  text-shadow: 0px 0px 3px;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
 }
 
 nav ul li a:hover:not(.active) {
-    
-    background-color: rgb(42, 42, 42);
-    
+  background-color: rgb(42, 42, 42);
 }
 
 nav ul li a.active {
-    
-    background-color: rgb(30, 30, 30);
-
+  background-color: rgb(30, 30, 30);
 }
 
-@media screen and (max-width: 600px){
-    
-    nav ul li.right,
-    nav ul li.left,
-    nav ul li {
-        
-        float: none;
-        
-    }
-    
-    nav {
-        
-        width: 100%;
-        position: relative;
-        
-    }
-    
+@media screen and (max-width: 600px) {
+  nav ul li.right, nav ul li.left, nav ul li {
+    float: none;
+  }
+  nav {
+    width: 100%;
+    position: relative;
+  }
 }
