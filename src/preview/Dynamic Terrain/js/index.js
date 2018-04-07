@@ -49,8 +49,6 @@ window.onload = function() {
 
   // Setup Three.js Light TODO
 
-  scene.add(helper);
-
   // Setup Scene's content
   let geometry = new THREE.Geometry();
   for (var i = 0; i < 10000; i++) {
