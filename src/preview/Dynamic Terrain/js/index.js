@@ -39,7 +39,23 @@ window.onload = function() {
   scene.add(light);
 
   // Setup Scene's content
-  let geometry = new THREE.BoxGeometry(1, 1, 1);
+  let geometry = new THREE.Geometry();
+  for (var i = 0; i < 10000; i++) {
+    var vertex = new THREE.Vector3();
+
+    // Random cordinates
+    vertex.x = THREE.Math.randFloatSpread(2000);
+    vertex.y = THREE.Math.randFloatSpread(2000);
+    vertex.z = THREE.Math.randFloatSpread(2000);
+
+    geometry.vertices.push(vertex);
+  }
+  var stars = new THREE.Points(geometry, new THREE.PointsMaterial({
+    color: new THREE.Color('rgb(255, 255, 255)'),
+  }));
+  scene.add(stars);
+
+  geometry = new THREE.BoxGeometry(1, 1, 1);
   let material = new THREE.MeshBasicMaterial({
     color: new THREE.Color('rgba(0, 255, 0, 1)'),
     wireframe: true
