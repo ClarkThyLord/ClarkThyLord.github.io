@@ -8,7 +8,8 @@ var debugging = true,
 var fps_stats;
 var gui_data;
 var data = {
-  seed: Math.random() * 100000,
+  seed: Math.floor(Math.random() * 100000),
+  material: 'wireframe',
 };
 var renderer, scene, light, camera;
 var terrain;
@@ -26,6 +27,7 @@ window.onload = function() {
   // Setup Dat.GUI.js Data Menu
   gui_data = new dat.GUI();
   gui_data.add(data, 'seed', 0, 100000, 1);
+  gui_data.add(data, 'material', ['wireframe', 'solid', 'cartoonish', 'heat']);
 
   // Setup Three.js Renderer
   renderer = new THREE.WebGLRenderer({
@@ -39,7 +41,7 @@ window.onload = function() {
   scene.background = new THREE.Color('rgba(0, 0, 0, 1)');
 
   // Setup Three.js Camera and Controls
-  camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+  camera = new THREE.PerspectiveCamera(100, window.innerWidth / window.innerHeight, 0.01, 1000);
   camera.userData.controls = new THREE.OrbitControls(camera);
   camera.position.z = 5;
 
@@ -71,8 +73,8 @@ window.onload = function() {
     wireframe: true,
   });
   terrain = new THREE.Mesh(geometry, material);
+  terrain.userData.material = data.material;
   update_seed(data.seed);
-  terrain.rotation.x = 90;
   scene.add(terrain);
 
   // Append Scene DOM to HTML's body
@@ -111,7 +113,31 @@ function render_update() {
   // Update scene according to camera
   renderer.render(scene, camera);
 
-  update_seed(data.seed);
+  if (noise.get_seed() !== data.seed) {
+    update_seed(data.seed);
+  }
+
+  if (terrain.userData.material !== data.material) {
+    terrain.userData.material = data.material;
+    if (data.material === 'wireframe') {
+      terrain.material = new THREE.MeshBasicMaterial({
+        color: new THREE.Color('rgba(0, 255, 0, 1)'),
+        wireframe: true,
+      });
+    } else if (data.material === 'solid') {
+      terrain.material = new THREE.MeshBasicMaterial({
+        color: new THREE.Color('rgba(255, 255, 255, 1)'),
+      });
+    } else if (data.material === 'cartoonish') {
+      terrain.material = new THREE.MeshBasicMaterial({
+        color: new THREE.Color('rgba(180, 100, 15, 1)'),
+      });
+    } else if (data.material === 'heat') {
+      terrain.material = new THREE.MeshBasicMaterial({
+        color: new THREE.Color('rgba(255, 0, 0, 1)'),
+      });
+    }
+  }
 
   // Update Stats.js Stat Monitor
   fps_stats.update();
