@@ -55,13 +55,32 @@ window.onload = function() {
   }));
   scene.add(stars);
 
-  geometry = new THREE.BoxGeometry(1, 1, 1);
-  let material = new THREE.MeshBasicMaterial({
+  // geometry = new THREE.BoxGeometry(1, 1, 1);
+  // let material = new THREE.MeshBasicMaterial({
+  //   color: new THREE.Color('rgba(0, 255, 0, 1)'),
+  //   wireframe: true
+  // });
+  // let cube = new THREE.Mesh(geometry, material);
+  // scene.add(cube);
+
+  geometry = new THREE.PlaneGeometry(10, 10, 99, 99);
+  noise.seed(Math.random());
+  for (var i = 0; i < 100; i++) {
+    for (var j = 0; j < 100; j++) {
+      var ex = 0.5;
+      geometry.vertices[i + j * 100].z = (noise.simplex2(i / 100, j / 100) + (noise.simplex2((i + 200) / 50, j / 50) * Math.pow(ex, 1)) + (noise.simplex2((i + 400) / 25, j / 25) * Math.pow(ex, 2)) +
+        (noise.simplex2((i + 600) / 12.5, j / 12.5) * Math.pow(ex, 3)) +
+        +
+        (noise.simplex2((i + 800) / 6.25, j / 6.25) * Math.pow(ex, 4))
+      ) / 2;
+    }
+  }
+  let terrain = new THREE.Mesh(geometry, new THREE.MeshBasicMaterial({
     color: new THREE.Color('rgba(0, 255, 0, 1)'),
-    wireframe: true
-  });
-  let cube = new THREE.Mesh(geometry, material);
-  scene.add(cube);
+    wireframe: true,
+  }));
+  terrain.rotation.x = 90;
+  scene.add(terrain);
 
   // Append Scene DOM to HTML's body
   document.body.appendChild(renderer.domElement);
