@@ -12,16 +12,18 @@ var renderer, scene, light, camera;
 // Setup once the page has finished loading
 window.onload = function() {
   // Check if WebGL is usable
-  if (!Detector.webgl) Detector.addGetWebGLMessage({});
+  if (!Detector.webgl) Detector.addGetWebGLMessage();
 
   // Setup Stats.js FPS Stat Monitor
   fps_stats = new Stats(0);
   document.body.appendChild(fps_stats.dom);
 
   // Setup Three.js Renderer
-  renderer = new THREE.WebGLRenderer();
-  renderer.setPixelRatio(window.devicePixelRatio);
+  renderer = new THREE.WebGLRenderer({
+    antialias: true
+  });
   renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setPixelRatio(window.devicePixelRatio);
 
   // Setup Three.js Scene
   scene = new THREE.Scene();
@@ -30,6 +32,20 @@ window.onload = function() {
   // Setup Three.js Camera and Controls
   camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
   camera.userData.controls = new THREE.OrbitControls(camera);
+  camera.position.z = 5;
+
+  // Setup Three.js Light
+  light = new THREE.AmbientLight(new THREE.Color('rgb(255, 255, 0)'));
+  scene.add(light);
+
+  // Setup Scene's content
+  let geometry = new THREE.BoxGeometry(1, 1, 1);
+  let material = new THREE.MeshBasicMaterial({
+    color: new THREE.Color('rgba(0, 255, 0, 1)'),
+    wireframe: true
+  });
+  let cube = new THREE.Mesh(geometry, material);
+  scene.add(cube);
 
   // Append Scene DOM to HTML's body
   document.body.appendChild(renderer.domElement);
@@ -42,11 +58,15 @@ window.onload = function() {
 window.addEventListener('resize', function() {
   // FOR DEBUGGING
   if (debugging && debug_type >= 0) {
-    console.log(`Resize:\nX: ${window.innerWidth} | Y: ${window.innerHeight}\n---`);
+    console.log(`Resize:\nWidth: ${window.innerWidth} | Height: ${window.innerHeight}\n---`);
   }
 
   // Update width and height of Three.js Renderer
   renderer.setSize(window.innerWidth, window.innerHeight);
+
+  // Update Three.js Camera properties
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
 });
 
 
