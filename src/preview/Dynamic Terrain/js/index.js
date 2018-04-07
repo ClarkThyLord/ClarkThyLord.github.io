@@ -10,6 +10,7 @@ var gui_data;
 var data = {
   seed: Math.floor(Math.random() * 100000),
   material: 'wireframe',
+  material_color: [0, 255, 0],
 };
 var renderer, scene, light, camera;
 var terrain;
@@ -28,6 +29,7 @@ window.onload = function() {
   gui_data = new dat.GUI();
   gui_data.add(data, 'seed', 0, 100000, 1);
   gui_data.add(data, 'material', ['wireframe', 'solid', 'cartoonish', 'heat']);
+  gui_data.addColor(data, 'material_color');
 
   // Setup Three.js Renderer
   renderer = new THREE.WebGLRenderer({
@@ -41,13 +43,13 @@ window.onload = function() {
   scene.background = new THREE.Color('rgba(0, 0, 0, 1)');
 
   // Setup Three.js Camera and Controls
-  camera = new THREE.PerspectiveCamera(100, window.innerWidth / window.innerHeight, 0.01, 1000);
+  camera = new THREE.PerspectiveCamera(100, window.innerWidth / window.innerHeight, 0.1, 1000);
   camera.userData.controls = new THREE.OrbitControls(camera);
   camera.position.z = 5;
 
-  // Setup Three.js Light
-  light = new THREE.AmbientLight(new THREE.Color('rgb(255, 255, 0)'));
-  scene.add(light);
+  // Setup Three.js Light TODO
+
+  scene.add(helper);
 
   // Setup Scene's content
   let geometry = new THREE.Geometry();
@@ -69,11 +71,12 @@ window.onload = function() {
 
   geometry = new THREE.PlaneGeometry(10, 10, 99, 99);
   material = new THREE.MeshBasicMaterial({
-    color: new THREE.Color('rgba(0, 255, 0, 1)'),
+    color: new THREE.Color(stringRGB(data.material_color)),
     wireframe: true,
   });
   terrain = new THREE.Mesh(geometry, material);
   terrain.userData.material = data.material;
+  terrain.userData.material_color = stringRGB(data.material_color);
   update_seed(data.seed);
   scene.add(terrain);
 
@@ -121,22 +124,25 @@ function render_update() {
     terrain.userData.material = data.material;
     if (data.material === 'wireframe') {
       terrain.material = new THREE.MeshBasicMaterial({
-        color: new THREE.Color('rgba(0, 255, 0, 1)'),
+        color: new THREE.Color(stringRGB(data.material_color)),
         wireframe: true,
       });
     } else if (data.material === 'solid') {
-      terrain.material = new THREE.MeshBasicMaterial({
-        color: new THREE.Color('rgba(255, 255, 255, 1)'),
+      terrain.material = new THREE.MeshPhongMaterial({
+        color: new THREE.Color(stringRGB(data.material_color)),
       });
     } else if (data.material === 'cartoonish') {
-      terrain.material = new THREE.MeshBasicMaterial({
-        color: new THREE.Color('rgba(180, 100, 15, 1)'),
+      terrain.material = new THREE.MeshPhongMaterial({
+        color: new THREE.Color(stringRGB(data.material_color)),
       });
     } else if (data.material === 'heat') {
-      terrain.material = new THREE.MeshBasicMaterial({
-        color: new THREE.Color('rgba(255, 0, 0, 1)'),
+      terrain.material = new THREE.MeshDepthMaterial({
+        color: new THREE.Color(stringRGB(data.material_color)),
       });
     }
+  }
+  if (terrain.userData.material_color !== stringRGB(data.material_color)) {
+    terrain.material.color = new THREE.Color(stringRGB(data.material_color))
   }
 
   // Update Stats.js Stat Monitor
@@ -147,6 +153,14 @@ function render_update() {
 }
 
 
+/**
+ * Given a RGB object return a RGB string.
+ * @param {Object} [rgb] RGB object.
+ * @return {String} Returns a string representing a RGB color.
+ */
+function stringRGB(rgb) {
+  return "rgb(" + Math.floor(rgb[0]) + "," + Math.floor(rgb[1]) + "," + Math.floor(rgb[2]) + ")";
+}
 
 
 /**
