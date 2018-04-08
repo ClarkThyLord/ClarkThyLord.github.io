@@ -9,11 +9,49 @@ var fps_stats;
 var gui_data;
 var data = {
   seed: Math.floor(Math.random() * 100000),
-  material: 'wireframe',
-  material_color: [0, 255, 0],
+  environment: {
+    light: {
+      on: true,
+      color: [255, 255, 0],
+      dynamic: {
+        color: false,
+      },
+    },
+    fog: {
+      on: false,
+      color: [255, 255, 255],
+      dynamic: {
+        color: false,
+      },
+    },
+    stars: {
+      on: true,
+      color: [255, 255, 255],
+      dynamic: {
+        color: false,
+      },
+    },
+    background: {
+      color: [0, 0, 0],
+      dynamic: {
+        color: false,
+      },
+    },
+    dynamic: {
+      color: false,
+    },
+  },
+  terrain: {
+    type: 'wireframe',
+    color: [0, 255, 0],
+    dynamic: {
+      color: false,
+      terrain: false,
+    },
+  },
 };
 var renderer, scene, light, camera;
-var terrain;
+var stars, terrain;
 
 
 // Setup once the page has finished loading
@@ -21,15 +59,103 @@ window.onload = function() {
   // Check if WebGL is usable
   if (!Detector.webgl) Detector.addGetWebGLMessage();
 
+
   // Setup Stats.js FPS Stat Monitor
   fps_stats = new Stats(0);
   document.body.appendChild(fps_stats.dom);
 
+
   // Setup Dat.GUI.js Data Menu
   gui_data = new dat.GUI();
-  gui_data.add(data, 'seed', 0, 100000, 1);
-  gui_data.add(data, 'material', ['wireframe', 'solid', 'cartoonish', 'heat']);
-  gui_data.addColor(data, 'material_color');
+
+  gui_data.add(data, 'seed', 0, 100000, 1).onChange(function(value) {
+    update_terrain();
+  });
+
+
+  // Setup Environment data in GUI
+  let environment_data = gui_data.addFolder('Environment');
+
+  let light_data = environment_data.addFolder('Light');
+  light_data.add(data.environment.light, 'on').onChange(function(value) {
+    light.visible = value;
+  });
+  light_data.addColor(data.environment.light, 'color').onChange(function(value) {
+    light.color = new THREE.Color(stringRGB(value))
+  });;
+  let dynamic_data = light_data.addFolder('Dynamic');
+  dynamic_data.add(data.environment.light.dynamic, 'color');
+
+  let fog_data = environment_data.addFolder('Fog');
+  fog_data.add(data.environment.fog, 'on').onChange(function(value) {
+    if (value) {
+      scene.fog.near = 2000;
+      scene.fog.far = 4000;
+    } else {
+      scene.fog.near = 0.1;
+      scene.fog.far = 0;
+    }
+  });;
+  fog_data.addColor(data.environment.fog, 'color').onChange(function(value) {
+    scene.fog.color = new THREE.Color(stringRGB(value));
+  });
+  dynamic_data = fog_data.addFolder('Dynamic');
+  dynamic_data.add(data.environment.fog.dynamic, 'color');
+
+  let stars_data = environment_data.addFolder('Stars');
+  stars_data.add(data.environment.stars, 'on').onChange(function(value) {
+    stars.visible = value;
+  });
+  stars_data.addColor(data.environment.stars, 'color').onChange(function(value) {
+    stars.material.color = new THREE.Color(stringRGB(value));
+  });
+  dynamic_data = stars_data.addFolder('Dynamic');
+  dynamic_data.add(data.environment.stars.dynamic, 'color');
+
+  let background_data = environment_data.addFolder('Background');
+  background_data.addColor(data.environment.background, 'color').onChange(function(value) {
+    scene.background = new THREE.Color(stringRGB(value));
+  });
+  dynamic_data = background_data.addFolder('Dynamic');
+  dynamic_data.add(data.environment.background.dynamic, 'color');
+
+  dynamic_data = environment_data.addFolder('Dynamic');
+  dynamic_data.add(data.environment.dynamic, 'color');
+
+
+  // Setup Terrain data in GUI
+  let terrain_data = gui_data.addFolder('Terrain');
+
+  terrain_data.add(data.terrain, 'type', ['wireframe', 'solid', 'cartoonish', 'heat']).onChange(function(value) {
+    if (value === 'wireframe') {
+      terrain.material = new THREE.MeshBasicMaterial({
+        color: new THREE.Color(stringRGB(data.terrain.color)),
+        wireframe: true,
+      });
+    } else if (value === 'solid') {
+      terrain.material = new THREE.MeshPhongMaterial({
+        color: new THREE.Color(stringRGB(data.terrain.color)),
+      });
+    } else if (value === 'cartoonish') {
+      terrain.material = new THREE.MeshPhongMaterial({
+        color: new THREE.Color(stringRGB(data.terrain.color)),
+        specular: 0x773300,
+        shading: THREE.FlatShading,
+        shininess: 3
+      });
+    } else if (value === 'heat') {
+      terrain.material = new THREE.MeshDepthMaterial({
+        color: new THREE.Color(stringRGB(data.terrain.color)),
+      });
+    }
+  });
+  terrain_data.addColor(data.terrain, 'color').onChange(function(value) {
+    terrain.material.color = new THREE.Color(stringRGB(value));
+  });
+
+  dynamic_data = terrain_data.addFolder('Dynamic');
+  dynamic_data.add(data.terrain.dynamic, 'color');
+  dynamic_data.add(data.terrain.dynamic, 'terrain');
 
   // Setup Three.js Renderer
   renderer = new THREE.WebGLRenderer({
@@ -40,14 +166,26 @@ window.onload = function() {
 
   // Setup Three.js Scene
   scene = new THREE.Scene();
-  scene.background = new THREE.Color('rgba(0, 0, 0, 1)');
+
+  // Setup Scene's background
+  scene.background = new THREE.Color(stringRGB(data.environment.background.color));
+
+  // Setup Scene's fog
+  scene.fog = new THREE.Fog(new THREE.Color(stringRGB(data.environment.fog.color), 2000, 4000));
+  if (!data.environment.fog.on) {
+    scene.fog.near = 0.1;
+    scene.fog.far = 0;
+  }
 
   // Setup Three.js Camera and Controls
   camera = new THREE.PerspectiveCamera(100, window.innerWidth / window.innerHeight, 0.1, 1000);
   camera.userData.controls = new THREE.OrbitControls(camera);
   camera.position.z = 5;
 
-  // Setup Three.js Light TODO
+  // Setup Three.js Light
+  light = new THREE.AmbientLight(new THREE.Color(stringRGB(data.environment.light.color)), 0.25); // soft white light
+  light.visible = data.environment.light.on;
+  scene.add(light);
 
   // Setup Scene's content
   let geometry = new THREE.Geometry();
@@ -64,18 +202,16 @@ window.onload = function() {
   let material = new THREE.PointsMaterial({
     color: new THREE.Color('rgb(255, 255, 255)'),
   });
-  var stars = new THREE.Points(geometry, material);
+  stars = new THREE.Points(geometry, material);
   scene.add(stars);
 
   geometry = new THREE.PlaneGeometry(10, 10, 99, 99);
   material = new THREE.MeshBasicMaterial({
-    color: new THREE.Color(stringRGB(data.material_color)),
+    color: new THREE.Color(stringRGB(data.terrain.color)),
     wireframe: true,
   });
   terrain = new THREE.Mesh(geometry, material);
-  terrain.userData.material = data.material;
-  terrain.userData.material_color = stringRGB(data.material_color);
-  update_seed(data.seed);
+  update_terrain();
   scene.add(terrain);
 
   // Append Scene DOM to HTML's body
@@ -114,35 +250,6 @@ function render_update() {
   // Update scene according to camera
   renderer.render(scene, camera);
 
-  if (noise.get_seed() !== data.seed) {
-    update_seed(data.seed);
-  }
-
-  if (terrain.userData.material !== data.material) {
-    terrain.userData.material = data.material;
-    if (data.material === 'wireframe') {
-      terrain.material = new THREE.MeshBasicMaterial({
-        color: new THREE.Color(stringRGB(data.material_color)),
-        wireframe: true,
-      });
-    } else if (data.material === 'solid') {
-      terrain.material = new THREE.MeshPhongMaterial({
-        color: new THREE.Color(stringRGB(data.material_color)),
-      });
-    } else if (data.material === 'cartoonish') {
-      terrain.material = new THREE.MeshPhongMaterial({
-        color: new THREE.Color(stringRGB(data.material_color)),
-      });
-    } else if (data.material === 'heat') {
-      terrain.material = new THREE.MeshDepthMaterial({
-        color: new THREE.Color(stringRGB(data.material_color)),
-      });
-    }
-  }
-  if (terrain.userData.material_color !== stringRGB(data.material_color)) {
-    terrain.material.color = new THREE.Color(stringRGB(data.material_color))
-  }
-
   // Update Stats.js Stat Monitor
   fps_stats.update();
 
@@ -162,11 +269,10 @@ function stringRGB(rgb) {
 
 
 /**
- * Updates renderer's content.
- * @param {integer} seed Seed used to generate the noise map.
+ * Update terrain.
  * @return {undefined} Returns nothing.
  */
-function update_seed(seed) {
+function update_terrain() {
   noise.seed(data.seed);
   for (var i = 0; i < 100; i++) {
     for (var j = 0; j < 100; j++) {
