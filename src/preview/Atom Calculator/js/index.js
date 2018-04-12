@@ -189,17 +189,17 @@ function randomRGB() {
 
 /**
  * Given a RGB object return a RGB string.
- * @param {Object} [rgb] RGB object.
+ * @param {Array} [rgb] Array representing RGB; [ Red, Green, Blue ].
  * @return {String} Returns a string representing a RGB color.
  */
 function stringRGB(rgb) {
-  return "rgb(" + rgb[0] + "," + rgb[1] + "," + rgb[2] + ")";
+  return "rgb(" + Math.floor(rgb[0]) + "," + Math.floor(rgb[1]) + "," + Math.floor(rgb[2]) + ")";
 }
 
 
 /**
  * Given a RGB object and alpha return a RGBA string.
- * @param {Object} [rgb] RGB object.
+ * @param {Array} [rgb] Array representing RGB; [ Red, Green, Blue ].
  * @param {Integer} [alpha] Alpha amount; Range: 0 - 1.
  * @return {String} Returns a string representing a RGBA color.
  */

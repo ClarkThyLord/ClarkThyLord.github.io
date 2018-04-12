@@ -69,7 +69,7 @@ window.onload = function() {
   gui_data = new dat.GUI();
 
   gui_data.add(data, 'seed', 0, 100000, 1).onChange(function(value) {
-    update_terrain();
+    terrain_update();
   });
 
 
@@ -211,7 +211,7 @@ window.onload = function() {
     wireframe: true,
   });
   terrain = new THREE.Mesh(geometry, material);
-  update_terrain();
+  terrain_update();
   scene.add(terrain);
 
   // Append Scene DOM to HTML's body
@@ -260,7 +260,7 @@ function render_update() {
 
 /**
  * Given a RGB object return a RGB string.
- * @param {Object} [rgb] RGB object.
+ * @param {array} [rgb] Array representing RGB; [ Red, Green, Blue ].
  * @return {String} Returns a string representing a RGB color.
  */
 function stringRGB(rgb) {
@@ -272,7 +272,7 @@ function stringRGB(rgb) {
  * Update terrain.
  * @return {undefined} Returns nothing.
  */
-function update_terrain() {
+function terrain_update() {
   noise.seed(data.seed);
   for (var i = 0; i < 100; i++) {
     for (var j = 0; j < 100; j++) {
