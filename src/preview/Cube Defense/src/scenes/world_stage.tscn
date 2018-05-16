@@ -1,0 +1,44 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://entities/tiles/tilesets/grass.tres" type="TileSet" id=1]
+[ext_resource path="res://entities/slime/slime.tscn" type="PackedScene" id=2]
+
+[node name="root" type="Node2D" index="0"]
+
+[node name="floor" type="TileMap" parent="." index="0"]
+
+mode = 0
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 32, 32 )
+cell_quadrant_size = 16
+cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+cell_half_offset = 2
+cell_tile_origin = 0
+cell_y_sort = false
+cell_clip_uv = false
+collision_use_kinematic = true
+collision_friction = 1.0
+collision_bounce = 0.0
+collision_layer = 1
+collision_mask = 1
+occluder_light_mask = 1
+format = 1
+tile_data = PoolIntArray( 1245183, 0, 0, 1179648, 1, 0, 1179649, 1, 0, 1179650, 1, 0, 1179651, 1, 0, 1179652, 1, 0, 1179653, 1, 0, 1179654, 1, 0, 1179655, 1, 0, 1179656, 1, 0, 1179657, 1, 0, 1179658, 1, 0, 1179659, 1, 0, 1179660, 1, 0, 1179661, 1, 0, 1179662, 1, 0, 1179663, 1, 0, 1179664, 1, 0, 1179665, 1, 0, 1179666, 1, 0, 1179667, 1, 0, 1179668, 1, 0, 1179669, 1, 0, 1179670, 1, 0, 1179671, 1, 0, 1179672, 1, 0, 1179673, 1, 0, 1179674, 1, 0, 1179675, 1, 0, 1179676, 1, 0, 1179677, 1, 0, 1179678, 1, 0, 1179679, 1, 0, 1179680, 2, 0 )
+_sections_unfolded = [ "Cell", "Collision" ]
+
+[node name="slime" parent="." index="1" instance=ExtResource( 2 )]
+
+position = Vector2( 490.775, 552.107 )
+
+[node name="slime3" parent="." index="2" instance=ExtResource( 2 )]
+
+position = Vector2( 430.609, 551.107 )
+
+[node name="slime2" parent="." index="3" instance=ExtResource( 2 )]
+
+position = Vector2( 607.411, 550.937 )
+direction = "left"
+health = 100
+attack = 1
+
+

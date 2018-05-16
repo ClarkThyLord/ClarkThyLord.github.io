@@ -1,0 +1,87 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://entities/tiles/textures/grass/1.png" type="Texture" id=1]
+[ext_resource path="res://entities/tiles/textures/grass/2.png" type="Texture" id=2]
+[ext_resource path="res://entities/tiles/textures/grass/3.png" type="Texture" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 16, 16 )
+
+[node name="tiles" type="Node2D"]
+
+position = Vector2( 16, 16 )
+
+[node name="tile" type="Sprite" parent="." index="0"]
+
+texture = ExtResource( 1 )
+region_rect = Rect2( 0, 0, 23, 23 )
+
+[node name="body" type="StaticBody2D" parent="tile" index="0"]
+
+editor/display_folded = true
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="bounds" type="CollisionShape2D" parent="tile/body" index="0"]
+
+shape = SubResource( 1 )
+
+[node name="tile1" type="Sprite" parent="." index="1"]
+
+position = Vector2( 32, 0 )
+texture = ExtResource( 2 )
+region_rect = Rect2( 0, 0, 23, 23 )
+
+[node name="body" type="StaticBody2D" parent="tile1" index="0"]
+
+editor/display_folded = true
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="bounds" type="CollisionShape2D" parent="tile1/body" index="0"]
+
+shape = SubResource( 1 )
+
+[node name="tile3" type="Sprite" parent="." index="2"]
+
+position = Vector2( 64, 0 )
+texture = ExtResource( 3 )
+region_rect = Rect2( 0, 0, 23, 23 )
+
+[node name="body" type="StaticBody2D" parent="tile3" index="0"]
+
+editor/display_folded = true
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="bounds" type="CollisionShape2D" parent="tile3/body" index="0"]
+
+shape = SubResource( 1 )
+
+
