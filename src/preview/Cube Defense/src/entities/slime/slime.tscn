@@ -51,7 +51,7 @@ direction = "right"
 health = 23
 speed = 25
 attack = 5
-defence = 1
+defense = 1
 
 [node name="bounds" type="CollisionShape2D" parent="." index="0"]
 
