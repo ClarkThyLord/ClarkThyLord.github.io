@@ -11,7 +11,7 @@ extents = Vector2( 16, 16 )
 
 [resource]
 
-0/name = "tile"
+0/name = "grass left end"
 0/texture = ExtResource( 1 )
 0/tex_offset = Vector2( 0, 0 )
 0/modulate = Color( 1, 1, 1, 1 )
@@ -25,7 +25,7 @@ extents = Vector2( 16, 16 )
 "shape": SubResource( 1 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 16, 16 )
 } ]
-1/name = "tile1"
+1/name = "grass"
 1/texture = ExtResource( 2 )
 1/tex_offset = Vector2( 0, 0 )
 1/modulate = Color( 1, 1, 1, 1 )
@@ -39,7 +39,7 @@ extents = Vector2( 16, 16 )
 "shape": SubResource( 1 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 16, 16 )
 } ]
-2/name = "tile3"
+2/name = "grass right end"
 2/texture = ExtResource( 3 )
 2/tex_offset = Vector2( 0, 0 )
 2/modulate = Color( 1, 1, 1, 1 )

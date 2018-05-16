@@ -27,7 +27,9 @@ func _process(delta):
 	
 	var action = move_and_collide(Vector2(speed, 0) * delta)
 	if action and !action.collider.is_in_group(direction):
-		action.collider.take_health(-(randi() % attack))
+		# ATTACK; IF POSSIBLE
+		if action.collider.has_method('take_health'):
+			action.collider.take_health(-(randi() % attack))
 	
 	# GRAVITY
 	move_and_slide(Vector2(0, 1000))

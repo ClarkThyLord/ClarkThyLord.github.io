@@ -13,12 +13,12 @@ extents = Vector2( 16, 16 )
 
 position = Vector2( 16, 16 )
 
-[node name="tile" type="Sprite" parent="." index="0"]
+[node name="grass left end" type="Sprite" parent="." index="0"]
 
 texture = ExtResource( 1 )
 region_rect = Rect2( 0, 0, 23, 23 )
 
-[node name="body" type="StaticBody2D" parent="tile" index="0"]
+[node name="body" type="StaticBody2D" parent="grass left end" index="0"]
 
 editor/display_folded = true
 input_pickable = false
@@ -32,17 +32,17 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="bounds" type="CollisionShape2D" parent="tile/body" index="0"]
+[node name="bounds" type="CollisionShape2D" parent="grass left end/body" index="0"]
 
 shape = SubResource( 1 )
 
-[node name="tile1" type="Sprite" parent="." index="1"]
+[node name="grass" type="Sprite" parent="." index="1"]
 
 position = Vector2( 32, 0 )
 texture = ExtResource( 2 )
 region_rect = Rect2( 0, 0, 23, 23 )
 
-[node name="body" type="StaticBody2D" parent="tile1" index="0"]
+[node name="body" type="StaticBody2D" parent="grass" index="0"]
 
 editor/display_folded = true
 input_pickable = false
@@ -56,17 +56,17 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="bounds" type="CollisionShape2D" parent="tile1/body" index="0"]
+[node name="bounds" type="CollisionShape2D" parent="grass/body" index="0"]
 
 shape = SubResource( 1 )
 
-[node name="tile3" type="Sprite" parent="." index="2"]
+[node name="grass right end" type="Sprite" parent="." index="2"]
 
 position = Vector2( 64, 0 )
 texture = ExtResource( 3 )
 region_rect = Rect2( 0, 0, 23, 23 )
 
-[node name="body" type="StaticBody2D" parent="tile3" index="0"]
+[node name="body" type="StaticBody2D" parent="grass right end" index="0"]
 
 editor/display_folded = true
 input_pickable = false
@@ -80,7 +80,7 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="bounds" type="CollisionShape2D" parent="tile3/body" index="0"]
+[node name="bounds" type="CollisionShape2D" parent="grass right end/body" index="0"]
 
 shape = SubResource( 1 )
 
