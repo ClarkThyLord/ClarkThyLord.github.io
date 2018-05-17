@@ -10,6 +10,9 @@ var gui_data;
 var data = {
   seed: Math.floor(Math.random() * 100000),
   environment: {
+    everything: {
+      'dynamic color': false,
+    },
     light: {
       on: true,
       color: [255, 255, 0],
@@ -37,16 +40,13 @@ var data = {
         color: false,
       },
     },
-    dynamic: {
-      color: false,
-    },
   },
   terrain: {
     type: 'wireframe',
     color: [0, 255, 0],
     dynamic: {
       color: false,
-      terrain: false,
+      shape: false,
     },
   },
 };
@@ -57,13 +57,26 @@ var stars, terrain;
 // Setup once the page has finished loading
 window.onload = function() {
   // Check if WebGL is usable
-  if (!Detector.webgl) Detector.addGetWebGLMessage();
+  if (!Detector.webgl) return Detector.addGetWebGLMessage();
 
+  // Setup Window resize event
+  window.addEventListener('resize', function() {
+    // FOR DEBUGGING
+    if (debugging && debug_type >= 0) {
+      console.log(`Resize:\nWidth: ${window.innerWidth} | Height: ${window.innerHeight}\n---`);
+    }
+
+    // Update width and height of Three.js Renderer
+    renderer.setSize(window.innerWidth, window.innerHeight);
+
+    // Update Three.js Camera properties
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+  });
 
   // Setup Stats.js FPS Stat Monitor
   fps_stats = new Stats(0);
   document.body.appendChild(fps_stats.dom);
-
 
   // Setup Dat.GUI.js Data Menu
   gui_data = new dat.GUI();
@@ -76,13 +89,16 @@ window.onload = function() {
   // Setup Environment data in GUI
   let environment_data = gui_data.addFolder('Environment');
 
+  everything_data = environment_data.addFolder('Everything');
+  everything_data.add(data.environment.everything, 'dynamic color');
+
   let light_data = environment_data.addFolder('Light');
   light_data.add(data.environment.light, 'on').onChange(function(value) {
     light.visible = value;
   });
   light_data.addColor(data.environment.light, 'color').onChange(function(value) {
-    light.color = new THREE.Color(stringRGB(value))
-  });;
+    light.color = new THREE.Color(stringRGB(value));
+  });
   let dynamic_data = light_data.addFolder('Dynamic');
   dynamic_data.add(data.environment.light.dynamic, 'color');
 
@@ -95,7 +111,7 @@ window.onload = function() {
       scene.fog.near = 0.1;
       scene.fog.far = 0;
     }
-  });;
+  });
   fog_data.addColor(data.environment.fog, 'color').onChange(function(value) {
     scene.fog.color = new THREE.Color(stringRGB(value));
   });
@@ -118,9 +134,6 @@ window.onload = function() {
   });
   dynamic_data = background_data.addFolder('Dynamic');
   dynamic_data.add(data.environment.background.dynamic, 'color');
-
-  dynamic_data = environment_data.addFolder('Dynamic');
-  dynamic_data.add(data.environment.dynamic, 'color');
 
 
   // Setup Terrain data in GUI
@@ -155,7 +168,7 @@ window.onload = function() {
 
   dynamic_data = terrain_data.addFolder('Dynamic');
   dynamic_data.add(data.terrain.dynamic, 'color');
-  dynamic_data.add(data.terrain.dynamic, 'terrain');
+  dynamic_data.add(data.terrain.dynamic, 'shape');
 
   // Setup Three.js Renderer
   renderer = new THREE.WebGLRenderer({
@@ -219,22 +232,7 @@ window.onload = function() {
 
   // Setup continuous updates for renderer's content
   requestAnimationFrame(render_update);
-}
-
-// Setup Window resize event
-window.addEventListener('resize', function() {
-  // FOR DEBUGGING
-  if (debugging && debug_type >= 0) {
-    console.log(`Resize:\nWidth: ${window.innerWidth} | Height: ${window.innerHeight}\n---`);
-  }
-
-  // Update width and height of Three.js Renderer
-  renderer.setSize(window.innerWidth, window.innerHeight);
-
-  // Update Three.js Camera properties
-  camera.aspect = window.innerWidth / window.innerHeight;
-  camera.updateProjectionMatrix();
-});
+};
 
 
 /**
@@ -245,6 +243,15 @@ function render_update() {
   // FOR DEBUGGING
   if (debugging && debug_type >= 2) {
     console.log('Updating renderer\'s content!\n---');
+  }
+
+  if (data.terrain.dynamic.color) {
+    data.terrain.color = alterateRGB(data.terrain.color);
+
+    console.log(data.terrain.color);
+    console.log(stringRGB(data.terrain.color));
+
+    terrain.material.color = new THREE.Color(stringRGB(data.terrain.color));
   }
 
   // Update scene according to camera
@@ -260,11 +267,29 @@ function render_update() {
 
 /**
  * Given a RGB object return a RGB string.
- * @param {array} [rgb] Array representing RGB; [ Red, Green, Blue ].
+ * @param {Array} [rgb] Array representing RGB; [ Red, Green, Blue ].
  * @return {String} Returns a string representing a RGB color.
  */
 function stringRGB(rgb) {
   return "rgb(" + Math.floor(rgb[0]) + "," + Math.floor(rgb[1]) + "," + Math.floor(rgb[2]) + ")";
+}
+
+
+/**
+ * Alterate RGB.
+ * @param {Array} [rgb] Array representing RGB; [ Red, Green, Blue ].
+ * @return {Array} Returns Array, representing RGB, alterated.
+ */
+function alterateRGB(rgb) {
+  if (rgb[0] !== 255) {
+    rgb[0] += 5;
+  } else if (rgb[1] !== 255) {
+    rgb[1] += 5;
+  } else if (rgb[2] !== 255) {
+    rgb[2] += 5;
+  }
+
+  return rgb;
 }
 
 
