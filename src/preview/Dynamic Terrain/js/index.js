@@ -247,10 +247,6 @@ function render_update() {
 
   if (data.terrain.dynamic.color) {
     data.terrain.color = alterateRGB(data.terrain.color);
-
-    console.log(data.terrain.color);
-    console.log(stringRGB(data.terrain.color));
-
     terrain.material.color = new THREE.Color(stringRGB(data.terrain.color));
   }
 
@@ -281,7 +277,13 @@ function stringRGB(rgb) {
  * @return {Array} Returns Array, representing RGB, alterated.
  */
 function alterateRGB(rgb) {
-  if (rgb[0] !== 255) {
+  if (rgb[0] > 0 && rgb[1] === 255 && rgb[2] === 255) {
+    rgb[0] -= 5;
+  } else if (rgb[1] > 0 && rgb[0] === 0 && rgb[2] === 255) {
+    rgb[1] -= 5;
+  } else if (rgb[2] > 0 && rgb[0] === 0 && rgb[1] === 0) {
+    rgb[2] -= 5;
+  } else if (rgb[0] !== 255) {
     rgb[0] += 5;
   } else if (rgb[1] !== 255) {
     rgb[1] += 5;
