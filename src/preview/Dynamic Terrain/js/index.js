@@ -245,6 +245,45 @@ function render_update() {
     console.log('Updating renderer\'s content!\n---');
   }
 
+  // UPDATE ENVIRONMENT COLORS
+  if (data.environment.everything['dynamic color']) {
+    data.environment.light.color = alterateRGB(data.environment.light.color);
+    light.color = new THREE.Color(stringRGB(data.environment.light.color));
+
+    data.environment.light.color = alterateRGB(data.environment.light.color);
+    light.color = new THREE.Color(stringRGB(data.environment.light.color));
+
+    data.environment.stars.color = alterateRGB(data.environment.light.color);
+    stars.material.color = new THREE.Color(stringRGB(data.environment.stars.color));
+
+    data.environment.background.color = alterateRGB(data.environment.background.color);
+    scene.background = new THREE.Color(stringRGB(data.environment.background.color));
+  } else {
+    // LIGHTS DYNAMIC
+    if (data.environment.light.dynamic.color) {
+      data.environment.light.color = alterateRGB(data.environment.light.color);
+      light.color = new THREE.Color(stringRGB(data.environment.light.color));
+    }
+    // FOG DYNAMIC
+    if (data.environment.fog.dynamic.color) {
+      data.environment.fog.color = alterateRGB(data.environment.fog.color);
+      scene.fog.color = new THREE.Color(stringRGB(data.environment.fog.color));
+    }
+    // STARS DYNAMIC
+    if (data.environment.stars.dynamic.color) {
+      data.environment.stars.color = alterateRGB(data.environment.light.color);
+      stars.material.color = new THREE.Color(stringRGB(data.environment.stars.color));
+    }
+    // BACKGROUND DYNAMIC
+    if (data.environment.background.dynamic.color) {
+      data.environment.background.color = alterateRGB(data.environment.background.color);
+      scene.background = new THREE.Color(stringRGB(data.environment.background.color));
+    }
+  }
+
+
+  // UPDATE TERRAIN
+  // DYNAMIC COLOR
   if (data.terrain.dynamic.color) {
     data.terrain.color = alterateRGB(data.terrain.color);
     terrain.material.color = new THREE.Color(stringRGB(data.terrain.color));
