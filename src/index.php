@@ -10,14 +10,24 @@
 		<meta name="keywords" content="www,potential" />
 
 		<!-- CSS -->
-		<style></style>
-		<link rel="stylesheet" type="text/css" href="./css/libs/semantic.min.css">
+    <link rel="stylesheet" href="./css/libs/foundation.min.css">
+		<link rel="stylesheet" href="./css/libs/foundation.css">
+		<link rel="stylesheet" href="./css/libs/gui-potential.css">
+
+    <link rel="stylesheet" href="./css/common.css">
+
+		<style>
+		</style>
 	</head>
 	<body>
 
 		<!-- JS -->
-		<script></script>
 		<script src="./js/libs/jquery-3.3.1.min.js"></script>
-		<script src="./js/libs/semantic.min.js"></script>
+		<script src="./js/libs/gui-potential.js"></script>
+
+    <script src="./js/common.js"></script>
+
+		<script>
+		</script>
 	</body>
 </html>
