@@ -1,0 +1,76 @@
+:root {
+  /* Global Variables */
+  --text-size: 12px;
+  --primary: rgba(255, 255, 255, 1);
+  --secondary: rgba(200, 200, 200, 1);
+}
+
+body {
+  background-color: var(--primary);
+}
+
+/* Common Classes */
+
+.t-left {
+  text-align: left;
+}
+
+.t-center {
+  text-align: center;
+}
+
+.t-right {
+  text-align: right;
+}
+
+/* Icon Classes */
+
+.icon {}
+
+.icon.relative {
+  width: var(--text-size);
+}
+
+.icon.small {
+  width: 20px;
+}
+
+.icon.medium {
+  width: 30px;
+}
+
+.icon.large {
+  width: 50px;
+}
+
+.icon.full {
+  width: 100%;
+}
+
+/* .Menu Classes */
+
+.gui.menu {}
+
+.gui.menu.horizontal {
+  display: flex;
+}
+
+.gui.menu.vertical {}
+
+.menu .section {
+  flex: 0.33;
+}
+
+.gui.menu .section .left {
+  flex: 0.33;
+}
+
+.gui.menu .section .center {
+  flex: 0.34;
+}
+
+.gui.menu .section .right {
+  flex: 0.33;
+}
+
+.gui.menu .item {}
