@@ -28,7 +28,9 @@
 					<span>Potential</span>
 				</div>
 				<div>
-					Work
+					<span>
+						Work
+					</span>
 					<ul>
 						<li>
 							Art
