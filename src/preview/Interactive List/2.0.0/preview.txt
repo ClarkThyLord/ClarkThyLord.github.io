@@ -1,0 +1,8 @@
+Interactive list that allows you to move it's elements arround.
+
+<ul>
+  <li>Drag &amp; Drop</li>
+  <li>Touch Support</li>
+  <li>Nesting</li>
+  <li>JS Handeling</li>
+</ul>

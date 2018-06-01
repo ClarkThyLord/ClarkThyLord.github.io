@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+  <link rel="icon" href="../assets/potential.png" />
+
+  <title>WS - 2D</title>
+
+  <!-- Meta -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Load CSS -->
+  <style rel="stylesheet" type="text/css">
+
+
+  </style>
+  <!-- Libraries -->
+  <link rel="stylesheet" type="text/css" href="../css/libraries/jquery-ui.min.css">
+  <link rel="stylesheet" type="text/css" href="../css/libraries/jquery-ui-theme.css">
+  <link rel="stylesheet" type="text/css" href="../css/libraries/jquery-sm-core.css">
+  <link rel="stylesheet" type="text/css" href="../css/libraries/jquery-sm-theme.css">
+  <link rel="stylesheet" type="text/css" href="../css/libraries/jquery-spectrum.css">
+
+  <!-- Common -->
+  <link rel="stylesheet" type="text/css" href="../css/common/gui.css">
+
+  <!-- Custom -->
+  <link rel="stylesheet" type="text/css" href="../css/2D.css">
+
+  <!-- Load JS -->
+  <script>
+    var PREFIX = "..";
+
+  </script>
+  <!-- Libraries -->
+  <script src="../js/libraries/DragDropTouch.js"></script>
+  <script src="../js/libraries/jquery.min.js"></script>
+  <script src="../js/libraries/jquery-ui.min.js"></script>
+  <script src="../js/libraries/jquery-ui-touch-punch.min.js"></script>
+  <script src="../js/libraries/jquery-smartmenus.min.js"></script>
+  <script src="../js/libraries/jquery-spectrum.js"></script>
+  <script src="../js/libraries/dropzone.min.js"></script>
+
+  <!-- Common -->
+  <script src="../js/common/config.js"></script>
+  <script src="../js/common/gui.js"></script>
+
+  <!-- 2D -->
+  <script src="../js/libraries/preloadjs.min.js"></script>
+  <script src="../js/libraries/easeljs.min.js"></script>
+  <script src="../js/libraries/tweenjs.min.js"></script>
+  <script src="../js/libraries/soundjs.min.js"></script>
+  <script src="../js/libraries/matter.min.js"></script>
+
+  <!-- Custom -->
+  <script src="../js/2D.js"></script>
+
+</head>
+
+<body style="overflow: hidden;">
+
+  <!-- Master Toolbar -->
+  <div style="z-index: 2" id="master_toolbar">
+    <ul id=" main-menu" class="sm sm-theme">
+      <li><a style="padding: 0px; padding-top: 4px; padding-left: 5px; padding-right: 30px; max-width: 75px;"><img src="../assets/common/icons/potential.png" /></a>
+        <ul>
+          <li onclick="location.href = '../index.html';"><a>Main Menu</a></li>
+          <hr />
+          <li onclick='$("#ConfigurationMenu").dialog("open"); $("#ConfigTabs").tabs({active: 0});'><a>Settings</a></li>
+          <li onclick='$("#ConfigurationMenu").dialog("open"); $("#ConfigTabs").tabs({active: 1});'><a>Appearance</a></li>
+          <li onclick='$("#ConfigurationMenu").dialog("open"); $("#ConfigTabs").tabs({active: 2});'><a>About</a></li>
+          <hr />
+          <!-- TODO current project deletion and alert of current project deletion -->
+          <li onclick="location.href = '../index.html';"><a>Quit</a></li>
+        </ul>
+      </li>
+      <li><a>File</a>
+        <ul>
+          <li onclick=""><a>New...</a>
+            <ul>
+              <li onclick=""><a class="disabled">2D</a>
+                <ul>
+                  <li onclick=""><a>Image Manipulation</a></li>
+                  <li onclick=""><a>Vector Manipulation</a></li>
+                  <li onclick=""><a>Frame by Frame Animation</a></li>
+                  <li onclick=""><a>Skeleton Animation</a></li>
+                </ul>
+              </li>
+              <li onclick=""><a class="disabled">3D</a>
+                <ul>
+                  <li onclick=""><a>Modeling</a></li>
+                  <li onclick=""><a>Sculpting</a></li>
+                  <li onclick=""><a>Voxel Editor</a></li>
+                  <li onclick=""><a>Animating</a></li>
+                  <li onclick=""><a>Baking</a></li>
+                </ul>
+              </li>
+              <li onclick=""><a class="disabled">Other</a>
+                <ul>
+                  <li onclick=""><a>Audio Manipulation</a></li>
+                  <li onclick=""><a>Video Manipulation</a></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li onclick=""><a>Open...</a></li>
+          <li onclick=""><a>Save</a></li>
+          <li onclick=""><a>Save as...</a></li>
+        </ul>
+      </li>
+      <li><a>View</a>
+        <ul>
+          <li onclick=""><a>Save setup...</a></li>
+          <li onclick=""><a>Edit setups...</a></li>
+          <li onclick=""><a>Switch setup...</a>
+            <ul>
+              <li onclick=""><a class="disabled">2D</a>
+                <ul>
+                  <li onclick=""><a>Image Manipulation</a></li>
+                  <li onclick=""><a>Vector Manipulation</a></li>
+                  <li onclick=""><a>Frame by Frame Animation</a></li>
+                  <li onclick=""><a>Skeleton Animation</a></li>
+                </ul>
+              </li>
+              <li onclick=""><a class="disabled">3D</a>
+                <ul>
+                  <li onclick=""><a>Modeling</a></li>
+                  <li onclick=""><a>Sculpting</a></li>
+                  <li onclick=""><a>Voxel Editor</a></li>
+                  <li onclick=""><a>Animating</a></li>
+                  <li onclick=""><a>Baking</a></li>
+                </ul>
+              </li>
+              <li onclick=""><a class="disabled">Other</a>
+                <ul>
+                  <li onclick=""><a>Audio Manipulation</a></li>
+                  <li onclick=""><a>Video Manipulation</a></li>
+                </ul>
+              </li>
+              <li onclick=""><a class="disabled">Custom</a>
+                <ul>
+                  <li onclick=""><a>Custom 1</a></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <hr />
+          <li onclick="" id="panels"><a>Panels...</a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Master Canvas -->
+  <canvas style="background-color: black; z-index: 0;" id="master_canvas"></canvas>
+
+</body>
+
+</html>

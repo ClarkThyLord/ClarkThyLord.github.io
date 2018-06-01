@@ -1,0 +1,274 @@
+:root {
+  /* Prevent Select of Unintended Select */
+  user-select: none;
+  -ms-user-select: none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  /* Text */
+  --text-size: 18px;
+  --text-color: rgba(255, 255, 255, 1);
+  --shadow-effect: rgba(30, 30, 30, 0.25);
+  /* Interactive */
+  --choosen-color: rgba(60, 60, 60, 1);
+  --selected-color: rgba(50, 50, 50, 1);
+  /* Foreground */
+  --border-color: rgba(17, 17, 17, 0.3);
+  --primary-background-color: rgba(30, 30, 30, 1);
+  --secondary-background-color: rgba(42, 42, 42, 1);
+  background-color: var(--primary-background-color);
+}
+
+body {
+  /* Bounds */
+  margin: 0px;
+  padding: 0px;
+  /* Visuals */
+  font-size: var(--text-size);
+  /* Colors */
+  color: var(--text-color);
+  background-color: var(--primary-background-color);
+}
+
+legend {
+  margin: 0 auto;
+}
+
+input, select {
+  /* Visuals */
+  font-size: inherit;
+  font-family: inherit;
+  border: 2px solid;
+  /* Colors */
+  color: inherit;
+  border-color: var(--border-color);
+  background-color: var(--primary-background-color);
+}
+
+input:focus, select:focus {
+  /* Colors */
+  background-color: var(--secondary-background-color);
+}
+
+/* Custom Icons */
+
+.ui-icon-potential {
+  width: 32px;
+  height: 32px;
+  background-image: url(../../assets/common/icons/potential.png);
+}
+
+/* Custom Classes */
+
+.popup {
+  /* Position */
+  position: fixed;
+  z-index: 100;
+  left: 0;
+  top: 0;
+  /* Size */
+  width: 100%;
+  height: 100%;
+  /* Bounds */
+  display: none;
+  overflow: auto;
+  /* Colors */
+  background-color: var(--cover-color);
+}
+
+.popup .content {
+  /* Position */
+  position: fixed;
+  left: 10%;
+  top: 20%;
+  /* Size */
+  width: 80%;
+  height: 60%;
+  /* Bounds */
+  padding: 20px;
+  margin: auto;
+  overflow-y: auto;
+  /* Colors */
+  border: 1px solid var(--border-color);
+  background-color: var(--primary-background-color);
+}
+
+.popup .content .menus {
+  /* Size */
+  width: 100%;
+  height: 100%;
+}
+
+.popup .content .menus .item {
+  /* Bounds */
+  display: none;
+  overflow: auto;
+}
+
+.toolbar {
+  /* Size */
+  width: 100%;
+  /* Bounds */
+  display: flex;
+}
+
+.container {
+  /* Side */
+  max-height: 60%;
+  /* Bounds */
+  display: flex;
+  overflow: auto;
+}
+
+.container .panel {
+  /* Size */
+  min-width: 20%;
+  /* Bounds */
+  overflow: auto;
+  /* Colors */
+  background-color: var(--primary-background-color);
+}
+
+.container .section {
+  /* Size */
+  min-height: 25%;
+  /* Bounds */
+  overflow: auto;
+  /* Colors */
+  background-color: var(--secondary-background-color);
+}
+
+.container .section .content {
+  overflow: auto;
+  max-height: 40%;
+}
+
+.container .section .title {
+  /* Bounds */
+  padding: 5px;
+  /* Colors */
+  border-color: 1px solid var(--border-color);
+  background-color: var(--primary-background-color);
+}
+
+.container .section .content {
+  /* Bounds */
+  padding: 5px;
+}
+
+.container .canvas_container {
+  /* Size */
+  flex: 1;
+  min-width: 60%;
+  min-height: 600px;
+  /* Bounds */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Color */
+  background-color: var(--primary-background-color);
+}
+
+.options {
+  /* Color */
+  background-color: var(--primary-background-color);
+}
+
+.options .item {
+  /* Position */
+  z-index: 2;
+  /* Bounds */
+  padding: 3px;
+}
+
+.dropmenu {
+  /* Pointer */
+  cursor: pointer;
+  /* Position */
+  position: relative;
+}
+
+.dropmenu .item {
+  /* Pointer */
+  cursor: pointer;
+  /* Position */
+  position: relative;
+}
+
+.dropmenu .menu {
+  /* Pointer */
+  cursor: pointer;
+  /* Position */
+  position: absolute;
+  left: 0px;
+  /* Bounds */
+  display: none;
+  min-width: 160px;
+  /* Color */
+  background-color: var(--primary-background-color);
+}
+
+/* Global classes */
+
+.choosen {
+  /* Color */
+  background-color: var(--choosen-color);
+}
+
+.selected {
+  /* Color */
+  background-color: var(--selected-color);
+}
+
+.selectable {
+  /* Pointer */
+  cursor: pointer;
+}
+
+.selectable:hover {
+  /* Color */
+  background-color: var(--selected-color);
+}
+
+.selectable:active {
+  /* Color */
+  background-color: var(--choosen-color);
+}
+
+.disabled {
+  /* Cursor */
+  cursor: not-allowed;
+}
+
+.hidden {
+  /* Bounds */
+  display: none;
+}
+
+.left {
+  /* Position */
+  float: left;
+  text-align: left;
+}
+
+.center {
+  /* Position */
+  text-align: center;
+  align-items: center;
+  vertical-align: middle;
+  justify-content: center;
+}
+
+.right {
+  /* Position */
+  float: right;
+  text-align: right;
+  justify-content: flex-end;
+}
+
+.border {
+  border-size: 10px;
+  border-style: solid;
+  border-color: var(--border-color);
+}

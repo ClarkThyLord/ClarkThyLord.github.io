@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+  <link rel="icon" href="./assets/potential.png" />
+
+  <title>WS - Potential</title>
+
+  <!-- Meta -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Load CSS -->
+  <style rel="stylesheet" type="text/css">
+
+
+  </style>
+  <!-- Libraries -->
+  <link rel="stylesheet" type="text/css" href="./css/libraries/jquery-ui.min.css">
+  <link rel="stylesheet" type="text/css" href="./css/libraries/jquery-ui-theme.css">
+  <link rel="stylesheet" type="text/css" href="./css/libraries/jquery-sm-core.css">
+  <link rel="stylesheet" type="text/css" href="./css/libraries/jquery-sm-theme.css">
+  <link rel="stylesheet" type="text/css" href="./css/libraries/jquery-spectrum.css">
+
+  <!-- Common -->
+  <link rel="stylesheet" type="text/css" href="./css/common/gui.css">
+
+  <!-- Custom -->
+  <link rel="stylesheet" type="text/css" href="./css/index.css">
+
+  <!-- Load JS -->
+  <script>
+    var PREFIX = ".";
+
+  </script>
+  <!-- Libraries -->
+  <script src="./js/libraries/DragDropTouch.js"></script>
+  <script src="./js/libraries/jquery.min.js"></script>
+  <script src="./js/libraries/jquery-ui.min.js"></script>
+  <script src="./js/libraries/jquery-ui-touch-punch.min.js"></script>
+  <script src="./js/libraries/jquery-spectrum.js"></script>
+  <script src="./js/libraries/dropzone.min.js"></script>
+
+  <!-- Common -->
+  <script src="./js/common/config.js"></script>
+  <script src="./js/common/gui.js"></script>
+
+</head>
+
+<body>
+  <div class="title center">
+    <img src="./assets/potential.png" class="icon" />
+  </div>
+
+  <div class="bar center">
+    <div class="center">
+      2D
+      <br />
+      <div onclick="location.href = './html/2D.html#ImageManipulation';" style="display: inline-block;" class="item  selectable">
+        Image Manipulation
+      </div>
+      <div onclick="location.href = './html/2D.html#VectorManipulation';" style="display: inline-block;" class="item  selectable">
+        Vector Manipulation
+      </div>
+      <div onclick="location.href = './html/2D.html#FrameByFrameAnimation';" style="display: inline-block;" class="item  selectable">
+        Frame by Frame Animation
+      </div>
+      <div onclick="location.href = './html/2D.html#SkeletonAnimation';" style="display: inline-block;" class="item selectable">
+        Skeleton Animation
+      </div>
+    </div>
+
+    <div class="center">
+      3D
+      <br />
+      <div onclick="location.href = './html/3D.html#Modeling';" style="display: inline-block;" class="item selectable">
+        Modeling
+      </div>
+      <div onclick="location.href = './html/3D.html#Sculpting';" style="display: inline-block;" class="item selectable">
+        Sculpting
+      </div>
+      <div onclick="location.href = './html/3D.html#VoxelEditor';" style="display: inline-block;" class="item selectable">
+        Voxel Editor
+      </div>
+      <div onclick="location.href = './html/3D.html#Animating';" style="display: inline-block;" class="item selectable">
+        Animating
+      </div>
+      <div onclick="location.href = './html/3D.html#Rendering';" style="display: inline-block;" class="item selectable">
+        Rendering
+      </div>
+    </div>
+
+    <div class="center">
+      Other
+      <br />
+      <div onclick="location.href = './html/Audio.html';" style="display: inline-block;" class="item selectable">
+        Audio Manipulation
+      </div>
+      <div onclick="location.href = './html/Video.html';" style="display: inline-block;" class="item selectable">
+        Video Manipulation
+      </div>
+    </div>
+  </div>
+
+  <div class="center">
+    <form>
+      <input type="file" multiple style="display: none;" onchange="" name="projects" />
+      <input type="button" value="Open A Project" onclick="projects.click()" style="cursor: pointer; margin: 10px;" />
+    </form>
+  </div>
+
+  <div class="projects center">
+    <div onclick="" class="project selectable center">
+      <div class="title">
+        New Project...
+      </div>
+      <div class="properties">
+        Create a new ___ project!
+      </div>
+    </div>
+    <div onclick="" class="project selectable center">
+      <div class="title">
+        First Project
+      </div>
+      <div class="properties">
+        Date Modified: xx-xx-xxxx
+      </div>
+    </div>
+    <div onclick="" class="project selectable center">
+      <div class="title">
+        Second Project
+      </div>
+      <div class="properties">
+        Date Modified: xx-xx-xxxx
+      </div>
+    </div>
+  </div>
+
+  <div class="options toolbar">
+
+    <!-- toolbar's left -->
+    <div style="flex=33;">
+
+    </div>
+
+    <!-- toolbar's middle -->
+    <div style="display: flex; flex: 34;" class="center">
+
+      <div onclick='$("#ConfigurationMenu").dialog("open"); $("#ConfigTabs").tabs({active: 0});' class="item selectable center">
+        Settings
+      </div>
+      <div onclick='$("#ConfigurationMenu").dialog("open"); $("#ConfigTabs").tabs({active: 1});' class="item selectable center ">
+        Appearance
+      </div>
+      <div onclick='$("#ConfigurationMenu").dialog("open"); $("#ConfigTabs").tabs({active: 2});' class="item selectable center">
+        About
+      </div>
+
+    </div>
+
+    <!-- toolbar's right -->
+    <div style="flex: 0.33;">
+
+    </div>
+
+  </div>
+
+</body>
+
+</html>
