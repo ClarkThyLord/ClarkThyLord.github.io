@@ -1,3 +1,0 @@
-Pocket Smash
-
-Project for 2017 game jam hosted by GitHub; made with Phaser!
