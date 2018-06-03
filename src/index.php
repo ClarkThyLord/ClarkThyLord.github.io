@@ -50,7 +50,16 @@
 
 			<!-- RIGHT -->
 			<ul class="app-bar-menu ml-auto">
-				<li><a href="#">About</a></li>
+		    <li>
+	        <a href="#" class="dropdown-toggle">About</a>
+	        <ul class="d-menu put-right" data-role="dropdown">
+            <li><a href="#">Info</a></li>
+            <li><a href="#">Q&A</a></li>
+            <li><a href="#">Contant</a></li>
+            <li class="divider bg-lightGray"></li>
+            <li><a href="#">See more...</a></li>
+	        </ul>
+		    </li>
 			</ul>
 		</div>
 
