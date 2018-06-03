@@ -12,7 +12,7 @@
     <!-- CSS-->
     <link rel="stylesheet" href="./css/libs/metro-all.min.css">
 
-		<style>
+		<style id="master_style">
 			.app-bar-menu li {
       	list-style: none!important;
 	    }
@@ -31,8 +31,8 @@
 		    <li>
 	        <a href="#" class="dropdown-toggle">Works</a>
 	        <ul class="d-menu" data-role="dropdown">
-						<li><a href="#">Design</a></li>
 						<li><a href="#">Art</a></li>
+						<li><a href="#">Design</a></li>
             <li><a href="#">Literature</a></li>
             <li class="divider bg-lightGray"></li>
             <li><a href="#">See more...</a></li>
@@ -52,6 +52,10 @@
 			<ul class="app-bar-menu ml-auto">
 				<li><a href="#">About</a></li>
 			</ul>
+		</div>
+
+		<div id="master_html">
+			<?php include './php/home.php'; ?>
 		</div>
 
     <!-- JS -->
