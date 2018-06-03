@@ -55,7 +55,7 @@
 	        <ul class="d-menu put-right" data-role="dropdown">
             <li><a href="#">Info</a></li>
             <li><a href="#">Q&A</a></li>
-            <li><a href="#">Contant</a></li>
+            <li><a href="#">Contact</a></li>
             <li class="divider bg-lightGray"></li>
             <li><a href="#">See more...</a></li>
 	        </ul>
