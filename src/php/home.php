@@ -14,10 +14,65 @@
 
 <div data-role="panel" data-title-caption="Works" data-title-icon="<img src='./assets/icons/Design Logo.jpg'>" class="border bd-grey m-5">
 	<div class="m-3 d-flex flex-justify-around flex-wrap">
-		<div data-role="tile" data-size="wide" class="border border-radius m-2"></div>
-		<div data-role="tile" data-size="wide" class="border border-radius m-2"></div>
-		<div data-role="tile" data-size="wide" class="border border-radius m-2"></div>
-		<div data-role="tile" data-size="wide" class="border border-radius m-2"></div>
-		<div data-role="tile" data-size="wide" class="border border-radius m-2"></div>
+		<div data-role="tile" data-size="wide" data-effect="hover-zoom-down" class="border border-radius m-2">
+			<!-- TITLE -->
+			<span class="branding-bar fg-white">Work's Name</span>
+
+			<!-- CONTENT -->
+	    <div class="slide-front">
+        <img src="./assets/icons/Design Logo.jpg" class="h-100 w-100">
+	    </div>
+	    <div class="slide-back d-flex flex-justify-center flex-align-center p-4 op-mauve text-center">
+
+	    </div>
+		</div>
+		<div data-role="tile" data-size="wide" data-effect="hover-zoom-down" class="border border-radius m-2">
+			<!-- TITLE -->
+			<span class="branding-bar fg-white">Work's Name</span>
+
+			<!-- CONTENT -->
+	    <div class="slide-front">
+        <img src="./assets/icons/Design Logo.jpg" class="h-100 w-100">
+	    </div>
+	    <div class="slide-back d-flex flex-justify-center flex-align-center p-4 op-mauve text-center">
+
+	    </div>
+		</div>
+		<div data-role="tile" data-size="wide" data-effect="hover-zoom-down" class="border border-radius m-2">
+			<!-- TITLE -->
+			<span class="branding-bar fg-white">Work's Name</span>
+
+			<!-- CONTENT -->
+	    <div class="slide-front">
+        <img src="./assets/icons/Design Logo.jpg" class="h-100 w-100">
+	    </div>
+	    <div class="slide-back d-flex flex-justify-center flex-align-center p-4 op-mauve text-center">
+
+	    </div>
+		</div>
+		<div data-role="tile" data-size="wide" data-effect="hover-zoom-down" class="border border-radius m-2">
+			<!-- TITLE -->
+			<span class="branding-bar fg-white">Work's Name</span>
+
+			<!-- CONTENT -->
+	    <div class="slide-front">
+        <img src="./assets/icons/Design Logo.jpg" class="h-100 w-100">
+	    </div>
+	    <div class="slide-back d-flex flex-justify-center flex-align-center p-4 op-mauve text-center">
+
+	    </div>
+		</div>
+		<div data-role="tile" data-size="wide" data-effect="hover-zoom-down" class="border border-radius m-2">
+			<!-- TITLE -->
+			<span class="branding-bar fg-white">Work's Name</span>
+
+			<!-- CONTENT -->
+	    <div class="slide-front">
+        <img src="./assets/icons/Design Logo.jpg" class="h-100 w-100">
+	    </div>
+	    <div class="slide-back d-flex flex-justify-center flex-align-center p-4 op-mauve text-center">
+
+	    </div>
+		</div>
 	</div>
 </div>

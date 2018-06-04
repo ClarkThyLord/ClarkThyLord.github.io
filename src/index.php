@@ -88,7 +88,7 @@
 	    </ul>
 		</aside>
 
-		<div class="pt-13" id="master_html">
+		<div class="pt-14" id="master_html">
 			<?php include './php/home.php'; ?>
 		</div>
 
