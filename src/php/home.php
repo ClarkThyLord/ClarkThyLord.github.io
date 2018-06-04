@@ -12,10 +12,12 @@
 	</div>
 </div>
 
-<div class="d-flex flex-justify-around p-5">
-	<div data-role="tile" data-size="wide" class="border border-radius"></div>
-	<div data-role="tile" data-size="wide"></div>
-	<div data-role="tile" data-size="wide"></div>
-	<div data-role="tile" data-size="wide"></div>
-	<div data-role="tile" data-size="wide"></div>
+<div data-role="panel" data-title-caption="Works" data-title-icon="<img src='./assets/icons/Design Logo.jpg'>" class="border bd-grey m-5">
+	<div class="m-3 d-flex flex-justify-around flex-wrap">
+		<div data-role="tile" data-size="wide" class="border border-radius m-2"></div>
+		<div data-role="tile" data-size="wide" class="border border-radius m-2"></div>
+		<div data-role="tile" data-size="wide" class="border border-radius m-2"></div>
+		<div data-role="tile" data-size="wide" class="border border-radius m-2"></div>
+		<div data-role="tile" data-size="wide" class="border border-radius m-2"></div>
+	</div>
 </div>
