@@ -6,8 +6,8 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-		<meta name="description" content="WorkStation potential allows users to work with 2D and 3D assets via web technologies!" />
-		<meta name="keywords" content="ws,workstation,potential" />
+		<meta name="description" content="Potential, home of the unknown!" />
+		<meta name="keywords" content="ws,potential" />
 
     <!-- CSS-->
     <link rel="stylesheet" href="./css/libs/metro-all.min.css">
