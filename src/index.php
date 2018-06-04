@@ -20,7 +20,7 @@
   </head>
   <body>
 		<!-- NAVIGATION TOP -->
-		<div class="app-bar-expand-md" data-role="appbar">
+		<div class="app-bar-expand-md" data-role="appbar" id="main-nav-top">
 			<!-- ICON -->
 			<a href="#" class="brand">
 				<img src="./assets/potential.svg" style="width: 55px;" class="p-1" />
@@ -62,6 +62,31 @@
 		    </li>
 			</ul>
 		</div>
+
+		<!-- NAVIGATION SIDE -->
+		<aside class="sidebar" data-role="sidebar" id="main-nav-side">
+			<!-- HEADER -->
+	    <div class="sidebar-header">
+		    <a href="/" class="fg-white sub-action">
+	        <span class="mif-arrow-left mif-2x"></span>
+		    </a>
+
+				<!-- ICON -->
+		    <div class="avatar">
+	        <img data-role="gravatar" data-default="./assets/potential.svg">
+		    </div>
+
+				<!-- TILE -->
+		    <span class="title">WWW-potential</span>
+
+				<!-- SUBTITLE -->
+		    <span class="subtitle">Home</span>
+	    </div>
+
+			<!-- MENU -->
+	    <ul class="sidebar-menu">
+	    </ul>
+		</aside>
 
 		<div class="pt-13" id="master_html">
 			<?php include './php/home.php'; ?>
