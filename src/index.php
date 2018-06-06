@@ -18,7 +18,7 @@
 	    }
 		</style>
   </head>
-  <body>
+  <body id="app">
 		<!-- NAVIGATION TOP -->
 		<div class="app-bar-expand-md" data-role="appbar" id="main-nav-top">
 			<!-- ICON -->
@@ -94,6 +94,15 @@
 
     <!-- JS -->
     <script src="./js/libs/jquery-3.3.1.min.js"></script>
+    <script src="./js/libs/vue.min.js"></script>
     <script src="./js/libs/metro.min.js"></script>
+
+		<script>
+			$(function () {
+				var app = new Vue({
+					el: '#master_html',
+				});
+			});
+		</script>
   </body>
 </html>
