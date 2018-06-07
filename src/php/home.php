@@ -13,7 +13,13 @@
 </div>
 
 <div v-for="preview in previews" data-role="panel" :data-title-icon="(preview.img_url && preview.img_url !== '') ? '<img src=\'' + preview.img_url + '\' />' : ''" :data-title-caption="preview.name" style="padding: 0px;" class="border bd-grey m-5">
+	<div class="container-fluid">
+		{{ preview.description }}
+	</div>
 	<div v-for="section in preview.sections" data-role="panel" :data-title-icon="(section.img_url && section.img_url !== '') ? '<img src=\'' + section.img_url + '\' />' : ''" :data-title-caption="section.name">
+		<div class="container-fluid">
+			{{ section.description }}
+		</div>
 		<div class="m-3 d-flex flex-justify-around flex-wrap">
 			<div v-for="item in section.items" data-role="tile" data-size="wide" data-effect="hover-zoom-down" class="border border-radius m-2">
 				<!-- TITLE -->
