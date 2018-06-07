@@ -145,8 +145,8 @@
 									},
 									{
 										name: 'Literature',
-										url: '',
-										img_url: 'works#literature',
+										url: 'works#literature',
+										img_url: '',
 										description: 'Literature I\'ve done over time',
 										items: [
 											{
