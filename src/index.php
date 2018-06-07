@@ -97,8 +97,8 @@
 
 		  <!-- JS -->
 		  <script src="./js/libs/jquery-3.3.1.min.js"></script>
-		  <script src="./js/libs/vue.min.js"></script>
 		  <script src="./js/libs/metro.min.js"></script>
+		  <script src="./js/libs/vue.min.js"></script>
 		</div>
 
 		<!-- Start Vue.js and Metro -->
@@ -108,8 +108,80 @@
 				app = new Vue({
 					el: '#app',
 					data: {
-						hello: 'hello world!',
-						previews: []
+						previews: [
+							{
+								name: 'Works',
+								url: 'works',
+								img_url: '',
+								description: 'Works I\'ve done over time',
+								sections: [
+									{
+										name: 'Art',
+										url: 'works#art',
+										img_url: '',
+										description: 'Art I\'ve done over time',
+										items: [
+											{
+												name: '',
+												url: '',
+												img_url: '',
+												description: ''
+											}
+										]
+									},
+									{
+										name: 'Design',
+										url: 'works#design',
+										img_url: '',
+										description: 'Designs I\'ve done over time',
+										items: [
+											{
+												name: '',
+												url: '',
+												img_url: '',
+												description: ''
+											}
+										]
+									},
+									{
+										name: 'Literature',
+										url: '',
+										img_url: 'works#literature',
+										description: 'Literature I\'ve done over time',
+										items: [
+											{
+												name: '',
+												url: '',
+												img_url: '',
+												description: ''
+											}
+										]
+									}
+								]
+							},
+							{
+								name: '',
+								url: '',
+								img_url: '',
+								description: '',
+								sections: [
+									{
+										name: '',
+										url: '',
+										img_url: '',
+										description: '',
+										items: [
+											{
+												name: '',
+												url: '',
+												img_url: '',
+												description: ''
+											}
+										]
+									}
+								]
+							}
+						]
 					},
 					mounted: function () {
 						Metro.init();

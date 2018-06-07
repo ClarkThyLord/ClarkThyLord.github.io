@@ -12,22 +12,22 @@
 	</div>
 </div>
 
-<div v-if="previews" v-for="preview in previews" data-role="panel" :data-title-icon="<img src='preview.img_url'>" :data-title-caption="preview.name" style="padding: 0px;" class="border bd-grey m-5">
-	<div v-for="section in preview.sections" data-role="panel" :data-title-icon="<img src='section.img_url'>" data-title-caption="section.name">
+<div v-for="preview in previews" data-role="panel" :data-title-icon="preview.img_url" :data-title-caption="preview.name" style="padding: 0px;" class="border bd-grey m-5">
+	<div v-for="section in preview.sections" data-role="panel" :data-title-icon="section.img_url" :data-title-caption="section.name">
 		<div class="m-3 d-flex flex-justify-around flex-wrap">
-			<div v-for="piece in section.pieces" data-role="tile" data-size="wide" data-effect="hover-zoom-down" class="border border-radius m-2">
+			<div v-for="item in section.items" data-role="tile" data-size="wide" data-effect="hover-zoom-down" class="border border-radius m-2">
 				<!-- TITLE -->
 				<span class="branding-bar fg-white">
-					{{ piece.name }}
+					{{ item.name }}
 				</span>
 
 				<!-- CONTENT -->
-		    <div class="slide-front">
-	        <img :src="piece.img_url" class="h-100 w-100">
-		    </div>
-		    <div class="slide-back d-flex flex-justify-center flex-align-center p-4 op-mauve text-center">
-					{{ piece.description }}
-		    </div>
+				<div class="slide-front">
+					<img :src="item.img_url" class="h-100 w-100">
+				</div>
+				<div class="slide-back d-flex flex-justify-center flex-align-center p-4 op-mauve text-center">
+					{{ item.description }}
+				</div>
 			</div>
 		</div>
 	</div>
