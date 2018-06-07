@@ -9,6 +9,8 @@
 		<meta name="description" content="Potential, home of the unknown!" />
 		<meta name="keywords" content="ws,potential" />
 
+		<meta name="metro4:init" content="false">
+
     <!-- CSS-->
     <link rel="stylesheet" href="./css/libs/metro-all.min.css">
 
@@ -97,14 +99,23 @@
 		  <script src="./js/libs/jquery-3.3.1.min.js"></script>
 		  <script src="./js/libs/vue.min.js"></script>
 		  <script src="./js/libs/metro.min.js"></script>
-
-			<script>
-				$(function () {
-					var app = new Vue({
-						el: '#app'
-					});
-				});
-			</script>
 		</div>
+
+		<!-- Start Vue.js and Metro -->
+		<script>
+			var app;
+			$(function () {
+				app = new Vue({
+					el: '#app',
+					data: {
+						hello: 'hello world!',
+						previews: []
+					},
+					mounted: function () {
+						Metro.init();
+					}
+				});
+			});
+		</script>
 	</body>
 </html>

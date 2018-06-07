@@ -12,197 +12,28 @@
 	</div>
 </div>
 
-<div data-role="panel" data-title-caption="Works" data-title-icon="<img src='./assets/icons/Design Logo.jpg'>" style="padding: 0px;" class="border bd-grey m-5">
-	<div data-role="panel" data-title-caption="Art">
+<div v-if="previews" v-for="preview in previews" data-role="panel" :data-title-icon="<img src='preview.img_url'>" :data-title-caption="preview.name" style="padding: 0px;" class="border bd-grey m-5">
+	<div v-for="section in preview.sections" data-role="panel" :data-title-icon="<img src='section.img_url'>" data-title-caption="section.name">
 		<div class="m-3 d-flex flex-justify-around flex-wrap">
-			<div data-role="tile" data-size="wide" data-effect="hover-zoom-down" class="border border-radius m-2">
+			<div v-for="piece in section.pieces" data-role="tile" data-size="wide" data-effect="hover-zoom-down" class="border border-radius m-2">
 				<!-- TITLE -->
-				<span class="branding-bar fg-white">Work's Name</span>
+				<span class="branding-bar fg-white">
+					{{ piece.name }}
+				</span>
 
 				<!-- CONTENT -->
 		    <div class="slide-front">
-	        <img src="./assets/icons/Design Logo.jpg" class="h-100 w-100">
+	        <img :src="piece.img_url" class="h-100 w-100">
 		    </div>
 		    <div class="slide-back d-flex flex-justify-center flex-align-center p-4 op-mauve text-center">
-
-		    </div>
-			</div>
-			<div data-role="tile" data-size="wide" data-effect="hover-zoom-down" class="border border-radius m-2">
-				<!-- TITLE -->
-				<span class="branding-bar fg-white">Work's Name</span>
-
-				<!-- CONTENT -->
-		    <div class="slide-front">
-	        <img src="./assets/icons/Design Logo.jpg" class="h-100 w-100">
-		    </div>
-		    <div class="slide-back d-flex flex-justify-center flex-align-center p-4 op-mauve text-center">
-
-		    </div>
-			</div>
-			<div data-role="tile" data-size="wide" data-effect="hover-zoom-down" class="border border-radius m-2">
-				<!-- TITLE -->
-				<span class="branding-bar fg-white">Work's Name</span>
-
-				<!-- CONTENT -->
-		    <div class="slide-front">
-	        <img src="./assets/icons/Design Logo.jpg" class="h-100 w-100">
-		    </div>
-		    <div class="slide-back d-flex flex-justify-center flex-align-center p-4 op-mauve text-center">
-
-		    </div>
-			</div>
-			<div data-role="tile" data-size="wide" data-effect="hover-zoom-down" class="border border-radius m-2">
-				<!-- TITLE -->
-				<span class="branding-bar fg-white">Work's Name</span>
-
-				<!-- CONTENT -->
-		    <div class="slide-front">
-	        <img src="./assets/icons/Design Logo.jpg" class="h-100 w-100">
-		    </div>
-		    <div class="slide-back d-flex flex-justify-center flex-align-center p-4 op-mauve text-center">
-
-		    </div>
-			</div>
-			<div data-role="tile" data-size="wide" data-effect="hover-zoom-down" class="border border-radius m-2">
-				<!-- TITLE -->
-				<span class="branding-bar fg-white">Work's Name</span>
-
-				<!-- CONTENT -->
-		    <div class="slide-front">
-	        <img src="./assets/icons/Design Logo.jpg" class="h-100 w-100">
-		    </div>
-		    <div class="slide-back d-flex flex-justify-center flex-align-center p-4 op-mauve text-center">
-
-		    </div>
-			</div>
-		</div>
-	</div>
-	<div data-role="panel" data-title-caption="Design">
-		<div class="m-3 d-flex flex-justify-around flex-wrap">
-			<div data-role="tile" data-size="wide" data-effect="hover-zoom-down" class="border border-radius m-2">
-				<!-- TITLE -->
-				<span class="branding-bar fg-white">Work's Name</span>
-
-				<!-- CONTENT -->
-		    <div class="slide-front">
-	        <img src="./assets/icons/Design Logo.jpg" class="h-100 w-100">
-		    </div>
-		    <div class="slide-back d-flex flex-justify-center flex-align-center p-4 op-mauve text-center">
-
-		    </div>
-			</div>
-			<div data-role="tile" data-size="wide" data-effect="hover-zoom-down" class="border border-radius m-2">
-				<!-- TITLE -->
-				<span class="branding-bar fg-white">Work's Name</span>
-
-				<!-- CONTENT -->
-		    <div class="slide-front">
-	        <img src="./assets/icons/Design Logo.jpg" class="h-100 w-100">
-		    </div>
-		    <div class="slide-back d-flex flex-justify-center flex-align-center p-4 op-mauve text-center">
-
-		    </div>
-			</div>
-			<div data-role="tile" data-size="wide" data-effect="hover-zoom-down" class="border border-radius m-2">
-				<!-- TITLE -->
-				<span class="branding-bar fg-white">Work's Name</span>
-
-				<!-- CONTENT -->
-		    <div class="slide-front">
-	        <img src="./assets/icons/Design Logo.jpg" class="h-100 w-100">
-		    </div>
-		    <div class="slide-back d-flex flex-justify-center flex-align-center p-4 op-mauve text-center">
-
-		    </div>
-			</div>
-			<div data-role="tile" data-size="wide" data-effect="hover-zoom-down" class="border border-radius m-2">
-				<!-- TITLE -->
-				<span class="branding-bar fg-white">Work's Name</span>
-
-				<!-- CONTENT -->
-		    <div class="slide-front">
-	        <img src="./assets/icons/Design Logo.jpg" class="h-100 w-100">
-		    </div>
-		    <div class="slide-back d-flex flex-justify-center flex-align-center p-4 op-mauve text-center">
-
-		    </div>
-			</div>
-			<div data-role="tile" data-size="wide" data-effect="hover-zoom-down" class="border border-radius m-2">
-				<!-- TITLE -->
-				<span class="branding-bar fg-white">Work's Name</span>
-
-				<!-- CONTENT -->
-		    <div class="slide-front">
-	        <img src="./assets/icons/Design Logo.jpg" class="h-100 w-100">
-		    </div>
-		    <div class="slide-back d-flex flex-justify-center flex-align-center p-4 op-mauve text-center">
-
-		    </div>
-			</div>
-		</div>
-	</div>
-	<div data-role="panel" data-title-caption="Literature">
-		<div class="m-3 d-flex flex-justify-around flex-wrap">
-			<div data-role="tile" data-size="wide" data-effect="hover-zoom-down" class="border border-radius m-2">
-				<!-- TITLE -->
-				<span class="branding-bar fg-white">Work's Name</span>
-
-				<!-- CONTENT -->
-		    <div class="slide-front">
-	        <img src="./assets/icons/Design Logo.jpg" class="h-100 w-100">
-		    </div>
-		    <div class="slide-back d-flex flex-justify-center flex-align-center p-4 op-mauve text-center">
-
-		    </div>
-			</div>
-			<div data-role="tile" data-size="wide" data-effect="hover-zoom-down" class="border border-radius m-2">
-				<!-- TITLE -->
-				<span class="branding-bar fg-white">Work's Name</span>
-
-				<!-- CONTENT -->
-		    <div class="slide-front">
-	        <img src="./assets/icons/Design Logo.jpg" class="h-100 w-100">
-		    </div>
-		    <div class="slide-back d-flex flex-justify-center flex-align-center p-4 op-mauve text-center">
-
-		    </div>
-			</div>
-			<div data-role="tile" data-size="wide" data-effect="hover-zoom-down" class="border border-radius m-2">
-				<!-- TITLE -->
-				<span class="branding-bar fg-white">Work's Name</span>
-
-				<!-- CONTENT -->
-		    <div class="slide-front">
-	        <img src="./assets/icons/Design Logo.jpg" class="h-100 w-100">
-		    </div>
-		    <div class="slide-back d-flex flex-justify-center flex-align-center p-4 op-mauve text-center">
-
-		    </div>
-			</div>
-			<div data-role="tile" data-size="wide" data-effect="hover-zoom-down" class="border border-radius m-2">
-				<!-- TITLE -->
-				<span class="branding-bar fg-white">Work's Name</span>
-
-				<!-- CONTENT -->
-		    <div class="slide-front">
-	        <img src="./assets/icons/Design Logo.jpg" class="h-100 w-100">
-		    </div>
-		    <div class="slide-back d-flex flex-justify-center flex-align-center p-4 op-mauve text-center">
-
-		    </div>
-			</div>
-			<div data-role="tile" data-size="wide" data-effect="hover-zoom-down" class="border border-radius m-2">
-				<!-- TITLE -->
-				<span class="branding-bar fg-white">Work's Name</span>
-
-				<!-- CONTENT -->
-		    <div class="slide-front">
-	        <img src="./assets/icons/Design Logo.jpg" class="h-100 w-100">
-		    </div>
-		    <div class="slide-back d-flex flex-justify-center flex-align-center p-4 op-mauve text-center">
-
+					{{ piece.description }}
 		    </div>
 			</div>
 		</div>
 	</div>
 </div>
+
+<script>
+	function loaded() {
+	}
+</script>
