@@ -12,19 +12,19 @@
 	</div>
 </div>
 
-<div v-for="preview in previews" data-role="panel" :data-title-icon="(preview.img_url && preview.img_url !== '') ? '<img src=\'' + preview.img_url + '\' />' : ''" :data-title-caption="preview.name" style="padding: 0px;" class="border bd-grey m-5">
+<div v-for="preview in previews" data-role="panel" :data-title-icon="(preview.img_url && preview.img_url !== '') ? '<img src=\'' + preview.img_url + '\' />' : ''" :data-title-caption="(preview.name) ? '<h1><b>' + preview.name + '</b></h1>' : ''" style="padding: 0px;" class="border bd-grey m-5">
 	<div class="container-fluid">
-		{{ preview.description }}
+		<h3><i>{{ preview.description }}</i></h3>
 	</div>
-	<div v-for="section in preview.sections" data-role="panel" :data-title-icon="(section.img_url && section.img_url !== '') ? '<img src=\'' + section.img_url + '\' />' : ''" :data-title-caption="section.name">
+	<div v-for="section in preview.sections" data-role="panel" :data-title-icon="(section.img_url && section.img_url !== '') ? '<img src=\'' + section.img_url + '\' />' : ''" :data-title-caption="(section.name) ? '<h1><b><small>' + section.name + '</small></b></h1>' : ''">
 		<div class="container-fluid">
-			{{ section.description }}
+			<h3><i><small>{{ section.description }}</small></i></h3>
 		</div>
 		<div class="m-3 d-flex flex-justify-around flex-wrap">
-			<div v-for="item in section.items" data-role="tile" data-size="wide" data-effect="hover-zoom-down" class="border border-radius m-2">
+			<div v-for="(item, index) in section.items" data-role="tile" data-size="wide" data-effect="hover-zoom-down" :class="{'d-none d-block-md': (index + 1 > 3)}" class="border border-radius m-2">
 				<!-- TITLE -->
 				<span class="branding-bar fg-white">
-					{{ item.name }}
+					<b>{{ item.name }}</b>
 				</span>
 
 				<!-- CONTENT -->
@@ -32,7 +32,7 @@
 					<img :src="item.img_url" class="h-100 w-100">
 				</div>
 				<div class="slide-back d-flex flex-justify-center flex-align-center p-4 op-mauve text-center">
-					{{ item.description }}
+					<i>{{ item.description }}</i>
 				</div>
 			</div>
 		</div>
