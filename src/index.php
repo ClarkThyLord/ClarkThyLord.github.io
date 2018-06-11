@@ -176,28 +176,6 @@
 										]
 									}
 								]
-							},
-							{
-								name: '',
-								url: '',
-								img_url: '',
-								description: '',
-								sections: [
-									{
-										name: '',
-										url: '',
-										img_url: '',
-										description: '',
-										items: [
-											{
-												name: '',
-												url: '',
-												img_url: '',
-												description: ''
-											}
-										]
-									}
-								]
 							}
 						]
 					},
