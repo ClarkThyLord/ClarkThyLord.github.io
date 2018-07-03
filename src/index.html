@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="h-100">
 
 <head>
 	<link rel="icon" href="./assets/potential.svg" />
@@ -17,17 +17,15 @@
 	<link rel="stylesheet" href="./css/libs/metro-theme.css">
 
 	<style id="master_style">
-		.app-bar-menu li {
-			list-style: none !important;
-		}
+
 
 	</style>
 </head>
 
-<body>
-	<div id="app">
-		<!-- NAVIGATION TOP -->
-		<div class="app-bar-expand-md" data-role="appbar" id="main-nav-top">
+<body class="h-100">
+	<div class="h-100" id="app">
+		<!-- Master Navigation -->
+		<nav class="app-bar-expand-md" data-role="appbar" id="master_navigation">
 			<!-- ICON -->
 			<a href="#" onclick="return false;" class="brand">
 				<img src="./assets/potential.svg" style="width: 55px;" class="p-1 ani-hover-pulse" />
@@ -68,15 +66,22 @@
 					</ul>
 				</li>
 			</ul>
+		</nav>
+
+		<!-- Master Content -->
+		<div class="pt-14" id="master_content">
 		</div>
 
-		<div class="pt-14" id="master_html">
-		</div>
+		<!-- Master Footer -->
+		<footer class="h-25">
+		</footer>
 
-		<!-- JS -->
-		<script src="./js/libs/jquery-3.3.1.min.js"></script>
-		<script src="./js/libs/metro.min.js"></script>
-		<script src="./js/libs/vue.min.js"></script>
+	</div>
+
+	<!-- JS -->
+	<script src="./js/libs/jquery-3.3.1.min.js"></script>
+	<script src="./js/libs/metro.min.js"></script>
+	<script src="./js/libs/vue.min.js"></script>
 	</div>
 
 	<!-- Start Vue.js and Metro -->
