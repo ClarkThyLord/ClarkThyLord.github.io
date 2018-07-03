@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<link rel="icon" href="./assets/potential.svg" />
+	<title>Potential - Home</title>
+
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<meta name="description" content="Potential, home of the unknown!" />
+	<meta name="keywords" content="ws,potential" />
+
+	<meta name="metro4:init" content="false">
+
+	<!-- CSS-->
+	<link rel="stylesheet" href="./css/libs/metro-all.min.css">
+	<link rel="stylesheet" href="./css/libs/metro-theme.css">
+
+	<style id="master_style">
+		.app-bar-menu li {
+			list-style: none !important;
+		}
+
+	</style>
+</head>
+
+<body>
+	<div id="app">
+		<!-- NAVIGATION TOP -->
+		<div class="app-bar-expand-md" data-role="appbar" id="main-nav-top">
+			<!-- ICON -->
+			<a href="#" onclick="return false;" class="brand">
+				<img src="./assets/potential.svg" style="width: 55px;" class="p-1 ani-hover-pulse" />
+			</a>
+
+			<!-- LEFT -->
+			<ul class="app-bar-menu">
+				<li>
+					<a href="#" onclick="return false;" class="dropdown-toggle">Works</a>
+					<ul class="d-menu" data-role="dropdown">
+						<li><a href="#" onclick="return false;">Art</a></li>
+						<li><a href="#" onclick="return false;">Design</a></li>
+						<li><a href="#" onclick="return false;">Literature</a></li>
+						<li class="divider bg-lightGray"></li>
+						<li><a href="#" onclick="return false;">See more...</a></li>
+					</ul>
+				</li>
+				<li>
+					<a href="#" onclick="return false;" class="dropdown-toggle">Projects</a>
+					<ul class="d-menu" data-role="dropdown">
+						<li><a href="#" onclick="return false;">WS-potential</a></li>
+						<li class="divider bg-lightGray"></li>
+						<li><a href="#" onclick="return false;">See more...</a></li>
+					</ul>
+				</li>
+			</ul>
+
+			<!-- RIGHT -->
+			<ul class="app-bar-menu ml-auto">
+				<li>
+					<a href="#" onclick="return false;" class="dropdown-toggle">About</a>
+					<ul class="d-menu put-right" data-role="dropdown">
+						<li><a href="#" onclick="return false;">Info</a></li>
+						<li><a href="#" onclick="return false;">Q&A</a></li>
+						<li><a href="#" onclick="return false;">Contact</a></li>
+						<li class="divider bg-lightGray"></li>
+						<li><a href="#" onclick="return false;">See more...</a></li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+
+		<div class="pt-14" id="master_html">
+		</div>
+
+		<!-- JS -->
+		<script src="./js/libs/jquery-3.3.1.min.js"></script>
+		<script src="./js/libs/metro.min.js"></script>
+		<script src="./js/libs/vue.min.js"></script>
+	</div>
+
+	<!-- Start Vue.js and Metro -->
+	<script>
+		var app;
+		$(function() {
+			app = new Vue({
+				el: '#app',
+				mounted: function() {
+					Metro.init();
+				}
+			});
+		});
+
+	</script>
+</body>
+
+</html>
