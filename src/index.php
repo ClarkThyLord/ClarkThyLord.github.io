@@ -13,6 +13,7 @@
 
     <!-- CSS-->
     <link rel="stylesheet" href="./css/libs/metro-all.min.css">
+    <link rel="stylesheet" href="./css/libs/metro-theme.css">
 
 		<style id="master_style">
 			.app-bar-menu li {
