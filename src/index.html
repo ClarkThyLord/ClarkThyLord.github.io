@@ -17,7 +17,13 @@
 	<link rel="stylesheet" href="./css/libs/metro-theme.css">
 
 	<style id="master_style">
-
+		.icon-box ul li {
+			margin: 3px;
+			padding: 5px;
+			display: inline-block;
+			border-radius: 3px;
+			box-shadow: 0px 0px 5px rgb(0, 0, 0);
+		}
 
 	</style>
 </head>
@@ -69,12 +75,32 @@
 		</nav>
 
 		<!-- Master Content -->
-		<div class="pt-14" id="master_content">
+		<div class="pt-13" id="master_content">
 		</div>
 
 		<!-- Master Footer -->
-		<footer>
+		<footer class="d-flex border-top bd-lightGray bg-primary">
+			<div style="flex: 0.33;">
+				<div class="m-2">
+					<h2>
+						Hello World!
+					</h2>
+					<div class="pl-5">
+						Just another programmer :v
+					</div>
+				</div>
 
+				<div class="m-2 icon-box">
+					<h4>
+						Skills
+					</h4>
+					<ul>
+						<li v-for="(time, skill) in {'Java': 2}" data-role="popover" :data-popover-text="'Experienced in ' + skill + ' for over ' + time + ' years'" data-hide-on-leave="true" data-popover-hide="0">
+							{{ skill }}
+						</li>
+					</ul>
+				</div>
+			</div>
 		</footer>
 	</div>
 
