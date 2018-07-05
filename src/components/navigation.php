@@ -1,4 +1,4 @@
-<nav class="app-bar-expand-md" data-role="appbar" id="master_navigation">
+<nav class="app-bar-expand-md" data-role="appbar">
 	<!-- ICON -->
 	<a href="#" onclick="return false;" class="brand">
 		<img src="./assets/potential.svg" style="width: 55px;" class="p-1 ani-hover-pulse" />

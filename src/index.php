@@ -28,23 +28,27 @@
 		<?php include './components/navigation.php'; ?>
 
 		<!-- Master Content -->
-		<main>
-
-			<div data-role="carousel" data-auto-start="true" data-bullet-style="circle" data-effect="fade" data-period="3000" data-duration="500" style="max-height: 100%; background-color: rgba(0, 0, 0, 0);" class="p-0">
-				<div class="slide h-100 p-10 fg-white d-flex flex-content-end flex-justify-center flex-wrap" data-cover="./assets/art/Eye%20Of%20Potential.jpg">
-					<h2><em>Eye of Potential</em></h2>
-				</div>
-				<div class="slide h-100 p-10 fg-white d-flex flex-content-end flex-justify-center flex-wrap" data-cover="./assets/art/Kingdom%20Hearts%20Sky.jpg">
-					<h2><em>Kingdom Heart's Sky</em></h2>
-				</div>
-				<div class="slide h-100 p-10 fg-white d-flex flex-content-end flex-justify-center flex-wrap" data-cover="./assets/design/Pierce%20The%20Veil.jpg">
-					<h2><em>Pierce the Veil</em></h2>
+		<main class="pt-13">
+			<div data-role="carousel" data-auto-start="true" data-bullet-style="circle" data-effect="fade" data-period="3000" data-duration="500" style="max-height: 100%; background-color: rgba(0, 0, 0, 0);">
+				<div v-for="(url, name) in {'Eye of Potential': './assets/art/Eye%20Of%20Potential.jpg', 'Kingdom Heart\'s Sky': './assets/art/Kingdom%20Hearts%20Sky.jpg', 'Pierce the Veil': './assets/design/Pierce%20The%20Veil.jpg'}" class="slide h-100 p-10 fg-white d-flex flex-content-end flex-justify-center flex-wrap" :data-cover="url">
+					<span style="font-size: 3vw;"> {{ name }} </span>
 				</div>
 			</div>
 
-			<div>
-				<div class="mb-3 border-bottom border-size-3 bd-lightGray">
-					<h2 class="ml-3">Works</h2>
+			<div class="m-3">
+				<div class="mb-3 d-flex flex-justify-start border-bottom border-size-3 bd-lightGray">
+					<!-- LEFT -->
+					<div class="ml-3">
+						<h2>Works</h2>
+					</div>
+
+					<!-- RIGHT -->
+			    <div class="ml-auto mr-3">
+						<button onclick="" title="View all" class="image-button">
+							<span class="icon mif-plus"></span>
+							<span class="caption">View all</span>
+						</button>
+					</div>
 				</div>
 
 				<div class="d-flex-column-sm d-flex-md">
