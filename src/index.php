@@ -58,7 +58,7 @@
 					</div>
 
 					<div class="d-flex-column-sm d-flex-md">
-						<div v-for="item in 5" class="m-2 card image-header selectable">
+						<div v-for="item in GLOBALS.works" class="m-2 card image-header selectable">
 							<div class="card-header fg-white" style="background-image: url();">
 								NAME
 							</div>
@@ -94,7 +94,7 @@
 					</div>
 
 					<div class="d-flex-column-sm d-flex-md">
-						<div v-for="item in 5" class="m-2 card image-header selectable">
+						<div v-for="item in GLOBALS.projects" class="m-2 card image-header selectable">
 							<div class="card-header fg-white" style="background-image: url();">
 								NAME
 							</div>
