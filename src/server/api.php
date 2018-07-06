@@ -50,7 +50,6 @@
 		// Setup debug spot in response
 		$GLOBALS['response']['debug'] = Array();
 
-		$GLOBALS['response']['debug']['session'] = $_SESSION;
 		$GLOBALS['response']['debug']['method'] = $_SERVER['REQUEST_METHOD'];
 		$GLOBALS['response']['debug']['routes'] = $routes;
 	}
@@ -89,7 +88,7 @@
 	* @return {undefined} Returns nothing.
 	*/
 	function response_send($success=null, $reason=null) {
-		if ($success !== null) { response_success($success, $reason); }
+		if ($success !== null) { response_status($success, $reason); }
 
 		// Echo response
 		echo json_encode($GLOBALS['response']);
