@@ -2,14 +2,9 @@
 GLOBALS.works = [];
 GLOBALS.projects = [];
 
-/**
- * Fetch recent works.
- * @return {undefined} Returns nothing.
- */
-function fetch_recent_works() {}
-
-/**
- * Fetch recent works.
- * @return {undefined} Returns nothing.
- */
-function fetch_recent_projects() {}
+$(function() {
+  $.getJSON('http://www-potential/server/api.php/works', function(response) {
+    console.log(response);
+    GLOBALS.works = response.data.works;
+  });
+});

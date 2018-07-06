@@ -58,16 +58,16 @@
 					</div>
 
 					<div style="min-height: 300px;" class="w-100 d-flex-column-sm d-flex-md">
-						<div v-for="item in GLOBALS.works" class="m-2 card image-header selectable">
-							<div class="card-header fg-white" style="background-image: url();">
-								NAME
+						<div v-for="work in GLOBALS.works" class="m-2 card image-header selectable">
+							<div class="card-header fg-white" :style="{'background-image': 'url(' + work.url + ')'}">
+								{{ work.name }}
 							</div>
 							<div class="card-content p-2">
-								<p class="fg-gray">DATE</p>
-								DESCRIPTION
+								<p class="fg-gray">{{ work.modified }}</p>
+								Created with love! 💖
 							</div>
 							<div class="card-footer">
-								<button onclick="" title="View" class="mt-2 image-button">
+								<button @click="window.location.href = work.url;" title="View" class="mt-2 image-button">
 									<span class="icon mif-eye"></span>
 									<span class="caption">View</span>
 								</button>
