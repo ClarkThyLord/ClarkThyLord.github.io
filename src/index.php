@@ -2,7 +2,7 @@
 <html lang="en" class="h-100">
 
 <head>
-	<link rel="icon" href="./assets/potential.svg" />
+	<link rel="icon" href="./css/icons/potential.svg" />
 	<title>Potential - Home</title>
 
 	<meta charset="utf-8">
@@ -15,6 +15,8 @@
 	<!-- CSS-->
 	<link rel="stylesheet" href="./css/libs/metro-all.min.css">
 	<link rel="stylesheet" href="./css/libs/metro-theme.css">
+
+	<link rel="stylesheet" href="./css/gui.css">
 
 	<style>
 
@@ -30,7 +32,7 @@
 		<!-- Master Content -->
 		<main class="pt-13">
 			<div data-role="carousel" data-auto-start="true" data-bullet-style="circle" data-effect="fade" data-period="3000" data-duration="500" style="max-height: 100%; background-color: rgba(0, 0, 0, 0);">
-				<div v-for="(url, name) in {'Eye of Potential': './assets/art/Eye%20Of%20Potential.jpg', 'Kingdom Heart\'s Sky': './assets/art/Kingdom%20Hearts%20Sky.jpg', 'Pierce the Veil': './assets/design/Pierce%20The%20Veil.jpg'}" class="slide h-100 p-10 fg-white d-flex flex-content-end flex-justify-center flex-wrap" :data-cover="url">
+				<div v-for="(url, name) in {'Eye of Potential': './works/Eye%20Of%20Potential.jpg', 'Kingdom Heart\'s Sky': './works/Kingdom%20Hearts%20Sky.jpg', 'Pierce the Veil': './works/Pierce%20The%20Veil.jpg'}" class="slide h-100 p-10 fg-white d-flex flex-content-end flex-justify-center flex-wrap" :data-cover="url">
 					<span style="font-size: 3vw;"> {{ name }} </span>
 				</div>
 			</div>
@@ -52,7 +54,7 @@
 				</div>
 
 				<div class="d-flex-column-sm d-flex-md">
-					<div v-for="item in [1, 2, 3, 4, 5]" class="m-2 card image-header">
+					<div v-for="item in [1, 2, 3, 4, 5]" class="m-2 card image-header selectable">
 						<div class="card-header fg-white" style="background-image: url();">
 							NAME
 						</div>
