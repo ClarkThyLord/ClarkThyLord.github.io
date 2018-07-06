@@ -13,7 +13,7 @@
 	}
 
 	// Setup Response that will be sent back
-	$response = array('success' => true, 'reason' => 'initial response', 'data' => array(), 'user' => (isset($_SESSION['user']) ? $_SESSION['user'] : null));
+	$response = array('success' => true, 'reason' => 'initial response', 'data' => array());
 
 	// Stripping the base URL and getting all the 'routes'
 	// ***************************************************************************
@@ -91,9 +91,6 @@
 	function response_send($success=null, $reason=null) {
 		if ($success !== null) { response_success($success, $reason); }
 
-		// Close connection to SQL database if any
-		conn_close();
-
 		// Echo response
 		echo json_encode($GLOBALS['response']);
 
@@ -110,13 +107,13 @@
 		include_once './endpoints/works.php';
 
 		if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-			works_get(json_decode($_GET['filter'], true), json_decode($_GET['options'], true));
+			works_get((isset($_GET['filter']) ? json_decode($_GET['filter'], true) : array()), (isset($_GET['options']) ? json_decode($_GET['options'], true) : array()));
 		}
 	} else if ($routes[0] === 'projects') {
 		include_once './endpoints/projects.php';
 
 		if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-			projects_get(json_decode($_GET['filter'], true), json_decode($_GET['options'], true));
+			projects_get((isset($_GET['filter']) ? json_decode($_GET['filter'], true) : array()), (isset($_GET['options']) ? json_decode($_GET['options'], true) : array()));
 		}
 	} else {
 		response_status(false, "`{$routes[0]}` endpoint not found");
