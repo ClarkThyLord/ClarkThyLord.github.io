@@ -58,6 +58,13 @@
 					</div>
 
 					<div style="min-height: 300px;" class="w-100 d-flex-column-sm d-flex-md">
+						<div v-if="GLOBALS.works.length === 0" class="w-100 d-inline-flex flex-justify-center d-flex flex-column">
+							<figure>
+								<img src="./css/icons/potential.svg" style="margin: auto; width: 100px;" class="ani-pulse" />
+								<figcaption class="text-center">Loading...</figcaption>
+							</figure>
+						</div>
+
 						<div v-for="work in GLOBALS.works" class="m-2 card image-header selectable">
 							<div class="card-header text-cap fg-white" :style="{'background-image': 'url(' + work.url + ')'}">
 								{{ work.name }}
@@ -94,6 +101,13 @@
 					</div>
 
 					<div style="min-height: 300px;" class="w-100 d-flex-column-sm d-flex-md">
+						<div v-if="GLOBALS.projects.length === 0" class="w-100 d-inline-flex flex-justify-center d-flex flex-column">
+							<figure>
+								<img src="./css/icons/potential.svg" style="margin: auto; width: 100px;" class="ani-pulse" />
+								<figcaption class="text-center">Loading...</figcaption>
+							</figure>
+						</div>
+
 						<div v-for="item in GLOBALS.projects" class="m-2 card image-header selectable">
 							<div class="card-header fg-white" style="background-image: url();">
 								NAME
