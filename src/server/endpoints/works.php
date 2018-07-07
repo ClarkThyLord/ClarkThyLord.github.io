@@ -7,17 +7,35 @@
 	* @return {Array} Returns a Array containing valid work(s) found.
 	*/
 	function works_get($filter=array(), $options=array()) {
+		if (!isset($filter['type'])) {
+			response_send(false, 'works filter `type` not given');
+		}
+
 		$GLOBALS['response']['data']['works'] = array();
 
-		if ($handle = opendir('../works/')) {
+		// List all work(s) within valid filter
+		if ($handle = opendir("../works/{$filter["type"]}/")) {
 			while (false !== ($entry = readdir($handle))) {
 			  if ($entry != '.' && $entry != '..') {
-					array_push($GLOBALS['response']['data']['works'], array('name' => preg_replace('/\\.[^.\\s]{3,4}$/', '', $entry), 'extension' => pathinfo("../works/{$entry}", PATHINFO_EXTENSION), 'modified' => date ("F d Y H:i:s", filemtime("../works/{$entry}")), 'url' => str_replace(' ', '%20', ('http://' . $_SERVER['SERVER_NAME'] . "/works/{$entry}"))));
+					array_push($GLOBALS['response']['data']['works'], array('name' => preg_replace('/\\.[^.\\s]{3,4}$/', '', $entry), 'extension' => pathinfo("../works/{$filter["type"]}/{$entry}", PATHINFO_EXTENSION), 'modified' => date ("F d Y H:i:s", filemtime("../works/{$filter["type"]}/{$entry}")), 'url' => str_replace(' ', '%20', ('http://' . $_SERVER['SERVER_NAME'] . "/works/{$filter["type"]}/{$entry}"))));
 			  }
 			}
 			closedir($handle);
 		}
 
+		// Sort data by ASCending or DEScending order
+		if (isset($options['sort'])) {
+			$GLOBALS['order'] = $options['sort'] === 'ASC' ? -1 : 1;
+			usort($GLOBALS['response']['data']['works'], function($file_1, $file_2) {
+        if ( $file_1['modified'] == $file_2['modified'] ) {
+					return 0;
+				}
+
+        return $GLOBALS['order'] * ($file_1['modified'] < $file_2['modified'] ? -1 : 1);
+	    });
+		}
+
+		// Limit returning data to max if given
 		if (isset($options['max'])) {
 			$GLOBALS['response']['data']['works'] = array_slice($GLOBALS['response']['data']['works'], 0, $options['max'], true);
 		}

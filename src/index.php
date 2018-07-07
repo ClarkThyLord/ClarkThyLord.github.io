@@ -33,7 +33,7 @@
 		<main class="pt-13">
 			<!-- CAROUSEL -->
 			<div data-role="carousel" data-auto-start="true" data-bullet-style="circle" data-effect="fade" data-period="3000" data-duration="500" style="max-height: 100%; background-color: rgba(0, 0, 0, 0);">
-				<div v-for="(url, name) in {'eye of potential': './works/Eye%20Of%20Potential.jpg', 'kingdom heart\'s sky': './works/Kingdom%20Hearts%20Sky.jpg', 'pierce the veil': './works/Pierce%20The%20Veil.jpg'}" class="slide h-100 p-10 fg-white d-flex flex-content-end flex-justify-center flex-wrap" :data-cover="url">
+				<div v-for="(url, name) in {'eye of potential': './works/images/Eye%20Of%20Potential.jpg', 'kingdom heart\'s sky': './works/images/Kingdom%20Hearts%20Sky.jpg', 'pierce the veil': './works/images/Pierce%20The%20Veil.jpg'}" class="slide h-100 p-10 fg-white d-flex flex-content-end flex-justify-center flex-wrap" :data-cover="url">
 					<span style="font-size: 3vw;" class="text-cap"> {{ name }} </span>
 				</div>
 			</div>

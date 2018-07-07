@@ -10,7 +10,6 @@
 			<a href="#" class="dropdown-toggle">Works</a>
 			<ul class="d-menu" data-role="dropdown">
 				<li><a href="#">Art</a></li>
-				<li><a href="#">Design</a></li>
 				<li><a href="#">Literature</a></li>
 				<li class="divider bg-lightGray"></li>
 				<li><a href="#">See more...</a></li>
