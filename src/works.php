@@ -38,11 +38,14 @@
 
 						<!-- RIGHT -->
 				    <div class="ml-auto mr-3">
-							<!-- TODO Sort -->
+							<button data-order="ascending" onclick="$('#images-content').children().each(function(i,li){$('#images-content').prepend(li)}); if ($(this).data('order') === 'ascending') { $(this).prop('title', 'Order by ascending').data('order', 'descending').children('.icon').removeClass('mif-sort-desc').addClass('mif-sort-asc'); } else { $(this).prop('title', 'Order by descending').data('order', 'ascending').children('.icon').removeClass('mif-sort-asc').addClass('mif-sort-desc'); }" title="Sort descending" class="mt-3 image-button">
+								<span class="icon mif-sort-desc"></span>
+								<span class="caption">Sort</span>
+							</button>
 						</div>
 					</div>
 
-					<div style="min-height: 300px;" class="w-100 d-flex-column-sm d-flex-md flex-wrap flex-justify-center">
+					<div style="min-height: 300px;" class="w-100 d-flex-column-sm d-flex-md flex-wrap flex-justify-center" id="images-content">
 						<div v-if="GLOBALS.images.length === 0" class="w-100 d-inline-flex flex-justify-center d-flex flex-column">
 							<figure>
 								<img src="./css/icons/potential.svg" style="margin: auto; width: 100px;" class="ani-pulse" />
