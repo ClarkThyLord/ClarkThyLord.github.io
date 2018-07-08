@@ -30,7 +30,7 @@
 			<div class="m-3">
 				<!-- Images -->
 				<div id="images">
-					<div class="mt-5 mb-3 d-flex flex-justify-start border-bottom border-size-3 bd-lightGray">
+					<div class="mt-5 mb-3 d-inline-sm d-flex-md flex-justify-start border-bottom border-size-3 bd-lightGray">
 						<!-- LEFT -->
 						<div class="ml-3">
 							<h1>Images</h1>
@@ -38,10 +38,17 @@
 
 						<!-- RIGHT -->
 				    <div class="ml-auto mr-3">
-							<button data-order="ascending" onclick="$('#images-content').children().each(function(i,li){$('#images-content').prepend(li)}); if ($(this).data('order') === 'ascending') { $(this).prop('title', 'Order by ascending').data('order', 'descending').children('.icon').removeClass('mif-sort-desc').addClass('mif-sort-asc'); } else { $(this).prop('title', 'Order by descending').data('order', 'ascending').children('.icon').removeClass('mif-sort-asc').addClass('mif-sort-desc'); }" title="Sort descending" class="mt-3 image-button">
-								<span class="icon mif-sort-desc"></span>
-								<span class="caption">Sort</span>
-							</button>
+							<ul class="mt-5 pagination no-gap">
+						    <li class="page-item">
+									<input type="text" oninput="var search_term = this.value.toLowerCase(); if (search_term !== '') { $('#images-content').children().each(function(i, li){ if ($(li).children('.card-header').html().toLowerCase().indexOf(search_term) !== -1) { $(li).show(); } else { $(li).hide(); } }); } else { $('#images-content').children().show(); }" placeholder="Search..." />
+								</li>
+						    <li class="page-item">
+									<button data-order="ascending" onclick="$('#images-content').children().each(function(i, li){ $('#images-content').prepend(li) }); if ($(this).data('order') === 'ascending') { $(this).prop('title', 'Order by ascending').data('order', 'descending').children('.icon').removeClass('mif-sort-desc').addClass('mif-sort-asc'); } else { $(this).prop('title', 'Order by descending').data('order', 'ascending').children('.icon').removeClass('mif-sort-asc').addClass('mif-sort-desc'); }" title="Sort descending" class="image-button">
+										<span class="icon mif-sort-desc"></span>
+										<span class="caption">Sort</span>
+									</button>
+								</li>
+							</ul>
 						</div>
 					</div>
 
@@ -73,7 +80,7 @@
 
 				<!-- Literature -->
 				<div id="literature">
-					<div class="mt-5 mb-3 d-flex flex-justify-start border-bottom border-size-3 bd-lightGray">
+					<div class="mt-5 mb-3 d-inline-sm d-flex-md flex-justify-start border-bottom border-size-3 bd-lightGray">
 						<!-- LEFT -->
 						<div class="ml-3">
 							<h1>Literature</h1>
@@ -81,10 +88,17 @@
 
 						<!-- RIGHT -->
 				    <div class="ml-auto mr-3">
-							<button data-order="ascending" onclick="$('#literature-content').children().each(function(i,li){$('#literature-content').prepend(li)}); if ($(this).data('order') === 'ascending') { $(this).prop('title', 'Order by ascending').data('order', 'descending').children('.icon').removeClass('mif-sort-desc').addClass('mif-sort-asc'); } else { $(this).prop('title', 'Order by descending').data('order', 'ascending').children('.icon').removeClass('mif-sort-asc').addClass('mif-sort-desc'); }" title="Sort descending" class="mt-3 image-button">
-								<span class="icon mif-sort-desc"></span>
-								<span class="caption">Sort</span>
-							</button>
+							<ul class="mt-5 pagination no-gap">
+						    <li class="page-item">
+									<input type="text" oninput="var search_term = this.value.toLowerCase(); if (search_term !== '') { $('#literature-content').children().each(function(i, li){ if ($(li).children('.card-header').html().toLowerCase().indexOf(search_term) !== -1) { $(li).show(); } else { $(li).hide(); } }); } else { $('#literature-content').children().show(); }" placeholder="Search..." />
+								</li>
+						    <li class="page-item">
+									<button data-order="ascending" onclick="$('#literature-content').children().each(function(i, li){ $('#literature-content').prepend(li) }); if ($(this).data('order') === 'ascending') { $(this).prop('title', 'Order by ascending').data('order', 'descending').children('.icon').removeClass('mif-sort-desc').addClass('mif-sort-asc'); } else { $(this).prop('title', 'Order by descending').data('order', 'ascending').children('.icon').removeClass('mif-sort-asc').addClass('mif-sort-desc'); }" title="Sort descending" class="image-button">
+										<span class="icon mif-sort-desc"></span>
+										<span class="caption">Sort</span>
+									</button>
+								</li>
+							</ul>
 						</div>
 					</div>
 
