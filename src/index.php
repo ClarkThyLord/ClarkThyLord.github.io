@@ -45,7 +45,7 @@
 
 						<!-- RIGHT -->
 				    <div class="ml-auto mr-3">
-							<button onclick="" title="View all" class="mt-3 image-button">
+							<button onclick="window.location.href = 'works.php';" title="View all" class="mt-3 image-button">
 								<span class="icon mif-plus"></span>
 								<span class="caption">View all</span>
 							</button>
