@@ -81,11 +81,14 @@
 
 						<!-- RIGHT -->
 				    <div class="ml-auto mr-3">
-							<!-- TODO Sort -->
+							<button data-order="ascending" onclick="$('#literature-content').children().each(function(i,li){$('#literature-content').prepend(li)}); if ($(this).data('order') === 'ascending') { $(this).prop('title', 'Order by ascending').data('order', 'descending').children('.icon').removeClass('mif-sort-desc').addClass('mif-sort-asc'); } else { $(this).prop('title', 'Order by descending').data('order', 'ascending').children('.icon').removeClass('mif-sort-asc').addClass('mif-sort-desc'); }" title="Sort descending" class="mt-3 image-button">
+								<span class="icon mif-sort-desc"></span>
+								<span class="caption">Sort</span>
+							</button>
 						</div>
 					</div>
 
-					<div style="min-height: 300px;" class="w-100 d-flex-column-sm d-flex-md">
+					<div style="min-height: 300px;" class="w-100 d-flex-column-sm d-flex-md flex-wrap flex-justify-center" id="literature-content">
 						<div v-if="GLOBALS.literature.length === 0" class="w-100 d-inline-flex flex-justify-center d-flex flex-column">
 							<figure>
 								<img src="./css/icons/potential.svg" style="margin: auto; width: 100px;" class="ani-pulse" />
@@ -93,10 +96,11 @@
 							</figure>
 						</div>
 
-						<div v-for="work in GLOBALS.literature" class="m-2 card image-header selectable">
-							<div class="card-header text-cap fg-white" :style="{'background-image': 'url(' + work.url + ')'}">
+						<div v-for="work in GLOBALS.literature" style="min-width: 247px; max-width: 359.8px;" class="m-2 card selectable">
+							<div class="card-header text-cap text-center fg-white">
 								{{ work.name }}
 							</div>
+							<iframe :src="work.url" style="min-height: 440px;" class="w-100 card-content"></iframe>
 							<div class="card-content p-2">
 								<p class="fg-gray">{{ work.modified }}</p>
 								Created with love! 💖
