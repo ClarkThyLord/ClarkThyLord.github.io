@@ -19,7 +19,7 @@
 			<a href="#">Projects</a>
 		</li>
 		<li>
-			<a href="#">WS-potential</a>
+			<a href="content/projects/WS-potential/src/">WS-potential</a>
 		</li>
 	</ul>
 
