@@ -14,10 +14,10 @@
 		$GLOBALS['response']['data']['works'] = array();
 
 		// List all work(s) within valid filter
-		if ($handle = opendir("../works/{$filter["type"]}/")) {
+		if ($handle = opendir("../content/works/{$filter["type"]}/")) {
 			while (false !== ($entry = readdir($handle))) {
 			  if ($entry != '.' && $entry != '..') {
-					array_push($GLOBALS['response']['data']['works'], array('name' => preg_replace('/\\.[^.\\s]{3,4}$/', '', $entry), 'extension' => pathinfo("../works/{$filter["type"]}/{$entry}", PATHINFO_EXTENSION), 'modified' => date ("F d Y H:i:s", filemtime("../works/{$filter["type"]}/{$entry}")), 'url' => str_replace(' ', '%20', ('http://' . $_SERVER['SERVER_NAME'] . "/works/{$filter["type"]}/{$entry}"))));
+					array_push($GLOBALS['response']['data']['works'], array('name' => preg_replace('/\\.[^.\\s]{3,4}$/', '', $entry), 'extension' => pathinfo("../content/works/{$filter["type"]}/{$entry}", PATHINFO_EXTENSION), 'modified' => date ("F d Y H:i:s", filemtime("../content/works/{$filter["type"]}/{$entry}")), 'url' => str_replace(' ', '%20', ('http://' . $_SERVER['SERVER_NAME'] . "/content/works/{$filter["type"]}/{$entry}"))));
 			  }
 			}
 			closedir($handle);

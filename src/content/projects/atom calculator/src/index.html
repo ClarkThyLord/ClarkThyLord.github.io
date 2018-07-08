@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+	<link rel="icon" href="./assets/icon.png">
+
+	<title>Atom Calculator</title>
+
+	<!-- Meta -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- Load CSS files -->
+	<link rel="stylesheet" type="text/css" href="./css/index.css">
+
+	<!-- Load JS Files -->
+	<script src="./js/index.js"></script>
+	<script src="./js/lib/DragDropTouch.js"></script>
+	<script src="./js/lib/jquery-3.2.1.min.js"></script>
+	<script src="./js/lib/preloadjs.min.js"></script>
+	<script src="./js/lib/easeljs.min.js"></script>
+	<script src="./js/lib/tweenjs.min.js"></script>
+	<script src="./js/lib/soundjs.min.js"></script>
+
+</head>
+
+<body onload="init();">
+
+	<div class="title_space">
+		Atom Calculator
+	</div>
+
+	<!-- Canvas -->
+	<div class="canvas_space">
+		<canvas id="main_canvas" width="800" height="600"></canvas>
+	</div>
+
+	<!-- Control panel -->
+	<form class="control_panel" id="control_panel">
+
+		<input type="button" value="Create Atom" onclick="new newAtom();" />
+
+		<br />
+
+		<label>
+      All Atoms:
+      <select name="atoms_all">
+      </select>
+    </label>
+		<label>
+      Selected Atoms:
+      <select name="atoms_selected">
+        <option>
+          None
+        </option>
+      </select>
+    </label>
+
+		<br />
+
+		<div style="font-size: 24px;" name="atom_title">
+			Atom 1
+		</div>
+
+		<label> Charge:
+      <select name="atom_charge" />
+        <option value="=">
+          neutral (=)
+        </option>
+        <option value="+">
+          positive (+)
+        </option>
+        <option value="-">
+          negative (-)
+        </option>
+      </select>
+    </label>
+		<label> Magnitude:
+      <input type="number" step="1" min="0" placeholder="0" name="atom_magnitude" />
+    </label>
+		<label> Color:
+      <input type="color" onchange="var value = this.value.match(/[A-Za-z0-9]{2}/g); value = value.map(function(v) { return parseInt(v, 16) });" name="atom_color" />
+    </label> |
+		<input type="button" value="Duplicate" name="atom_duplicate" />
+		<input type="button" value="Delete" name="atom_delete" />
+
+		<br />
+	</form>
+
+	<hr />
+
+	<!-- Config panel -->
+	<form class="config_panel" id="config_panel">
+		<label name="session_current">
+      Session:
+      <select>
+        <option value="temporary">
+          temporary
+        </option>
+      </select>
+    </label> |
+		<input type="text" placeholder="session name..." value="temporary" onchange="session_rename.value = this.value;" name="session_name" />
+		<input type="button" value="Rename" name="session_rename" />
+		<input type="button" value="Duplicate" name="session_duplicate" />
+		<input type="button" value="Delete" name="session_delete" />
+
+		<br />
+
+		<label>
+      Custom Colors:
+      <input type="checkbox" onchange="config.custom_colors = !config.custom_colors; save();" name="custom_colors" />
+    </label>
+		<label>
+      Show Text:
+      <input type="checkbox" placeholder="" onchange="config.show_text = !config.show_text; save();" name="show_text" />
+    </label>
+		<label>
+      Text Color:
+      <input type="color" onchange="var value = this.value.match(/[A-Za-z0-9]{2}/g); value = value.map(function(v) { return parseInt(v, 16) }); config.text_color = stringRGB(value); save();" name="text_color" />
+    </label>
+		<label>
+      Show Magnitudes:
+      <input type="checkbox" onchange="config.show_magnitudes = !config.show_magnitudes; save();" name="show_magnitudes" />
+    </label>
+		<label>
+      Show Alpha:
+      <input type="number" placeholder="0.25" step="0.01" min="0" max="1" onchange="config.magnitude_alpha = this.value; save();" name="magnitude_alpha" />
+    </label>
+	</form>
+</body>
+
+</html>
