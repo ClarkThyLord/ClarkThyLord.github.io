@@ -10,4 +10,12 @@ $(function() {
       alert(response.reason);
     }
   });
+
+  $.getJSON('http://www-potential/server/api.php/projects?options={"max":5,"sort":"ASC"}', function(response) {
+    if (response.success) {
+      GLOBALS.projects = response.data.projects;
+    } else {
+      alert(response.reason);
+    }
+  });
 });
