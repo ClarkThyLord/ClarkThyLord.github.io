@@ -19,7 +19,7 @@
 	// ***************************************************************************
 
 	// Get the base URL and remove it from the request URL
-	$url = substr($_SERVER['REQUEST_URI'], strlen(implode('/', array_slice(explode('/', 'server.php'), 0, -1)) . '/'));
+	$url = substr($_SERVER['REQUEST_URI'], strlen(implode('/', array_slice(explode('/', 'api.php'), 0, -1)) . '/'));
 	// Remove query elements and excess /
 	if (strstr($url, '?')) $url = substr($url, 0, strpos($url, '?'));
 	$url = '/' . trim($url, '/');
