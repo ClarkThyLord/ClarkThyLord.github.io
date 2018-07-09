@@ -25,9 +25,9 @@
 
 		// Sort data by ASCending or DEScending order
 		if (isset($options['sort'])) {
-			$GLOBALS['order'] = $options['sort'] === 'DES' ? -1 : 1;
+			$GLOBALS['order'] = ($options['sort'] === 'DES' ? -1 : 1);
 			usort($GLOBALS['response']['data']['works'], function($file_1, $file_2) {
-        if ( $file_1['modified'] == $file_2['modified'] ) {
+        if ($file_1['modified'] === $file_2['modified']) {
 					return 0;
 				}
 
