@@ -61,7 +61,7 @@
 						</div>
 
 						<div v-for="project in GLOBALS.projects" style="min-width: 247px; max-width: 359.8px;" class="m-2 card image-header selectable">
-							<div class="card-header text-cap fg-white" :style="{'background-image': 'url(' + project.img_url + ')'}">
+							<div class="card-header text-cap fg-white" :style="{'background-image': 'url(http://www-potential/content/projects/' + project.name.replace(' ', '%20') + '/project.jpg)'}">
 								{{ project.name }}
 							</div>
 							<div style="min-height: 80px;" class="card-content p-2">

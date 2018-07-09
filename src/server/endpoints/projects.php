@@ -13,7 +13,7 @@
 		if ($handle = opendir("../content/projects/")) {
 			while (false !== ($entry = readdir($handle))) {
 			  if ($entry != '.' && $entry != '..') {
-					array_push($GLOBALS['response']['data']['projects'], array('name' => $entry, 'modified' => date("F d Y H:i:s", filemtime("../content/projects/{$entry}/project.json")), 'img_url' => 'http://www-potential/content/projects/' . str_replace(' ', '%20', $entry) . '/project.jpg', 'data' => json_decode(file_get_contents("../content/projects/{$entry}/project.json"), true)));
+					array_push($GLOBALS['response']['data']['projects'], array('name' => $entry, 'modified' => date("F d Y H:i:s", filemtime("../content/projects/{$entry}/project.json")), 'data' => json_decode(file_get_contents("../content/projects/{$entry}/project.json"), true)));
 			  }
 			}
 			closedir($handle);
