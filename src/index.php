@@ -27,7 +27,7 @@
 		<!-- Master Content -->
 		<main class="pt-13">
 			<!-- CAROUSEL -->
-			<div data-role="carousel" data-auto-start="true" data-bullet-style="circle" data-effect="fade" data-period="3000" data-duration="500" style="max-height: 100%; background-color: rgba(0, 0, 0, 0);">
+			<div data-role="carousel" data-auto-start="true" data-control-next="<span class='mif-arrow-right'></span>" data-control-prev="<span class='mif-arrow-left'></span>" data-bullet-style="circle" data-effect="fade" data-period="3000" data-duration="500" style="max-height: 100%; background-color: rgba(0, 0, 0, 0);">
 				<div v-for="(url, name) in {'eye of potential': './content/works/images/eye%20of%20potential.jpg', 'kingdom hearts sky': './content/works/images/kingdom%20hearts%20sky.jpg', 'pierce the veil': './content/works/images/pierce%20the%20veil.jpg'}" class="slide h-100 p-10 fg-white d-flex flex-content-end flex-justify-center flex-wrap" :data-cover="url">
 					<span style="font-size: 3vw;" class="text-cap"> {{ name }} </span>
 				</div>
