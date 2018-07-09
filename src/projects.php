@@ -69,7 +69,7 @@
 								{{ project.data.description }}
 							</div>
 							<div class="card-footer">
-								<button v-if="project.data.preview" @click="window.location.href = '/content/projects/' + project.name + '/src/';" title="View" class="mt-2 image-button">
+								<button v-if="project.data.preview" @click="window.location.href = '/content/projects/' + project.name.replace(' ', '%20') + '/src/';" title="View" class="mt-2 image-button">
 									<span class="icon mif-eye"></span>
 									<span class="caption">Preview</span>
 								</button>
