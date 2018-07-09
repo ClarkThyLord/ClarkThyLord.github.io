@@ -17,7 +17,7 @@
 		if ($handle = opendir("../content/works/{$filter["type"]}/")) {
 			while (false !== ($entry = readdir($handle))) {
 			  if ($entry != '.' && $entry != '..') {
-					array_push($GLOBALS['response']['data']['works'], array('name' => preg_replace('/\\.[^.\\s]{3,4}$/', '', $entry), 'modified' => date ("F d Y H:i:s", filemtime("../content/works/{$filter["type"]}/{$entry}")), 'url' => str_replace(' ', '%20', ('http://' . $_SERVER['SERVER_NAME'] . "/content/works/{$filter["type"]}/{$entry}"))));
+					array_push($GLOBALS['response']['data']['works'], array('name' => preg_replace('/\\.[^.\\s]{3,4}$/', '', $entry), 'modified' => date ("F d Y H:i:s", filemtime("../content/works/{$filter["type"]}/{$entry}")), 'url' => str_replace(' ', '%20', ("/content/works/{$filter["type"]}/{$entry}"))));
 			  }
 			}
 			closedir($handle);
@@ -25,7 +25,7 @@
 
 		// Sort data by ASCending or DEScending order
 		if (isset($options['sort'])) {
-			$GLOBALS['order'] = ($options['sort'] === 'DES' ? -1 : 1);
+			$GLOBALS['order'] = ($options['sort'] === 'DES' ? 1 : -1);
 			usort($GLOBALS['response']['data']['works'], function($file_1, $file_2) {
         if ($file_1['modified'] === $file_2['modified']) {
 					return 0;

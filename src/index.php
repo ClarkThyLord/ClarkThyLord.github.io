@@ -104,7 +104,7 @@
 						</div>
 
 						<div v-for="project in GLOBALS.projects" style="min-width: 247px; max-width: 359.8px;" class="m-2 card image-header selectable">
-							<div class="card-header text-cap fg-white" :style="{'background-image': 'url(http://www-potential/content/projects/' + project.name.replace(' ', '%20') + '/project.jpg)'}">
+							<div class="card-header text-cap fg-white" :style="{'background-image': 'url(/content/projects/' + project.name.replace(' ', '%20') + '/project.jpg)'}">
 								{{ project.name }}
 							</div>
 							<div style="min-height: 80px;" class="card-content p-2">
@@ -112,7 +112,7 @@
 								{{ project.data.description }}
 							</div>
 							<div class="card-footer">
-								<button v-if="project.data.preview" @click="window.location.href = 'http://www-potential/content/projects/' + project.name + '/src/';" title="View" class="mt-2 image-button">
+								<button v-if="project.data.preview" @click="window.location.href = '/content/projects/' + project.name + '/src/';" title="View" class="mt-2 image-button">
 									<span class="icon mif-eye"></span>
 									<span class="caption">Preview</span>
 								</button>
