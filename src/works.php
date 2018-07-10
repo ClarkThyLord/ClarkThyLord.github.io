@@ -114,7 +114,7 @@
 							<div class="card-header text-cap text-center fg-white">
 								{{ work.name }}
 							</div>
-							<iframe :src="work.url" style="min-height: 440px;" class="w-100 card-content"></iframe>
+							<embed :src="work.url" style="min-height: 440px;" class="w-100 card-content"></embed>
 							<div class="card-content p-2">
 								<p class="fg-gray">{{ work.modified }}</p>
 								Created with love! 💖
