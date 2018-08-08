@@ -10,10 +10,6 @@ You'll find just about everything I've created on my website; art, literature an
 
 You'll find multiple sub-projects under this repository:
 
-## [GUI-potential](https://github.com/ClarkThyLord/WWW-potential/issues/4)
-
-> GUI library
-
 ## [Interactive Tree](https://github.com/ClarkThyLord/WWW-potential/issues/1)
 
 > Interactive Tree, a HTML widget built with pure JS.
