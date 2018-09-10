@@ -110,16 +110,13 @@
 							</figure>
 						</div>
 
-						<div v-for="work in GLOBALS.literature" style="min-width: 247px; max-width: 359.8px;" class="m-2 card selectable">
+						<div v-for="work in GLOBALS.literature" style="min-width: 247px; max-width: 359.8px; max-height: 150px;" class="m-2 card selectable">
 							<div class="card-header text-cap text-center fg-white">
 								{{ work.name }}
 							</div>
-							<embed :src="work.url" style="min-height: 440px;" class="w-100 card-content"></embed>
 							<div class="card-content p-2">
 								<p class="fg-gray">{{ work.modified }}</p>
-								Created with love! 💖
-							</div>
-							<div class="card-footer">
+
 								<button @click="window.location.href = work.url;" title="View" class="mt-2 image-button">
 									<span class="icon mif-eye"></span>
 									<span class="caption">View</span>
