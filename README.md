@@ -24,17 +24,16 @@
 # Project Setup
 
 ## Setup Dependencies
-```shell
+```
 $ bundle install
-$ npm install
 ```
 
 ## Serve
-```shell
+```
 $ bundle exec jekyll serve
 ```
 
 ## Build
-```shell
+```
 $ bundle exec jekyll build
 ```
