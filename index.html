@@ -14,7 +14,7 @@ title: "Home"
                 <ul class="uk-navbar-nav">
                     <li class="uk-active"><a href="/">Home</a></li>
                     <li><a href="/projects">Projects</a></li>
-                    <li><a href="/works">Works</a></li>
+                    <li><a href="/other">Other</a></li>
                     <li><a href="/about">About</a></li>
                 </ul>
             </div>
@@ -36,7 +36,7 @@ title: "Home"
             scene.fog = new THREE.Fog(
                 new THREE.Color('black'),
                 0.1,
-                7.5
+                10
             );
 
             var camera = new THREE.PerspectiveCamera(
@@ -45,6 +45,7 @@ title: "Home"
                 0.1,
                 1000
             );
+            camera.position.y = -8;
             camera.position.z = 2.5;
 
             var renderer = new THREE.WebGLRenderer({
@@ -54,12 +55,14 @@ title: "Home"
             renderer.setSize(window.innerWidth, window.innerHeight);
 
             var terrain = new THREE.Mesh(
-                new THREE.PlaneGeometry(16, 16, 32, 32),
+                new THREE.CylinderGeometry(15, 5, 20, 32, 32),
                 new THREE.MeshBasicMaterial({
                     wireframe: true,
                     color: new THREE.Color('white')
                 })
             );
+            for (var v = 0; v < terrain.geometry.vertices.length; v++)
+                terrain.geometry.vertices[v]._z = terrain.geometry.vertices[v].z;
             terrain.rotation.x = 90;
             scene.add(terrain);
 
@@ -77,10 +80,11 @@ title: "Home"
                 requestAnimationFrame(animate);
 
                 for (var v = 0; v < terrain.geometry.vertices.length; v++) {
-                    terrain.geometry.vertices[v].z = Math.cos(noise.simplex2(
-                        v % 32 + step,
-                        v / 32 + step
-                    ));
+                    var increment = noise.simplex2(
+                        (terrain.geometry.vertices[v].x + step),
+                        (terrain.geometry.vertices[v].y + step)
+                    );
+                    terrain.geometry.vertices[v].z = terrain.geometry.vertices[v]._z + increment;
                 }
                 terrain.geometry.verticesNeedUpdate = true;
                 step += 0.01;
