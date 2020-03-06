@@ -2,10 +2,15 @@
     <div>
         <h3>More</h3>
         <dl class="uk-description-list">
+            {% if site.github_rep %}
             <dt>Source</dt>
-            <dd>Github</dd>
-            <dt>Secret</dt>
-            <dd>What's the secret?</dd>
+            <dd>
+                <a href="{{ site.github_rep }}">
+                    <span uk-icon="github"></span>
+                    GitHub Repository
+                </a>
+            </dd>
+            {% endif %}
         </dl>
     </div>
     <div></div>
