@@ -1,0 +1,85 @@
+---
+layout: default
+title: "Home"
+---
+<div class="uk-position-relative">
+    <div class="uk-cover-container" uk-height-viewport>
+        <canvas id="background-canvas"></canvas>
+        <img src="/assets/imgs/temp.png" alt="" class="uk-hidden" uk-cover id="background-img">
+    </div>
+
+    <div class="uk-position-top">
+        <nav class="uk-navbar-container uk-navbar-transparent" uk-navbar>
+            <div class="uk-navbar-right">
+                <ul class="uk-navbar-nav">
+                    <li class="uk-active"><a href="/">Home</a></li>
+                    <li><a href="/projects">Projects</a></li>
+                    <li><a href="/works">Works</a></li>
+                    <li><a href="/about">About</a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+</div>
+
+<script src="/assets/js/three.js/three.min.js"></script>
+<script src="/assets/js/three.js/WebGL.js"></script>
+<script>
+    window.onload = () => {
+
+        if (THREE.WEBGL.isWebGLAvailable()) {
+
+            var scene = new THREE.Scene();
+            var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            var canvas = document.getElementById("background-canvas");
+
+            var renderer = new THREE.WebGLRenderer({
+                canvas: canvas,
+                antialias: true
+            });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+
+            var geometry = new THREE.BoxGeometry();
+            var material = new THREE.MeshBasicMaterial({
+                color: 0x00ff00
+            });
+            var cube = new THREE.Mesh(geometry, material);
+            scene.add(cube);
+
+            camera.position.z = 5;
+
+            window.addEventListener('resize', function () {
+
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+
+                renderer.setSize(window.innerWidth, window.innerHeight);
+
+            }, false);
+
+            var animate = function () {
+                requestAnimationFrame(animate);
+
+                cube.rotation.x += 0.01;
+                cube.rotation.y += 0.01;
+
+                renderer.render(scene, camera);
+            };
+
+            animate();
+
+        } else {
+
+            var warning = THREE.WEBGL.getWebGLErrorMessage();
+            document.getElementById("background-img").classList.remove("uk-hidden");
+            window.UIkit.notification({
+                status: 'danger',
+                pos: 'bottom-right',
+                message: "WEBGL Isn't Supported!"
+            })
+
+        }
+
+    }
+
+</script>

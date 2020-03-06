@@ -23,7 +23,7 @@
 
 # Project Setup
 
-## Setup Dependencies
+## Setup
 ```
 $ bundle install
 ```

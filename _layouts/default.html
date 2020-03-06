@@ -21,11 +21,11 @@
   <link rel="stylesheet" href="{{ "/assets/css/main.css" | relative_url }}">
 </head>
 
-<body>
+<body class="uk-light uk-background-secondary">
   {{ content}}
 
-  <script src="{{'/assets/js/uikit/uikit.min.js' | prepend: site.baseurl}}"></script>
-  <script src="{{'/assets/js/uikit/uikit-icons.min.js' | prepend: site.baseurl}}"></script>
+  <script src="{{ '/assets/js/uikit/uikit.min.js' | relative_url }}"></script>
+  <script src="{{ '/assets/js/uikit/uikit-icons.min.js' | relative_url }}"></script>
 </body>
 
 </html>
