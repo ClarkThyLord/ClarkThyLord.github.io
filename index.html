@@ -2,110 +2,20 @@
 layout: default
 title: "Home"
 ---
-<div class="uk-position-relative">
-    <div class="uk-cover-container" uk-height-viewport>
-        <canvas id="background-canvas"></canvas>
-        <img src="/assets/imgs/background.jpg" alt="" class="uk-hidden" uk-cover id="background-img">
+    <div class="uk-width-1-1 uk-height-1-1 uk-light uk-margin">
+        <div class="uk-position-center uk-text-center">
+            <img src="/assets/svgs/favicon.outline.svg" alt="" width="256">
+            <h1>Christian Cuevas</h1>
+            <h2>ClarkThyLord</h2>
+            <p>Just another programmer :v</p>
+        </div>
     </div>
-
-    <div class="uk-position-top">
-        <nav class="uk-navbar-container uk-navbar-transparent" uk-navbar>
-            <div class="uk-navbar-right">
-                <ul class="uk-navbar-nav">
-                    <li class="uk-active"><a href="/">Home</a></li>
-                    <li><a href="/projects">Projects</a></li>
-                    <li><a href="/other">Other</a></li>
-                    <li><a href="/about">About</a></li>
-                </ul>
+    <div class="uk-width-1-1 uk-height-1-1 uk-light uk-margin">
+        <div class="uk-height-large uk-background-cover uk-overflow-hidden uk-light uk-flex uk-flex-top"
+            style="background-image: url('images/dark.jpg');">
+            <div class="uk-width-1-2@m uk-text-center uk-margin-auto uk-margin-auto-vertical">
+                <h1 uk-parallax="opacity: 0,1; y: -100,0; scale: 2,1; viewport: 0.5;">My Content</h1>
+                <p uk-parallax="opacity: 0,1; y: 100,0; scale: 0.5,1; viewport: 0.5;">I have none :'v</p>
             </div>
-        </nav>
+        </div>
     </div>
-</div>
-
-<script src="/assets/js/libs/perlin.js"></script>
-<script src="/assets/js/libs/three.min.js"></script>
-<script src="/assets/js/libs/WebGL.js"></script>
-<script>
-    window.onload = () => {
-
-        if (THREE.WEBGL.isWebGLAvailable()) {
-
-            var step = 0.0;
-            noise.seed(Math.random());
-            var scene = new THREE.Scene();
-            scene.fog = new THREE.Fog(
-                new THREE.Color('black'),
-                0.1,
-                10
-            );
-
-            var camera = new THREE.PerspectiveCamera(
-                75,
-                window.innerWidth / window.innerHeight,
-                0.1,
-                1000
-            );
-            camera.position.y = -8;
-            camera.position.z = 2.5;
-
-            var renderer = new THREE.WebGLRenderer({
-                antialias: true,
-                canvas: document.getElementById("background-canvas")
-            });
-            renderer.setSize(window.innerWidth, window.innerHeight);
-
-            var terrain = new THREE.Mesh(
-                new THREE.CylinderGeometry(15, 5, 20, 32, 32),
-                new THREE.MeshBasicMaterial({
-                    wireframe: true,
-                    color: new THREE.Color('white')
-                })
-            );
-            for (var v = 0; v < terrain.geometry.vertices.length; v++)
-                terrain.geometry.vertices[v]._z = terrain.geometry.vertices[v].z;
-            terrain.rotation.x = 90;
-            scene.add(terrain);
-
-
-            window.addEventListener('resize', function () {
-
-                camera.aspect = window.innerWidth / window.innerHeight;
-                camera.updateProjectionMatrix();
-
-                renderer.setSize(window.innerWidth, window.innerHeight);
-
-            }, false);
-
-            var animate = function () {
-                requestAnimationFrame(animate);
-
-                for (var v = 0; v < terrain.geometry.vertices.length; v++) {
-                    var increment = noise.simplex2(
-                        (terrain.geometry.vertices[v].x + step),
-                        (terrain.geometry.vertices[v].y + step)
-                    );
-                    terrain.geometry.vertices[v].z = terrain.geometry.vertices[v]._z + increment;
-                }
-                terrain.geometry.verticesNeedUpdate = true;
-                step += 0.01;
-
-                renderer.render(scene, camera);
-            };
-
-            animate();
-
-        } else {
-
-            var warning = THREE.WEBGL.getWebGLErrorMessage();
-            document.getElementById("background-img").classList.remove("uk-hidden");
-            window.UIkit.notification({
-                status: 'danger',
-                pos: 'bottom-right',
-                message: "WEBGL Isn't Supported!"
-            });
-
-        }
-
-    }
-
-</script>
