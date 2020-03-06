@@ -1,4 +1,4 @@
-<div class="uk-padding uk-light uk-background-secondary uk-child-width-expand@m" uk-grid>
+<div class="uk-padding uk-margin-large-top uk-light uk-background-secondary uk-child-width-expand@m" uk-grid>
     <div>
         <h3>More</h3>
         <dl class="uk-description-list">
@@ -11,12 +11,86 @@
     <div></div>
     <div>
         <h3>Contact</h3>
-        <ul class="uk-iconnav">
-            <li><a href="#" uk-icon="icon: github"></a></li>
-            <li><a href="#" uk-icon="icon: reddit"></a></li>
-            <li><a href="#" uk-icon="icon: youtube"></a></li>
-            <li><a href="#" uk-icon="icon: twitter"></a></li>
-            <li><a href="#" uk-icon="icon: linkedin"></a></li>
-        </ul>
+
+        <div uk-grid>
+            <dl class="uk-description-list uk-margin-medium-right">
+                {% if site.github %}
+                <dt>GitHub</dt>
+                <dd>
+                    <a href="https://github.com/{{ site.github }}">
+                        <span uk-icon="github"></span>
+                        {{ site.github }}
+                    </a>
+                </dd>
+                {% endif %}
+                {% if site.youtube %}
+                <dt>YouTube</dt>
+                <dd>
+                    <a href="https://www.youtube.com/channel/{{ site.youtube_id }}">
+                        <span uk-icon="youtube"></span>
+                        {{ site.youtube }}
+                    </a>
+                </dd>
+                {% endif %}
+                {% if site.twitch %}
+                <dt>Twitch</dt>
+                <dd>
+                    <a href="https://www.twitch.tv/">
+                        <span class="uk-icon uk-icon-image"
+                            style="background-image: url(/assets/svgs/icons/Twitch-Logo-White.svg);"></span>
+                        {{ site.twitch }}
+                    </a>
+                </dd>
+                {% endif %}
+            </dl>
+            <dl class="uk-description-list uk-margin-remove">
+                {% if site.reddit %}
+                <dt>Reddit</dt>
+                <dd>
+                    <a href="https://www.reddit.com/user/{{ site.reddit }}">
+                        <span uk-icon="reddit"></span>
+                        {{ site.reddit }}
+                    </a>
+                </dd>
+                {% endif %}
+                {% if site.discord %}
+                <dt>Discord</dt>
+                <dd>
+                    <span class="uk-icon uk-icon-image"
+                        style="background-image: url(/assets/svgs/icons/Discord-Logo-White.svg);"></span>
+                    {{ site.discord }}
+                </dd>
+                {% endif %}
+                {% if site.twitter %}
+                <dt>Twitter</dt>
+                <dd>
+                    <a href="https://twitter.com/{{ site.twitter }}">
+                        <span uk-icon="twitter"></span>
+                        {{ site.twitter }}
+                    </a>
+                </dd>
+                {% endif %}
+            </dl>
+            <dl class="uk-description-list uk-margin-remove">
+                {% if site.linkedin %}
+                <dt>LinkedIn</dt>
+                <dd>
+                    <a href="https://www.linkedin.com/in/{{ site.linkedin }}">
+                        <span uk-icon="linkedin"></span>
+                        {{ site.linkedin }}
+                    </a>
+                </dd>
+                {% endif %}
+                {% if site.mail %}
+                <dt>Mail</dt>
+                <dd>
+                    <a href="mailto:{{ site.mail }}" target="_top">
+                        <span uk-icon="mail"></span>
+                        {{ site.mail }}
+                    </a>
+                </dd>
+                {% endif %}
+            </dl>
+        </div>
     </div>
 </div>

@@ -2,10 +2,10 @@
     <nav class="uk-navbar-container uk-navbar-transparent" uk-navbar uk-sticky>
         <div class="uk-navbar-right">
             <ul class="uk-navbar-nav">
-                <li class="uk-active"><a href="/">Home</a></li>
-                <li><a href="/projects">Projects</a></li>
-                <li><a href="/other">Other</a></li>
-                <li><a href="/about">About</a></li>
+                <li class="{% if page.title == 'Home' %}uk-active{% endif %}"><a href="/">Home</a></li>
+                <li class="{% if page.title == 'Projects' %}uk-active{% endif %}"><a href="/projects.html">Projects</a></li>
+                <li class="{% if page.title == 'Other' %}uk-active{% endif %}"><a href="/other.html">Other</a></li>
+                <li class="{% if page.title == 'About' %}uk-active{% endif %}"><a href="/about.html">About</a></li>
             </ul>
         </div>
     </nav>
