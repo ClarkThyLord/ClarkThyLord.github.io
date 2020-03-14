@@ -5,43 +5,88 @@ title: "Projects"
 
 <div style="min-height: 100%;" class="uk-margin uk-padding uk-light">
 
-    <h1 class="uk-margin-left uk-margin-right">Projects</h1>
+    <div class="uk-padding-small">
 
-    <hr />
+        <h1 class="uk-margin-left uk-margin-right">Personal Projects</h1>
 
-    <div class="uk-margin-left-small uk-grid-match" uk-grid>
+        <hr />
 
-        {% assign repositories = site.github.public_repositories | sort: 'pushed_at' | reverse %}
-        {% for repository in repositories %}
+        <div class="uk-margin-left-small uk-grid-match" uk-grid>
 
-        <div class="uk-width-1-5@m">
-            <div class="uk-padding-small uk-flex uk-flex-column uk-background-secondary uk-border-rounded">
+            {% assign repositories = site.github.public_repositories | sort: 'pushed_at' | reverse %}
+            {% for repository in repositories %}
+            {% if repository.fork != true %}
+            <div class="uk-width-1-5@m">
+                <div class="uk-padding-small uk-flex uk-flex-column uk-background-secondary uk-border-rounded">
 
-                <div class="uk-grid-small uk-flex-middle uk-text-truncate" uk-grid>
-                    <div class="uk-width-expand">
-                        <h3 class="uk-margin-remove-bottom"> {{ repository.name }} </h3>
-                        <p class="uk-text-meta uk-margin-remove-top">{{ repository.created_at }}</p>
+                    <div class="uk-grid-small uk-flex-middle uk-text-truncate" uk-grid>
+                        <div class="uk-width-expand">
+                            <h3 class="uk-margin-remove-bottom"> {{ repository.name }} </h3>
+                            <p class="uk-text-meta uk-margin-remove-top">{{ repository.created_at }}</p>
+                        </div>
                     </div>
-                </div>
 
-                <div class="uk-margin-top uk-margin-bottom uk-flex-1 uk-text-break">
-                    <p>{{ repository.description }}</p>
-                    {% for topic in repository.topics %}
-                    <span class="uk-badge">{{ topic }}</span>
-                    {% endfor %}
-                </div>
+                    <div class="uk-margin-top uk-margin-bottom uk-flex-1 uk-text-break">
+                        <p>{{ repository.description }}</p>
+                        {% for topic in repository.topics %}
+                        <span class="uk-badge">{{ topic }}</span>
+                        {% endfor %}
+                    </div>
 
-                <div>
-                    <a href="{{ repository.html_url }}" class="uk-button uk-button-text">
-                        <span uk-icon="github"></span>
-                        GitHub
-                    </a>
-                </div>
+                    <div>
+                        <a href="{{ repository.html_url }}" class="uk-button uk-button-text">
+                            <span uk-icon="github"></span>
+                            GitHub
+                        </a>
+                    </div>
 
+                </div>
             </div>
+            {% endif %}
+            {% endfor %}
         </div>
+    </div>
 
-        {% endfor %}
+    <div class="uk-padding-small">
+
+        <h1 class="uk-margin-left uk-margin-right">Contributed Projects</h1>
+
+        <hr />
+
+        <div class="uk-margin-left-small uk-grid-match" uk-grid>
+
+            {% assign repositories = site.github.public_repositories | sort: 'pushed_at' | reverse %}
+            {% for repository in repositories %}
+            {% if repository.fork != false %}
+            <div class="uk-width-1-5@m">
+                <div class="uk-padding-small uk-flex uk-flex-column uk-background-secondary uk-border-rounded">
+
+                    <div class="uk-grid-small uk-flex-middle uk-text-truncate" uk-grid>
+                        <div class="uk-width-expand">
+                            <h3 class="uk-margin-remove-bottom"> {{ repository.name }} </h3>
+                            <p class="uk-text-meta uk-margin-remove-top">{{ repository.created_at }}</p>
+                        </div>
+                    </div>
+
+                    <div class="uk-margin-top uk-margin-bottom uk-flex-1 uk-text-break">
+                        <p>{{ repository.description }}</p>
+                        {% for topic in repository.topics %}
+                        <span class="uk-badge">{{ topic }}</span>
+                        {% endfor %}
+                    </div>
+
+                    <div>
+                        <a href="{{ repository.html_url }}" class="uk-button uk-button-text">
+                            <span uk-icon="github"></span>
+                            GitHub
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
     </div>
 
 </div>
