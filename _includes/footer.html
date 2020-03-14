@@ -27,79 +27,79 @@
 
         <div uk-grid>
             <dl class="uk-description-list uk-margin-medium-right">
-                {% if site.github %}
+                {% if site.github_un %}
                 <dt>GitHub</dt>
                 <dd>
-                    <a href="https://github.com/{{ site.github }}">
+                    <a href="https://github.com/{{ site.github_un }}">
                         <span uk-icon="github"></span>
-                        {{ site.github }}
+                        {{ site.github_un }}
                     </a>
                 </dd>
                 {% endif %}
-                {% if site.youtube %}
+                {% if site.youtube_un %}
                 <dt>YouTube</dt>
                 <dd>
                     <a href="https://www.youtube.com/channel/{{ site.youtube_id }}">
                         <span uk-icon="youtube"></span>
-                        {{ site.youtube }}
+                        {{ site.youtube_un }}
                     </a>
                 </dd>
                 {% endif %}
-                {% if site.twitch %}
+                {% if site.twitch_un %}
                 <dt>Twitch</dt>
                 <dd>
-                    <a href="https://www.twitch.tv/{{ site.twitch }}">
+                    <a href="https://www.twitch.tv/{{ site.twitch_un }}">
                         <span class="uk-icon uk-icon-image"
                             style="background-image: url(/assets/svgs/icons/Twitch-Logo-White.svg);"></span>
-                        {{ site.twitch }}
+                        {{ site.twitch_un }}
                     </a>
                 </dd>
                 {% endif %}
             </dl>
             <dl class="uk-description-list uk-margin-remove">
-                {% if site.reddit %}
+                {% if site.reddit_un %}
                 <dt>Reddit</dt>
                 <dd>
-                    <a href="https://www.reddit.com/user/{{ site.reddit }}">
+                    <a href="https://www.reddit.com/user/{{ site.reddit_un }}">
                         <span uk-icon="reddit"></span>
-                        {{ site.reddit }}
+                        {{ site.reddit_un }}
                     </a>
                 </dd>
                 {% endif %}
-                {% if site.discord %}
+                {% if site.discord_un %}
                 <dt>Discord</dt>
                 <dd>
                     <span class="uk-icon uk-icon-image"
                         style="background-image: url(/assets/svgs/icons/Discord-Logo-White.svg);"></span>
-                    {{ site.discord }}
+                    {{ site.discord_un }}
                 </dd>
                 {% endif %}
-                {% if site.twitter %}
+                {% if site.twitter_un %}
                 <dt>Twitter</dt>
                 <dd>
-                    <a href="https://twitter.com/{{ site.twitter }}">
+                    <a href="https://twitter.com/{{ site.twitter_un }}">
                         <span uk-icon="twitter"></span>
-                        {{ site.twitter }}
+                        {{ site.twitter_un }}
                     </a>
                 </dd>
                 {% endif %}
             </dl>
             <dl class="uk-description-list uk-margin-remove">
-                {% if site.linkedin %}
+                {% if site.linkedin_un %}
                 <dt>LinkedIn</dt>
                 <dd>
-                    <a href="https://www.linkedin.com/in/{{ site.linkedin }}">
+                    <a href="https://www.linkedin.com/in/{{ site.linkedin_un }}">
                         <span uk-icon="linkedin"></span>
-                        {{ site.linkedin }}
+                        {{ site.linkedin_un }}
                     </a>
                 </dd>
                 {% endif %}
-                {% if site.mail %}
+                {% if site.mail_un %}
                 <dt>Mail</dt>
                 <dd>
-                    <a href="mailto:{{ site.mail }}" target="_top">
+                    <a href="mailto:{{ site.mail_un }}" target="_top">
                         <span uk-icon="mail"></span>
-                        {{ site.mail }}
+                        {{ site.mail_un }}
                     </a>
                 </dd>
                 {% endif %}

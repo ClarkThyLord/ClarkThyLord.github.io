@@ -4,16 +4,20 @@ title: "ClarkThyLord"
 
 github_rep: "https://github.com/ClarkThyLord/ClarkThyLord.github.io"
 
-twitter: "ClarkThyLord"
-github: "ClarkThyLord"
-youtube: "ClarkThyLord"
+twitter_un: "ClarkThyLord"
+github_un: "ClarkThyLord"
+youtube_un: "ClarkThyLord"
 youtube_id: "UCJuo4Y8b-YT46mHBLz7zt0g"
-reddit: "ClarkThyLord"
-linkedin: "ClarkThyLord"
-twitch: "ClarkThyLord"
-discord: "ClarkThyLord#7042"
-mail: "ccpotential@gmail.com"
+reddit_un: "ClarkThyLord"
+linkedin_un: "ClarkThyLord"
+twitch_un: "ClarkThyLord"
+discord_un: "ClarkThyLord#7042"
+mail_un: "ccpotential@gmail.com"
 
 
 exclude:
   - README.md
+
+
+plugins:
+  - "jekyll-github-metadata"
