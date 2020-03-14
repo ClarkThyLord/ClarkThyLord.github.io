@@ -3,30 +3,28 @@ layout: default
 title: "About"
 ---
 
-<div class="uk-light uk-margin uk-padding-large uk-margin-auto">
+<div style="min-height: 100%;" class="uk-light uk-flex">
 
-    <div class="uk-height-1-1 uk-child-width-expand@s" uk-grid>
+    <div class="uk-margin-auto uk-margin-auto-vertical uk-child-width-expand@s" uk-grid>
 
-        <div class="uk-text-center uk-margin-auto uk-margin-auto-vertical">
-
+        <div style="max-width: 400px;" class="uk-margin-auto uk-text-center">
             <img src="/assets/svgs/favicon.outline.svg" alt="" width="256">
             <h1>Christian Cuevas</h1>
             <h2>ClarkThyLord</h2>
             <p>Just another programmer :v</p>
-
         </div>
 
-        <article class="uk-margin-auto uk-margin-auto-vertical">
+        <article class="uk-margin-large-right uk-width-expand@m">
 
             <h1 class="uk-article-title">
                 About Me
             </h1>
 
-            <p class="uk-text-lead">
+            <p class="uk-text-lead uk-text-justify">
                 Hi, I’m Christian Cuevas, a Mexican-American full stack developer, I’ve been coding and honing my skills
                 since I was 12 years old, that’s over {{ site.time | date: '%Y' | minus: 2012 }} years of experience!
-                Throughout the years I’ve had various opportunities to work on both personal and group projects. While
-                I’ve mainly been focused on web and game development, I’ve also had the privilege to work on other
+                Throughout the years I’ve had various opportunities to work on both personal and group projects.
+                While I’ve mainly been focused on web and game development, I’ve also had the privilege to work on other
                 projects as I’m eager and happy to diversify my skill set.
             </p>
 
@@ -34,7 +32,7 @@ title: "About"
                 Skills
             </h1>
 
-            <div class="uk-padding" uk-grid>
+            <div class="uk-margin-right uk-margin-left">
                 {% for skill in site.data.skills %}
                 <span class="uk-badge">{{ skill }}</span>
                 {% endfor %}

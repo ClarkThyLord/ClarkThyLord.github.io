@@ -3,7 +3,7 @@ layout: default
 title: "Home"
 ---
 
-<div class="uk-width-1-1 uk-height-1-1 uk-light uk-margin">
+<div class="uk-width-1-1 uk-height-1-1 uk-light">
     <div class="uk-position-center uk-text-center">
         <img src="/assets/svgs/favicon.outline.svg" alt="" width="256">
         <h1>Christian Cuevas</h1>
@@ -19,14 +19,14 @@ title: "Home"
 
         <hr />
 
-        <div class="uk-child-width-1-5@s uk-grid-match" uk-grid>
+        <div class="uk-grid-match" uk-grid>
 
             {% assign repositories = site.github.public_repositories | sort: 'stargazers_count' | reverse %}
             {% for repository in repositories limit: 5 %}
             {% if repository.stargazers_count >= 3 %}
 
-            <div>
-                <div class="uk-padding-small uk-flex uk-flex-column uk-background-secondary uk-border-rounded">
+            <div class="uk-width-expand@m">
+                <div class="uk-padding-small uk-flex uk-flex-column uk-background-secondary uk-border-rounded uk-text-truncate">
 
                     <div class="uk-grid-small uk-flex-middle" uk-grid>
                         <div class="uk-width-expand">
@@ -64,13 +64,13 @@ title: "Home"
 
         <hr />
 
-        <div class="uk-child-width-1-5@s uk-grid-match" uk-grid>
+        <div class="uk-grid-match" uk-grid>
 
             {% assign repositories = site.github.public_repositories | sort: 'pushed_at' | reverse %}
             {% for repository in repositories limit: 5 %}
 
-            <div>
-                <div class="uk-padding-small uk-flex uk-flex-column uk-background-secondary uk-border-rounded">
+            <div class="uk-width-expand@m">
+                <div class="uk-padding-small uk-flex uk-flex-column uk-background-secondary uk-border-rounded uk-text-truncate">
 
                     <div class="uk-grid-small uk-flex-middle" uk-grid>
                         <div class="uk-width-expand">

@@ -19,9 +19,9 @@
 
 
   {% if page.title %}
-    <title>{{ site.title }} : {{ page.title }}</title>
+  <title>{{ site.title }} : {{ page.title }}</title>
   {% else %}
-    <title>{{ site.title }}</title>
+  <title>{{ site.title }}</title>
   {% endif%}
   <link rel="stylesheet" href="{{ "/assets/css/main.css" | relative_url }}">
 
@@ -36,10 +36,10 @@
     <img src="/assets/imgs/background.jpg" alt="" class="uk-hidden" uk-cover id="background-img">
   </div>
 
-  <div class="uk-position-absolute uk-width-1-1 uk-height-1-1">
-  {{ content}}
+  <div style="padding-top: 60px;" class="uk-position-absolute uk-width-1-1 uk-height-1-1">
+    {{ content}}
 
-  {% include footer.html %}
+    {% include footer.html %}
   </div>
 
   <script src="{{ '/assets/js/libs/uikit.min.js' | relative_url }}"></script>
