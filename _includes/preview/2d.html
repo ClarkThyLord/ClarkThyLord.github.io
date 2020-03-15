@@ -12,7 +12,9 @@
 
     <div class="uk-grid-small uk-flex-middle uk-text-truncate" uk-grid>
         <div class="uk-width-expand">
-            <h3 class="uk-margin-remove-bottom"> {{ include.name }} </h3>
+            <a href="{{ include.more_page }}">
+                <h3 class="uk-margin-remove-bottom"> {{ include.name }} </h3>
+            </a>
             <p class="uk-text-meta uk-margin-remove-top">{{ include.created_at | date: "%a, %b %d, %Y" }}</p>
         </div>
     </div>

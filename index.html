@@ -71,7 +71,7 @@ title: "Home"
 
     <div class="uk-padding-large">
 
-        <h1 class="uk-margin-left uk-margin-right">Recent Others</h1>
+        <h1 class="uk-margin-left uk-margin-right">Other Recent Work</h1>
 
         <hr />
 
@@ -85,6 +85,7 @@ title: "Home"
                 {% include preview/2d.html
                     name=other.title
                     created_at=other.created_at
+                    more_page=other.url
                     image=other.asset
                     tags=tags
                 %}
