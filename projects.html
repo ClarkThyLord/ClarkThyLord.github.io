@@ -17,30 +17,14 @@ title: "Projects"
             {% for repository in repositories %}
             {% if repository.fork != true %}
             <div class="uk-width-1-5@m">
-                <div class="uk-padding-small uk-flex uk-flex-column uk-background-secondary uk-border-rounded">
-
-                    <div class="uk-grid-small uk-flex-middle uk-text-truncate" uk-grid>
-                        <div class="uk-width-expand">
-                            <h3 class="uk-margin-remove-bottom"> {{ repository.name }} </h3>
-                            <p class="uk-text-meta uk-margin-remove-top">{{ repository.created_at | date: "%a, %b %d, %Y" }}</p>
-                        </div>
-                    </div>
-
-                    <div class="uk-margin-top uk-margin-bottom uk-flex-1 uk-text-break">
-                        <p>{{ repository.description }}</p>
-                        {% for topic in repository.topics %}
-                        <span class="uk-badge">{{ topic }}</span>
-                        {% endfor %}
-                    </div>
-
-                    <div>
-                        <a href="{{ repository.html_url }}" class="uk-button uk-button-text">
-                            <span uk-icon="github"></span>
-                            GitHub
-                        </a>
-                    </div>
-
-                </div>
+                {% include preview/project.html
+                    name=repository.name
+                    created_at=repository.created_at
+                    description=repository.description
+                    tags=repository.topics
+                    github=repository.html_url
+                    more_page=repository.homepage
+                %}
             </div>
             {% endif %}
             {% endfor %}
@@ -59,30 +43,14 @@ title: "Projects"
             {% for repository in repositories %}
             {% if repository.fork != false %}
             <div class="uk-width-1-5@m">
-                <div class="uk-padding-small uk-flex uk-flex-column uk-background-secondary uk-border-rounded">
-
-                    <div class="uk-grid-small uk-flex-middle uk-text-truncate" uk-grid>
-                        <div class="uk-width-expand">
-                            <h3 class="uk-margin-remove-bottom"> {{ repository.name }} </h3>
-                            <p class="uk-text-meta uk-margin-remove-top">{{ repository.created_at | date: "%a, %b %d, %Y" }}</p>
-                        </div>
-                    </div>
-
-                    <div class="uk-margin-top uk-margin-bottom uk-flex-1 uk-text-break">
-                        <p>{{ repository.description }}</p>
-                        {% for topic in repository.topics %}
-                        <span class="uk-badge">{{ topic }}</span>
-                        {% endfor %}
-                    </div>
-
-                    <div>
-                        <a href="{{ repository.html_url }}" class="uk-button uk-button-text">
-                            <span uk-icon="github"></span>
-                            GitHub
-                        </a>
-                    </div>
-
-                </div>
+                {% include preview/project.html
+                    name=repository.name
+                    created_at=repository.created_at
+                    description=repository.description
+                    tags=repository.topics
+                    github=repository.html_url
+                    more_page=repository.homepage
+                %}
             </div>
             {% endif %}
             {% endfor %}
