@@ -31,7 +31,7 @@ title: "Home"
                     <div class="uk-grid-small uk-flex-middle uk-text-truncate" uk-grid>
                         <div class="uk-width-expand">
                             <h3 class="uk-margin-remove-bottom"> {{ repository.name }} </h3>
-                            <p class="uk-text-meta uk-margin-remove-top">{{ repository.created_at }}</p>
+                            <p class="uk-text-meta uk-margin-remove-top">{{ repository.created_at | date: "%a, %b %d, %Y" }}</p>
                         </div>
                     </div>
 
@@ -75,7 +75,7 @@ title: "Home"
                     <div class="uk-grid-small uk-flex-middle uk-text-truncate" uk-grid>
                         <div class="uk-width-expand">
                             <h3 class="uk-margin-remove-bottom"> {{ repository.name }} </h3>
-                            <p class="uk-text-meta uk-margin-remove-top">{{ repository.created_at }}</p>
+                            <p class="uk-text-meta uk-margin-remove-top">{{ repository.created_at | date: "%a, %b %d, %Y" }}</p>
                         </div>
                     </div>
 
@@ -91,6 +91,48 @@ title: "Home"
                             <span uk-icon="github"></span>
                             GitHub
                         </a>
+                    </div>
+
+                </div>
+            </div>
+
+            {% endfor %}
+        </div>
+
+    </div>
+
+    <div class="uk-padding-large">
+
+        <h1 class="uk-margin-left uk-margin-right">Recent Others</h1>
+
+        <hr />
+
+        <div class="uk-grid-match" uk-grid>
+
+            {% assign others = site.categories["other"] | sort: 'date' | reverse %}
+            {% for other in others limit: 5 %}
+
+            <div class="uk-width-1-5@m">
+                <div class="uk-padding-small uk-flex uk-flex-column uk-background-secondary uk-border-rounded">
+
+                    <div class="uk-cover-container uk-height-small uk-border-rounded">
+                        <img src="{{ other.asset }}" alt="" uk-cover />
+                    </div>
+
+                    <hr />
+
+                    <div class="uk-grid-small uk-flex-middle uk-text-truncate" uk-grid>
+                        <div class="uk-width-expand">
+                            <h3 class="uk-margin-remove-bottom"> {{ other.title }} </h3>
+                            <p class="uk-text-meta uk-margin-remove-top">{{ other.date | date: "%a, %b %d, %Y" }}</p>
+                        </div>
+                    </div>
+                    
+
+                    <div class="uk-margin-top uk-margin-bottom uk-flex-1 uk-text-break">
+                        {% for categories in other.categories %}
+                        <span class="uk-badge">{{ categories }}</span>
+                        {% endfor %}
                     </div>
 
                 </div>

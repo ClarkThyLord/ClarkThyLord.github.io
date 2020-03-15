@@ -22,7 +22,7 @@ title: "Projects"
                     <div class="uk-grid-small uk-flex-middle uk-text-truncate" uk-grid>
                         <div class="uk-width-expand">
                             <h3 class="uk-margin-remove-bottom"> {{ repository.name }} </h3>
-                            <p class="uk-text-meta uk-margin-remove-top">{{ repository.created_at }}</p>
+                            <p class="uk-text-meta uk-margin-remove-top">{{ repository.created_at | date: "%a, %b %d, %Y" }}</p>
                         </div>
                     </div>
 
@@ -64,7 +64,7 @@ title: "Projects"
                     <div class="uk-grid-small uk-flex-middle uk-text-truncate" uk-grid>
                         <div class="uk-width-expand">
                             <h3 class="uk-margin-remove-bottom"> {{ repository.name }} </h3>
-                            <p class="uk-text-meta uk-margin-remove-top">{{ repository.created_at }}</p>
+                            <p class="uk-text-meta uk-margin-remove-top">{{ repository.created_at | date: "%a, %b %d, %Y" }}</p>
                         </div>
                     </div>
 
