@@ -1,0 +1,49 @@
+---
+layout: default
+title: "Other"
+---
+
+<div style="min-height: 100%;" class="uk-margin uk-padding uk-light">
+
+    <div class="uk-padding-small">
+
+        <div class="uk-grid-match" uk-grid>
+
+            {% assign others = site.categories["other"] | sort: 'date' | reverse %}
+            {% for other in others %}
+
+            <div class="uk-width-1-5@m">
+                <div class="uk-padding-small uk-flex uk-flex-column uk-background-secondary uk-border-rounded">
+
+                    <div class="uk-cover-container uk-height-small uk-border-rounded">
+                        <img src="{{ other.asset }}" alt="" uk-cover />
+                    </div>
+
+                    <hr />
+
+                    <div class="uk-grid-small uk-flex-middle uk-text-truncate" uk-grid>
+                        <div class="uk-width-expand">
+                            <h3 class="uk-margin-remove-bottom"> {{ other.title }} </h3>
+                            <p class="uk-text-meta uk-margin-remove-top">{{ other.date | date: "%a, %b %d, %Y" }}</p>
+                        </div>
+                    </div>
+
+
+                    <div class="uk-margin-top uk-margin-bottom uk-flex-1 uk-text-break">
+                        {% for categories in other.categories %}
+                        <span class="uk-badge">{{ categories }}</span>
+                        {% endfor %}
+                        {% for tag in other.tags %}
+                        <span class="uk-badge">{{ tag }}</span>
+                        {% endfor %}
+                    </div>
+
+                </div>
+            </div>
+
+            {% endfor %}
+        </div>
+
+    </div>
+
+</div>

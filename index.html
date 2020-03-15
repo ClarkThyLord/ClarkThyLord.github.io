@@ -31,7 +31,8 @@ title: "Home"
                     <div class="uk-grid-small uk-flex-middle uk-text-truncate" uk-grid>
                         <div class="uk-width-expand">
                             <h3 class="uk-margin-remove-bottom"> {{ repository.name }} </h3>
-                            <p class="uk-text-meta uk-margin-remove-top">{{ repository.created_at | date: "%a, %b %d, %Y" }}</p>
+                            <p class="uk-text-meta uk-margin-remove-top">
+                                {{ repository.created_at | date: "%a, %b %d, %Y" }}</p>
                         </div>
                     </div>
 
@@ -75,7 +76,8 @@ title: "Home"
                     <div class="uk-grid-small uk-flex-middle uk-text-truncate" uk-grid>
                         <div class="uk-width-expand">
                             <h3 class="uk-margin-remove-bottom"> {{ repository.name }} </h3>
-                            <p class="uk-text-meta uk-margin-remove-top">{{ repository.created_at | date: "%a, %b %d, %Y" }}</p>
+                            <p class="uk-text-meta uk-margin-remove-top">
+                                {{ repository.created_at | date: "%a, %b %d, %Y" }}</p>
                         </div>
                     </div>
 
@@ -127,11 +129,14 @@ title: "Home"
                             <p class="uk-text-meta uk-margin-remove-top">{{ other.date | date: "%a, %b %d, %Y" }}</p>
                         </div>
                     </div>
-                    
+
 
                     <div class="uk-margin-top uk-margin-bottom uk-flex-1 uk-text-break">
                         {% for categories in other.categories %}
                         <span class="uk-badge">{{ categories }}</span>
+                        {% endfor %}
+                        {% for tag in other.tags %}
+                        <span class="uk-badge">{{ tag }}</span>
                         {% endfor %}
                     </div>
 
