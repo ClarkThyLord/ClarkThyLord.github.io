@@ -1,0 +1,27 @@
+<div class="uk-padding-small uk-flex uk-flex-column uk-background-secondary uk-border-rounded">
+
+    <div class="uk-cover-container uk-height-small uk-border-rounded">
+        <div class="uk-transition-toggle" uk-lightbox>
+            <a href="{{ include.image }}" data-caption="{{ include.name }}">
+                <img src="{{ include.image }}" tabindex="0" class="uk-transition-scale-up uk-transition-opaque" />
+            </a>
+        </div>        
+    </div>
+
+    <hr />
+
+    <div class="uk-grid-small uk-flex-middle uk-text-truncate" uk-grid>
+        <div class="uk-width-expand">
+            <h3 class="uk-margin-remove-bottom"> {{ include.name }} </h3>
+            <p class="uk-text-meta uk-margin-remove-top">{{ include.created_at | date: "%a, %b %d, %Y" }}</p>
+        </div>
+    </div>
+
+
+    <div class="uk-margin-top uk-margin-bottom uk-flex-1 uk-text-break">
+        {% for tag in include.tags %}
+        <span class="uk-badge">{{ tag }}</span>
+        {% endfor %}
+    </div>
+
+</div>
