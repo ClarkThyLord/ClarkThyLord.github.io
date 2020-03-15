@@ -14,13 +14,23 @@ title: "Other"
 
             <div class="uk-width-1-5@m">
                 {% assign tags = other.categories | concat: other.tags %}
+                {% if other.categories contains "2d" %}
                 {% include preview/2d.html
                     name=other.title
-                    created_at=other.created_at
+                    created_at=other.date
                     more_page=other.url
                     image=other.asset
                     tags=tags
                 %}
+                {% elsif other.categories contains "3d" %}
+                {% include preview/3d.html
+                    name=other.title
+                    created_at=other.date
+                    more_page=other.url
+                    model=other.asset
+                    tags=tags
+                %}
+                {% endif %}
             </div>
 
             {% endfor %}
