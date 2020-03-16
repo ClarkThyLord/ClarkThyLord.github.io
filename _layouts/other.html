@@ -16,7 +16,11 @@ layout: default
     <hr />
 
     <div class="uk-flex uk-flex-center">
-        <model-viewer src="{{ page.asset }}" alt="{{ page.title }}" auto-rotate camera-controls></model-viewer>
+        {% if page.categories contains "2d" %}
+        <img src="{{ page.asset }}" alt="" class="uk-border-rounded" uk-image>
+        {% elsif page.categories contains "3d" %}
+        <model-viewer src="{{ page.asset }}" alt="{{ page.title }}" style="min-height: 50vh;" auto-rotate camera-controls interaction-prompt="none"></model-viewer>
+        {% endif %}
     </div>
 
     <div class="uk-margin">

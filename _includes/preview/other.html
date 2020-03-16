@@ -1,0 +1,36 @@
+<div class="uk-padding-small uk-flex uk-flex-column uk-background-secondary uk-border-rounded">
+
+    <div class="uk-cover-container uk-height-small uk-border-rounded">
+        {% if include.categories contains "2d" %}
+        <div class="uk-transition-toggle" uk-lightbox>
+            <a href="{{ include.asset }}" data-caption="{{ include.title }}">
+                <img src="{{ include.asset }}" tabindex="0" class="uk-transition-scale-up uk-transition-opaque" />
+            </a>
+        </div>
+        {% elsif include.categories contains "3d" %}
+        <model-viewer src="{{ include.asset }}" alt="{{ include.title }}" auto-rotate camera-controls interaction-prompt="none"></model-viewer>
+        {% endif %}
+    </div>
+
+    <hr />
+
+    <div class="uk-grid-small uk-flex-middle uk-text-truncate" uk-grid>
+        <div class="uk-width-expand">
+            <a href="{{ include.more_page }}">
+                <h3 class="uk-margin-remove-bottom"> {{ include.title }} </h3>
+            </a>
+            <p class="uk-text-meta uk-margin-remove-top">{{ include.date | date: "%a, %b %d, %Y" }}</p>
+        </div>
+    </div>
+
+
+    <div class="uk-margin-top uk-margin-bottom uk-flex-1 uk-text-break">
+        {% for category in include.categories %}
+        <span class="uk-badge">{{ category }}</span>
+        {% endfor %}
+        {% for tag in include.tags %}
+        <span class="uk-badge">{{ tag }}</span>
+        {% endfor %}
+    </div>
+
+</div>
