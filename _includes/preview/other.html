@@ -1,14 +1,16 @@
 <div class="uk-padding-small uk-flex uk-flex-column uk-background-secondary uk-border-rounded">
 
-    <div class="uk-cover-container uk-height-small uk-border-rounded">
+    <div class="uk-cover-container uk-flex uk-flex-middle uk-height-small uk-border-rounded">
         {% if include.categories contains "2d" %}
         <div class="uk-transition-toggle" uk-lightbox>
             <a href="{{ include.asset }}" data-caption="{{ include.title }}">
-                <img src="{{ include.asset }}" tabindex="0" class="uk-transition-scale-up uk-transition-opaque" />
+                <img src="{{ include.asset }}" tabindex="0"
+                    class="uk-transition-scale-up uk-transition-opaque uk-border-rounded" />
             </a>
         </div>
         {% elsif include.categories contains "3d" %}
-        <model-viewer src="{{ include.asset }}" alt="{{ include.title }}" auto-rotate camera-controls interaction-prompt="none"></model-viewer>
+        <model-viewer src="{{ include.asset }}" alt="{{ include.title }}" auto-rotate camera-controls
+            interaction-prompt="none" class="uk-width-1-1 uk-height-1-1"></model-viewer>
         {% endif %}
     </div>
 
