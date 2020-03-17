@@ -12,7 +12,7 @@ title: "Other"
             {% assign others = site.categories["other"] | sort: 'date' | reverse %}
             {% for other in others %}
 
-            <div class="uk-width-1-5@m">
+            <div class="uk-width-1-2@s uk-width-1-3@m uk-width-1-4@l uk-width-1-5@xl">
                 {% include preview/other.html
                     title=other.title
                     date=other.date
