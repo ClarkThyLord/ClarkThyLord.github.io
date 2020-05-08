@@ -50,20 +50,26 @@ title: "Home"
 
         <div class="uk-grid-match" uk-grid>
 
+            {% assign recents = 0 %}
             {% assign repositories = site.github.public_repositories | sort: 'pushed_at' | reverse %}
-            {% for repository in repositories limit: 5 %}
-
-            <div class="uk-width-1-2@s uk-width-1-3@m uk-width-1-4@l uk-width-expand@xl">
-                {% include preview/project.html
-                    name=repository.name
-                    created_at=repository.created_at
-                    description=repository.description
-                    tags=repository.topics
-                    github=repository.html_url
-                    more_page=repository.homepage
-                %}
-            </div>
-
+            {% for repository in repositories %}
+                {% if recents == 5 %}
+                    {% break %}
+                {% elsif repository.name == site.github.repository_name %}
+                    {% continue %}
+                {% else %}
+                    {% assign recents = recents | plus: 1 %}
+                    <div class="uk-width-1-2@s uk-width-1-3@m uk-width-1-4@l uk-width-expand@xl">
+                        {% include preview/project.html
+                            name=repository.name
+                            created_at=repository.created_at
+                            description=repository.description
+                            tags=repository.topics
+                            github=repository.html_url
+                            more_page=repository.homepage
+                        %}
+                    </div>
+                {% endif %}
             {% endfor %}
         </div>
 
